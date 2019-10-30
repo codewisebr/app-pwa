@@ -1,0 +1,96 @@
+<ion-header>
+    <ion-toolbar>
+      <ion-buttons slot="start">
+        <ion-menu-button></ion-menu-button>
+      </ion-buttons>
+      <ion-title>Home</ion-title>
+    </ion-toolbar>
+  </ion-header>
+  <ion-content padding>
+    <ion-card>
+      <ion-card-header>
+        <ion-card-title text-center>
+            LISTA DE PRESENÇA
+        </ion-card-title>
+        <ion-list lines="none">
+              <ion-card-subtitle text-center>Comparecerá na reunião do dia {{this.data_r}} ?</ion-card-subtitle>
+        </ion-list>
+      </ion-card-header>
+      <ion-card-content text-center>
+          <h3>CONFIRMADOS: {{this.qtde}}</h3><br>
+            <ion-button [color]="p1" [disabled]="disabled1" (click)=resposta(1)>SIM</ion-button>
+            <ion-button [color]="p2" [disabled]="disabled2" (click)=resposta(0)>NÃO</ion-button>
+        <ion-buttons>
+          <ion-button color="medium" (click)=editar()>EDITAR</ion-button>
+          <ion-button color="medium" [disabled]="disabled3" (click)=bmotivo(0)>MOTIVO</ion-button>
+      </ion-buttons>
+      </ion-card-content>
+    </ion-card>
+    <ion-card>
+      <ion-card-header>
+        <ion-card-title text-center>
+              INFORMATIVOS
+        </ion-card-title>
+      </ion-card-header>
+      <ion-card-content>
+        <ion-list lines="none">
+          <ion-item *ngFor="let inform of info">
+            <ion-label text-uppercase>{{inform}}</ion-label>
+          </ion-item>
+        </ion-list>
+        <br>
+        <ion-buttons>
+          <ion-button color="primary" fill="clear" [routerLink]="['/informativo']">VER MAIS</ion-button>
+        </ion-buttons>
+      </ion-card-content>
+    </ion-card>
+    <ion-card>
+      <ion-card-header>
+        <ion-card-title text-center>
+              ÁGAPE
+        </ion-card-title>
+      </ion-card-header>
+      <ion-card-content>
+          <ion-list lines="none">
+              <ion-item *ngFor="let agapes of agape">
+                <ion-label text-uppercase>{{agapes}}</ion-label>
+              </ion-item>
+            </ion-list>
+            <br>
+            <ion-buttons>
+              <ion-button color="primary" fill="clear" [routerLink]="['/agape']">VER MAIS</ion-button>
+            </ion-buttons>
+      </ion-card-content>
+    </ion-card>
+    <ion-card>
+      <ion-card-header>
+        <ion-card-title text-center>ORDEM DO DIA
+        </ion-card-title>
+      </ion-card-header>
+      <ion-card-content>
+        <ion-list lines="none">
+          <ion-item *ngFor="let ordens of ordem">
+            <ion-label text-uppercase>{{ordens}}</ion-label>
+          </ion-item>
+        </ion-list>
+        <br>
+            <ion-buttons>
+              <ion-button color="primary" fill="clear" [routerLink]="['/ordem']">VER MAIS</ion-button>
+            </ion-buttons>
+      </ion-card-content>
+    </ion-card>
+    <ion-card>
+      <ion-card-header>
+        <ion-card-title>FINANCEIRO</ion-card-title>
+      </ion-card-header>
+      <ion-card-content>
+        <h3>
+            Verifique a situação financeira
+        </h3>
+        <br>
+        <ion-buttons>
+          <ion-button color="primary" fill="clear"  [routerLink]="['/financeiro']">VER MAIS</ion-button>
+        </ion-buttons>
+      </ion-card-content>
+    </ion-card>
+  </ion-content>

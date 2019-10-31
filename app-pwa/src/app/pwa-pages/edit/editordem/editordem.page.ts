@@ -1,3 +1,4 @@
+import { AppRoutingPreloaderService } from './../../../route-to-preload';
 
 import { ActivatedRoute } from '@angular/router';
 import { ModalController, NavParams, NavController } from '@ionic/angular';
@@ -22,10 +23,14 @@ export class EditordemPage implements OnInit {
     private authService: AuthService,
     private alertService: AlertService,
     private navCtrl: NavController,
-    private router:ActivatedRoute
+    private router:ActivatedRoute,
+    private routingService: AppRoutingPreloaderService
   ) { }
 
   ngOnInit() {
+  }
+  async ionViewDidEnter() {
+    await this.routingService.preloadRoute('adminagape');
   }
   ionViewWillEnter(){
     this.router.queryParams.subscribe(params => {

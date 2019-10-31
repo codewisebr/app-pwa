@@ -16,12 +16,18 @@ export class HispresencaPage implements OnInit {
   public id:any;
 
   
-  constructor(private authService: AuthService, private dataPipe: DatePipe, private navCtrl: NavController, private routingService: AppRoutingPreloaderService) { }
+  constructor(
+    private authService: AuthService, 
+    private dataPipe: DatePipe, 
+    private navCtrl: NavController, 
+    private routingService: AppRoutingPreloaderService
+  ) { }
 
   ngOnInit() {
   }
   async ionViewDidEnter() {
     await this.routingService.preloadRoute('hislista');
+    await this.routingService.preloadRoute('adminpresenca');
   }
   ionViewWillEnter()
   {

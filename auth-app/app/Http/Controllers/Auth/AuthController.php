@@ -279,8 +279,60 @@ class AuthController extends Controller
         return response()->json($mural -> id);
     }
 
-    public function financeiro(){
-        
+    public function financeiro(Request $request){
+        $request->validate([
+            'valor'=>'required|string',
+            'mes' => 'required|int'
+        ]);
+        switch($request->mes){
+            case 1:
+                $mes = "Janeiro";
+                break;
+            case 2:
+                $mes = "Fevereiro";
+                break;
+            case 3:
+                $mes = "Março";
+                break;
+            case 4:
+                $mes = "Abril";
+                break;
+            case 5:
+                $mes = "Maio";
+                break;
+            case 6:
+                $mes = "Junho";
+                break;
+            case 7:
+                $mes = "Julho";
+                break;
+            case 8:
+                $mes = "Agosto";
+                break;
+            case 9:
+                $mes = "Setembro";
+                break;
+            case 10:
+                $mes = "Outubro";
+                break;
+            case 11:
+                $mes = "Novembro";
+                break;
+            case 12:
+                $mes = "Dezembro";
+                break;
+        }
+        $usuarios = User::pluck('id');
+        foreach($usuarios as $user ){
+            $financeiro = new Financeiro;
+            $financeiro-> id_user = $user;
+            $financeiro -> data_pag = null;
+            $financeiro-> mes = $mes;
+            $financeiro-> valor = $request->valor;
+            $financeiro ->save();
+        }
+        $show = Financeiro::all();
+        return response()->json($show);
     }
 
     /**
@@ -402,6 +454,23 @@ class AuthController extends Controller
             return response()->json(['message' => 'Erro!'], 201);
         else
             return response()->json(['message' => 'Mural Atualizado!'], 201);
+    }
+
+    public function updatefinanceiro(Request $request){
+        $request->validate([
+            'id'=>'required|int',
+            'form'=>'required|int'
+        ]);
+        if($request->form == 0)
+            $resposta = Financeiro::where('id', $request->id)->update(['data_pag'=> null]);
+        else if($request->form == 1){
+            $atual = date('Y-m-d');
+            $resposta = Financeiro::where('id', $request->id)->update(['data_pag'=> $atual]);
+        }
+        if($resposta == null)
+            return response()->json(['message' => 'Erro!'], 201);
+        else
+            return response()->json(['message' => 'Financeiro Atualizado!'], 201);
     }
 
     public function deletemural(Request $request){
@@ -629,7 +698,7 @@ class AuthController extends Controller
                 $mes = "Dezembro";
                 break;
         }
-        $Info=Financeiro::where(['id_user'=>$request->id_user, 'ativo'=>1, 'mes'=>$mes])->get();
+        $Info=Financeiro::where(['id_user'=>$request->id_user, 'mes'=>$mes])->get();
         return response()->json($Info);
     }
 
@@ -639,6 +708,51 @@ class AuthController extends Controller
         ]);
         $Info=Financeiro::where('id_user',$request->id_user)->OrderBy('data_pag', 'asc')->get();
         return response()->json($Info);
+    }
+
+    public function getadminfinanceiro(){
+        $atual = date('m');
+        switch($atual){
+            case 1:
+                $mes = "Janeiro";
+                break;
+            case 2:
+                $mes = "Fevereiro";
+                break;
+            case 3:
+                $mes = "Março";
+                break;
+            case 4:
+                $mes = "Abril";
+                break;
+            case 5:
+                $mes = "Maio";
+                break;
+            case 6:
+                $mes = "Junho";
+                break;
+            case 7:
+                $mes = "Julho";
+                break;
+            case 8:
+                $mes = "Agosto";
+                break;
+            case 9:
+                $mes = "Setembro";
+                break;
+            case 10:
+                $mes = "Outubro";
+                break;
+            case 11:
+                $mes = "Novembro";
+                break;
+            case 12:
+                $mes = "Dezembro";
+                break;
+        }
+        $info=Financeiro::where('mes', $mes )->get();
+        
+        return response()->json($info);
     }
 
     public function getmural(){

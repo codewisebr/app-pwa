@@ -1,3 +1,4 @@
+import { AppRoutingPreloaderService } from './../../../route-to-preload';
 import { ActivatedRoute } from '@angular/router';
 
 import { NavParams, ModalController, NavController } from '@ionic/angular';
@@ -22,10 +23,14 @@ export class EditinfoPage implements OnInit {
     private authService: AuthService, 
     private alertService: AlertService, 
     private navCtrl: NavController,
-    private router:ActivatedRoute
+    private router:ActivatedRoute,
+    private routingService: AppRoutingPreloaderService
     ) { }
 
   ngOnInit() {
+  }
+  async ionViewDidEnter() {
+    await this.routingService.preloadRoute('admininfo');
   }
   ionViewWillEnter(){
     this.router.queryParams.subscribe(params => {

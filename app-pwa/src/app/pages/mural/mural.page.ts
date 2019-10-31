@@ -1,3 +1,4 @@
+import { AppRoutingPreloaderService } from './../../route-to-preload';
 import { NavigationExtras } from '@angular/router';
 
 import { AlertService } from 'src/app/services/alert.service';
@@ -20,10 +21,14 @@ export class MuralPage implements OnInit {
     private authService:AuthService, 
     private modalCtrl: ModalController,
     private alertService: AlertService,
-    private navCtrl: NavController
+    private navCtrl: NavController,
+    private routingService: AppRoutingPreloaderService
     ) { }
 
   ngOnInit() {
+  }
+  async ionViewDidEnter() {
+    await this.routingService.preloadRoute('cadastramural');
   }
   ionViewWillEnter(){
     this.showmural();
@@ -57,7 +62,7 @@ export class MuralPage implements OnInit {
   }
 
   async cadastrar(){
-    this.navCtrl.navigateRoot('/cadastramural');
+    this.navCtrl.navigateForward('/cadastramural');
   }
 
   async editar(id:any){

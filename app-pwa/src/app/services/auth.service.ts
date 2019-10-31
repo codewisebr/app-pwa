@@ -140,8 +140,11 @@ export class AuthService {
     ); 
   }
 
-  financeiro(){
-    return this.http.post(this.env.API_URL + 'auth/financeiro', {});
+  financeiro(valor: String, mes: Number){
+    return this.http.post(this.env.API_URL + 'auth/financeiro', {valor:valor, mes:mes}).pipe(
+      retry(1),
+      catchError(this.handleError)
+    );
   }
   //#endregion
   
@@ -200,6 +203,12 @@ export class AuthService {
     );
   }
   
+  updatefinanceiro(id: Number, form: Number) {
+    return this.http.put(this.env.API_URL + 'auth/updatefinanceiro',
+    {id: id, form: form}
+    );
+  }
+
   deletemural(id: Number) {
     return this.http.put(this.env.API_URL + 'auth/deletemural',
     {id: id}
@@ -387,6 +396,15 @@ export class AuthService {
   {
     return this.http.post<any>( this.env.API_URL+'auth/getfinanceiro', 
     {id_user: id_user})
+    .pipe(
+      retry(1),
+      catchError(this.handleError)
+      ); 
+  }
+
+  getAdminFinanceiro():Observable<any>
+  {
+    return this.http.get<any>( this.env.API_URL+'auth/getadminfinanceiro')
     .pipe(
       retry(1),
       catchError(this.handleError)

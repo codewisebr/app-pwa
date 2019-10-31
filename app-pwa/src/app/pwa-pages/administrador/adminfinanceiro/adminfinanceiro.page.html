@@ -19,11 +19,46 @@
       </ion-card>
       <ion-card>
           <ion-card-header>
-            <ion-card-title text-center>Situações</ion-card-title>
+            <ion-card-title text-center>{{this.atual}}</ion-card-title>
           </ion-card-header>
           <ion-card-content>
             <ion-list lines="none">
-               
+              <ion-row>
+                <ion-col size="5">
+                  <ion-item>
+                    <h2>Nome</h2>
+                  </ion-item>
+                </ion-col>
+                <ion-col size="5">
+                  <ion-item>
+                    <h2>Situação</h2>
+                  </ion-item>
+                </ion-col>
+                <ion-col size="2">
+                  <ion-item>
+                    <h2></h2>
+                  </ion-item>
+                </ion-col>
+              </ion-row>
+              <ion-row *ngFor="let financeiros of financeiro">
+                  <ion-col size="5">
+                    <ion-item>
+                      <ion-label>{{financeiros.nome}}</ion-label>
+                    </ion-item>
+                  </ion-col>
+                  <ion-col size="5">
+                    <ion-item>
+                      <ion-label>{{financeiros.data_pag}}</ion-label>
+                    </ion-item>
+                  </ion-col>
+                  <ion-col size="2">
+                    <ion-item>
+                      <ion-buttons slot="end">
+                        <ion-button color="primary" fill="clear" (click)="editar(financeiros.id)"><ion-icon name="create"></ion-icon></ion-button>
+                      </ion-buttons>
+                    </ion-item>
+                  </ion-col>
+              </ion-row>
             </ion-list>
           </ion-card-content>
         </ion-card>

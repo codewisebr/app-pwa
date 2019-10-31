@@ -1,3 +1,4 @@
+import { AppRoutingPreloaderService } from './../../../route-to-preload';
 import { AuthService } from 'src/app/services/auth.service';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
@@ -18,10 +19,14 @@ export class HislistaPage implements OnInit {
   public aux = " ";
   constructor(
     private router:ActivatedRoute, 
-    private authService: AuthService
+    private authService: AuthService,
+    private routingService:AppRoutingPreloaderService
   ) { }
 
   ngOnInit() {
+  }
+  async ionViewDidEnter() {
+    await this.routingService.preloadRoute('hispresenca');
   }
   ionViewWillEnter()
   {

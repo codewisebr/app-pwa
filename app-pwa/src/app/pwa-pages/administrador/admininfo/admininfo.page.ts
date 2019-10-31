@@ -59,7 +59,7 @@ export class AdmininfoPage implements OnInit {
     });
   }
   async cadastrar(){
-    this.navCtrl.navigateRoot('/cadastrainfo')
+    this.navCtrl.navigateForward('/cadastrainfo')
   }
 
   async editar(id:any){

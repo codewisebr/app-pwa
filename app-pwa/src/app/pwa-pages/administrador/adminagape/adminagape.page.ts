@@ -56,7 +56,7 @@ export class AdminagapePage implements OnInit {
   }
 
   async cadastrar(){
-    this.navCtrl.navigateRoot('/cadastraagape');
+    this.navCtrl.navigateForward('/cadastraagape');
   }
 
   async editar(id:any){

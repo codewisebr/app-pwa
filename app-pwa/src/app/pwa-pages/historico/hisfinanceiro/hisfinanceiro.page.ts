@@ -1,3 +1,4 @@
+import { AppRoutingPreloaderService } from './../../../route-to-preload';
 import { NavController } from '@ionic/angular';
 import { DatePipe } from '@angular/common';
 import { AuthService } from './../../../services/auth.service';
@@ -14,9 +15,17 @@ export class HisfinanceiroPage implements OnInit {
   public mes:any;
   public situacao: number;
   public data_pag:any;
-  constructor(private authService: AuthService, private datePipe: DatePipe, private navCtrl: NavController) { }
+  constructor(
+    private authService: AuthService, 
+    private datePipe: DatePipe, 
+    private navCtrl: NavController,
+    private routingService: AppRoutingPreloaderService
+  ) { }
 
   ngOnInit() {
+  }
+  async ionViewDidEnter() {
+    await this.routingService.preloadRoute('adminfinanceiro');
   }
   ionViewWillEnter(){
     this.showfinanceiro();

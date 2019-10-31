@@ -64,9 +64,10 @@ Route::prefix('auth')->group(function () {
 
     //financeiro
     Route::post('financeiro', 'Auth\AuthController@financeiro');
+    Route::get('getadminfinanceiro', 'Auth\AuthController@getadminfinanceiro');
     Route::post('getfinanceiro', 'Auth\AuthController@getfinanceiro');
     Route::post('getallfinanceiro', 'Auth\AuthController@getallfinanceiro');
-
+    Route::put('updatefinanceiro', 'Auth\AuthController@updatefinanceiro');
     //mural
     Route::post('mural', 'Auth\AuthController@mural');
     Route::get('getmural', 'Auth\AuthController@getmural');

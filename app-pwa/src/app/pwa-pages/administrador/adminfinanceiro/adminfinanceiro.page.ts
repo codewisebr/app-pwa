@@ -78,7 +78,7 @@ export class AdminfinanceiroPage implements OnInit {
       for(let i=0; i<data.length; i++){
         this.financeiro[i] = data[i];
         this.authService.getNome(data[i].id_user).subscribe(resul=>{
-          this.financeiro[i].nome = resul;
+          this.financeiro[i].nome = resul[0];
         });
         if(data[i].data_pag == null)
           this.financeiro[i].data_pag = "Aguardando";

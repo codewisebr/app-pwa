@@ -1,0 +1,25 @@
+<ion-header>
+    <ion-toolbar>
+        <ion-buttons slot="start">
+            <ion-back-button></ion-back-button>
+        </ion-buttons>
+      <ion-title>Família</ion-title>
+    </ion-toolbar>
+  </ion-header>
+  
+  <ion-content padding>
+    <div class="box">
+      <h2>Família {{nome}}</h2>
+      <ion-list lines="none">
+        <ion-item-sliding lines="none" *ngFor="let fam of familia">
+            <ion-item>
+              <ion-label>Grau: {{fam.grau}}</ion-label>
+            </ion-item>
+            <ion-item>
+              <ion-label>Data nascimento: {{fam.data_nasc}}</ion-label>
+            </ion-item>
+            <ion-item></ion-item>
+        </ion-item-sliding>
+      </ion-list>
+    </div>
+  </ion-content>

@@ -11,7 +11,7 @@ import { AppRoutingPreloaderService } from 'src/app/route-to-preload';
 })
 export class AdminusuarioPage implements OnInit {
   public user:any[]=[];
-  public nome:any[]=[];
+  public nome: any[]= [];
   public familia:any[]=[];
   public hidden:boolean;
   constructor(
@@ -35,7 +35,7 @@ export class AdminusuarioPage implements OnInit {
       for(let i=0; i<data.length; i++){
         this.user[i]=data[i];
         this.authService.getNome(data[i].id).subscribe(resul=>{
-          this.nome[i]=resul;
+          this.nome[i] = resul;
         });
         this.authService.getFamilia(data[i].id).subscribe(resp=>{
           if(resp == 0)
@@ -63,5 +63,15 @@ export class AdminusuarioPage implements OnInit {
 
   cadastrar(){
     this.navCtrl.navigateForward(['/cadastrausuario']);
+  }
+
+  verfamilia(id:any){
+    console.log(id);
+    let navigationExtras: NavigationExtras = {
+      queryParams: {
+          id: id
+      }
+    };
+    this.navCtrl.navigateForward(['/hisfamilia'], navigationExtras);
   }
 }

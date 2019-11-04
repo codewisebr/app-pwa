@@ -527,7 +527,7 @@ class AuthController extends Controller
         $first = User::where('id', $request->id_user)->value('first_name');
         $last = User::where('id', $request->id_user)->value('last_name');
         $nome = $first." ".$last;
-        return response()->json($nome);
+        return response()->json([$nome, $request->id_user]);
     }
 
     public function getlista(){

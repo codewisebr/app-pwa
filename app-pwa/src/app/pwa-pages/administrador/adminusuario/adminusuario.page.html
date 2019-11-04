@@ -34,7 +34,7 @@
           <ion-col size="11"> 
             <ion-item-sliding *ngFor="let nomes of nome">
               <ion-item>
-                <ion-label>{{nomes}}</ion-label>
+                  <ion-button color="dark" fill="clear" (click)="verfamilia(nomes[1])">{{nomes[0]}}</ion-button>
               </ion-item>
             </ion-item-sliding>
           </ion-col>

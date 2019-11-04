@@ -46,7 +46,7 @@ export class ContatosPage implements OnInit {
       for(let i=0; i<data.length; i++){
         this.user[i] = data[i];
         this.authService.getNome(data[i].id).subscribe(resul=>{
-          this.nome[i] = resul;
+          this.nome[i] = resul[0];
         });
       }
     });
@@ -57,7 +57,7 @@ export class ContatosPage implements OnInit {
       for(let i=0; i<data.length; i++){
         this.user[i] = data[i];
         this.authService.getNome(data[i].id).subscribe(resul=>{
-          this.user[i].id = resul;
+          this.user[i].id = resul[0];
         });
       }
     });

@@ -51,7 +51,8 @@ const routes: Routes = [
   { path: 'editmural', loadChildren: './pwa-pages/edit/editmural/editmural.module#EditmuralPageModule' },
   { path: 'contatos', loadChildren: './pwa-pages/contatos/contatos.module#ContatosPageModule' },
   { path: 'adminusuario', loadChildren: './pwa-pages/administrador/adminusuario/adminusuario.module#AdminusuarioPageModule' },  { path: 'cadastrafamilia', loadChildren: './pwa-pages/cadastra/cadastrafamilia/cadastrafamilia.module#CadastrafamiliaPageModule' },
-  { path: 'cadastrausuario', loadChildren: './pwa-pages/cadastra/cadastrausuario/cadastrausuario.module#CadastrausuarioPageModule' }
+  { path: 'cadastrausuario', loadChildren: './pwa-pages/cadastra/cadastrausuario/cadastrausuario.module#CadastrausuarioPageModule' },
+  { path: 'hisfamilia', loadChildren: './pwa-pages/historico/hisfamilia/hisfamilia.module#HisfamiliaPageModule' }
 
 
 

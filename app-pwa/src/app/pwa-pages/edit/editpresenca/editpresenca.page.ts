@@ -52,7 +52,7 @@ export class EditpresencaPage implements OnInit {
                 break;
             }
             this.authService.getNome(data[i].id_user).subscribe(resul=>{
-              this.name = resul;
+              this.name = resul[0];
             });
           }
         }

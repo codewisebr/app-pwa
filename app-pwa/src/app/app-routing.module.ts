@@ -46,8 +46,13 @@ const routes: Routes = [
   { path: 'editordem', loadChildren: './pwa-pages/edit/editordem/editordem.module#EditordemPageModule', data: {preload: true}, canActivate: [AuthGuard] },
   { path: 'editinfo', loadChildren: './pwa-pages/edit/editinfo/editinfo.module#EditinfoPageModule', data: {preload: true}, canActivate: [AuthGuard] },
   { path: 'editagape', loadChildren: './pwa-pages/edit/editagape/editagape.module#EditagapePageModule', data: {preload: true}, canActivate: [AuthGuard] },
-  { path: 'editpresenca', loadChildren: './pwa-pages/edit/editpresenca/editpresenca.module#EditpresencaPageModule', data: {preload: true}, canActivate: [AuthGuard] },  { path: 'cadastramural', loadChildren: './pwa-pages/cadastra/cadastramural/cadastramural.module#CadastramuralPageModule' },
-  { path: 'editmural', loadChildren: './pwa-pages/edit/editmural/editmural.module#EditmuralPageModule' }
+  { path: 'editpresenca', loadChildren: './pwa-pages/edit/editpresenca/editpresenca.module#EditpresencaPageModule', data: {preload: true}, canActivate: [AuthGuard] },
+  { path: 'cadastramural', loadChildren: './pwa-pages/cadastra/cadastramural/cadastramural.module#CadastramuralPageModule' },
+  { path: 'editmural', loadChildren: './pwa-pages/edit/editmural/editmural.module#EditmuralPageModule' },
+  { path: 'contatos', loadChildren: './pwa-pages/contatos/contatos.module#ContatosPageModule' },
+  { path: 'adminusuario', loadChildren: './pwa-pages/administrador/adminusuario/adminusuario.module#AdminusuarioPageModule' },  { path: 'cadastrafamilia', loadChildren: './pwa-pages/cadastra/cadastrafamilia/cadastrafamilia.module#CadastrafamiliaPageModule' },
+  { path: 'cadastrausuario', loadChildren: './pwa-pages/cadastra/cadastrausuario/cadastrausuario.module#CadastrausuarioPageModule' }
+
 
 
 ];

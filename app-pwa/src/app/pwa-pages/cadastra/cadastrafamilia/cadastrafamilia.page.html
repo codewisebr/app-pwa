@@ -1,0 +1,34 @@
+<ion-header>
+    <ion-toolbar>
+        <ion-buttons slot="start">
+            <ion-back-button ></ion-back-button>
+        </ion-buttons>
+    </ion-toolbar>
+  </ion-header>
+<ion-content>
+  <br>
+      <ion-grid text-center>
+       <ion-icon name="person-add" class="icon"></ion-icon> 
+      </ion-grid>
+      <br>
+      <ion-grid text-center >
+        <div class="box">
+          <h2>Cadastrar Familiar</h2>
+          <form #form="ngForm" (ngSubmit)="cadastrar(form)" method="POST">
+            <ion-grid>
+              <ion-select ngModel name="grau" required="true" placeholder="Grau de parentesco">
+                <ion-select-option *ngFor="let graus of grau" value="{{graus}}">{{graus}}</ion-select-option>
+              </ion-select> 
+            </ion-grid>
+            <br>
+            <ion-grid>
+              <ion-datetime ngModel name="data" placeholder="Data de nascimento" display-format="DD/MM/YYYY" required="true"></ion-datetime>
+            </ion-grid>
+            <br>
+            <ion-grid>
+              <ion-button type="submit" round expand="block" color="danger">Cadastrar</ion-button>
+            </ion-grid>
+          </form>
+        </div>
+      </ion-grid>
+</ion-content>

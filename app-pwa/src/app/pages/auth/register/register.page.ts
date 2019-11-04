@@ -46,7 +46,6 @@ export class RegisterPage implements OnInit {
   auxdata:any;
   daux:any;
   register(form: NgForm) {
-    console.log(form.value);
     this.auxtel=form.value.telefone.replace(/\D+/g, '');
     this.auxdata=form.value.data_nasc;
     this.daux = this.auxdata.split('T')[0];
@@ -75,7 +74,7 @@ export class RegisterPage implements OnInit {
     else{
       this.authService.register(form.value.fName, form.value.lName, form.value.email, form.value.password, 
         this.daux, this.global.cargo, this.global.avental, this.auxtel, form.value.endereco, 
-        form.value.cidade, form.value.estado, form.value.nivel).subscribe(
+        form.value.cidade, form.value.estado, form.value.nivel, form.value.profissao).subscribe(
         data => {
           
           this.authService.login(form.value.email, form.value.password).subscribe(

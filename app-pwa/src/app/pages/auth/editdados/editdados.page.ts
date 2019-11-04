@@ -20,6 +20,7 @@ export class EditdadosPage implements OnInit {
   public cidade: any;
   public estado: any
   public telefone: any;
+  public profissao: any;
   public data_nasc: any;
   public id: any;
   public nivel:any;
@@ -58,6 +59,7 @@ export class EditdadosPage implements OnInit {
       this.cidade = data.cidade.replace("\"", "");
       this.estado = data.estado.replace("\"", "");
       this.telefone = data.telefone.replace("\"", "");
+      this.profissao = data.profissao.replace("\"", "");
       this.data_nasc = data.data_nasc.replace("\"", "");
       this.nivel = data.nivel;
       switch (this.nivel)
@@ -106,7 +108,11 @@ export class EditdadosPage implements OnInit {
     .subscribe(
     data=>{ 
       this.id = data.id;
-      this.authService.updateuser(this.id,form.value.fName, form.value.lName, form.value.email, form.value.endereco, form.value.cidade, form.value.estado, form.value.data_nasc, form.value.telefone, form.value.nivel, this.global.cargo).subscribe(
+      this.authService.updateuser(
+        this.id,form.value.fName, form.value.lName, form.value.email, 
+        form.value.endereco, form.value.cidade, form.value.estado, 
+        form.value.data_nasc, form.value.telefone, form.value.nivel, 
+        this.global.cargo, form.value.profissao).subscribe(
         resp => {
         },
         error => {

@@ -4,7 +4,7 @@ namespace App\Http\Controllers\Auth;
 use App\Agape;
 use App\Avental;
 use App\Cargos;
-use App\Events\CreateReuniao;
+use App\Familia;
 use App\User;
 use App\ListaPresenca;
 use App\Reuniao;
@@ -35,7 +35,8 @@ class AuthController extends Controller
             'avental_id'  => 'required|integer',
             'telefone' => 'required|string',
             'nivel' => 'required|int',
-            'password' => 'required|string'
+            'password' => 'required|string',
+            'profissao'=> 'required|string'
         ]);
         
         //novo user
@@ -52,12 +53,12 @@ class AuthController extends Controller
         $user->cargo_id = $request->cargo_id;
         $user->avental_id = $request->avental_id;
         $user->nivel = $request->nivel;
+        $user->profissao = $request->profissao;
         $user->password = bcrypt($request->password);
         //salva o user
         $user->save();
-        return response()->json([
-            'message' => 'Usuário criado com sucesso!'
-        ], 201);
+        $info = User::where('email', $request->email)->value('id');
+        return response()->json($info);
     }
 
     public function listapresenca(Request $request){
@@ -335,17 +336,27 @@ class AuthController extends Controller
         return response()->json($show);
     }
 
+    public function familia(Request $request){
+        $request->validate([
+            'id_user'=>'required|int',
+            'grau' => 'required|string',
+            'data'=>'required|date'
+        ]);
+        $familia = new Familia;
+        $familia ->id_users = $request->id_user;
+        $familia ->data_nasc = $request->data;
+        $familia ->grau = $request->grau;
+        $familia ->save();
+        return response()->json($familia);
+    }
+
     /**
      * Get the authenticated User
      *
      * @return [json] user object
      */
 
-     //funcoes do user
-    public function user(Request $request){
-        return response()->json($request->user());
-    }
-
+     //UPDATES
     public function updateuser(Request $request){
         $request->validate([
             'id_user'=> 'required|int',
@@ -358,13 +369,14 @@ class AuthController extends Controller
             'data_nasc' => 'required|date',
             'telefone' => 'required|string',
             'nivel' => 'required|int',
-            'cargo' => 'required|int'
+            'cargo' => 'required|int',
+            'profissao' => 'required|string'
         ]);
         $resposta = User::where('id', $request->id_user)->update([
             'first_name'=> $request->fName, 'last_name'=> $request->lName, 'email'=>$request->email,
             'endereco' => $request->endereco, 'cidade'=> $request->cidade, 'estado'=>$request->estado,
             'data_nasc'=>$request->data_nasc, 'telefone'=>$request->telefone, 'nivel'=>$request->nivel,
-            'cargo_id'=>$request->cargo
+            'cargo_id'=>$request->cargo, 'profissao'=>$request->profissao
         ]);
         if($resposta == null)
             return response()->json(['message' => 'Erro!'], 201);
@@ -473,6 +485,7 @@ class AuthController extends Controller
             return response()->json(['message' => 'Financeiro Atualizado!'], 201);
     }
 
+    //DELETES
     public function deletemural(Request $request){
         $request->validate([
             'id'=>'required|int'
@@ -481,12 +494,30 @@ class AuthController extends Controller
         return response()->json(['message' => 'Mural Excluido!'], 201);
     }
 
+    //GETS
+    public function user(Request $request){
+        return response()->json($request->user());
+    }
+
     public function getusers(Request $request){
         $request->validate([
             'id_user'=>'required|int'
         ]);
         $resp = User::where('id', $request->id_user)->get();
         return response()->json($resp);
+    }
+
+    public function getbyemail(Request $request){
+        $request->validate([
+            'email'=>'required|string'
+        ]);
+        $resp = User::where('email', $request->email)->value('id');
+        return response()->json($resp);
+    }
+
+    public function getalluser(){
+        $info = User::select('id', 'profissao', 'telefone')->get();
+        return response()->json($info);
     }
 
     public function getnome(Request $request){
@@ -759,5 +790,18 @@ class AuthController extends Controller
         $info=Mural::get();
         
         return response()->json($info);
+    }
+
+    public function getfamilia(Request $request){
+        $request->validate([
+            'id_user'=>'required|int'
+        ]);
+        $info = Familia::where('id_users', $request->id_user)->get();
+        if($info == '[]'){
+            return response()->json(0);
+        }
+        else{
+            return response()->json($info);
+        }
     }
 }

@@ -50,6 +50,11 @@ export class AppComponent {
       icon: 'bookmark'
     },
     {
+      title: 'Contatos',
+      url: '/contatos',
+      icon: 'contacts'
+    },
+    {
       title: 'My account',
       url: '/account',
       icon: 'contact'
@@ -92,7 +97,17 @@ export class AppComponent {
       icon: 'cash'
     },
     {
-      title: 'My account',
+      title: 'Contatos',
+      url: '/contatos',
+      icon: 'contacts'
+    },
+    {
+      title: 'Usuários',
+      url: '/adminusuario',
+      icon: 'person-add'
+    },
+    {
+      title: 'Minha conta',
       url: '/account',
       icon: 'contact'
     }

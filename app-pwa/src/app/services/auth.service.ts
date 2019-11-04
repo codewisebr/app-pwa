@@ -81,7 +81,7 @@ export class AuthService {
 
   register(fName: String, lName: String, email: String, password: String,data_nasc: Date, 
     cargo_id: Number, avental_id:Number, telefone: Number, 
-    endereco: String, cidade: String, estado: String, nivel: Number) {
+    endereco: String, cidade: String, estado: String, nivel: Number, profissao:String) {
     return this.http.post(this.env.API_URL + 'auth/register',
     {
       fName: fName, lName: lName, 
@@ -89,13 +89,13 @@ export class AuthService {
       endereco: endereco, cidade: cidade, 
       estado: estado, data_nasc: data_nasc, 
       cargo_id: cargo_id, avental_id:avental_id, telefone:telefone,
-      nivel: nivel
+      nivel: nivel, profissao:profissao
     }).pipe(
       retry(1),
       catchError(this.handleError)
     ); 
   }
-  
+
   informativo(info:String, id_user:Number, nivel: Number){
     return this.http.post(this.env.API_URL + 'auth/informativo', {
       info:info, id_user:id_user, nivel:nivel
@@ -146,12 +146,24 @@ export class AuthService {
       catchError(this.handleError)
     );
   }
+
+  familia(id_user:Number, grau:String, data:Date){
+    return this.http.post(this.env.API_URL + 'auth/familia', {
+      id_user:id_user, grau:grau, data:data
+    });
+  }
   //#endregion
   
   //#region PUTS
-  updateuser(id: Number,fName: String, lName: String, email: String, endereco: String, cidade: String, estado: String, data_nasc: String, telefone: Number, nivel:Number, cargo:Number) {
+  updateuser(
+    id: Number,fName: String, lName: String, email: String, 
+    endereco: String, cidade: String, estado: String, 
+    data_nasc: String, telefone: Number, nivel:Number, cargo:Number, profissao: String) {
     return this.http.put(this.env.API_URL + 'auth/updateuser',
-      {id_user: id, fName: fName, lName: lName, email: email, endereco: endereco, cidade: cidade, estado: estado,data_nasc: data_nasc, telefone: telefone, nivel:nivel, cargo:cargo}
+      {
+        id_user: id, fName: fName, lName: lName, email: email, 
+        endereco: endereco, cidade: cidade, estado: estado,
+        data_nasc: data_nasc, telefone: telefone, nivel:nivel, cargo:cargo, profissao:profissao}
     );
   }
 
@@ -256,6 +268,16 @@ export class AuthService {
     return this.http.post(this.env.API_URL + 'auth/getusers',
     {id_user:id}
     ); 
+  }
+
+  getUsersbyemail(email: String){
+    return this.http.post(this.env.API_URL + 'auth/getbyemail',
+    {email:email}
+    ); 
+  }
+  
+  getAllUser(): Observable<any>{
+    return this.http.get(this.env.API_URL + 'auth/getalluser');
   }
 
   getNome(id: Number){
@@ -416,6 +438,15 @@ export class AuthService {
       retry(1),
       catchError(this.handleError)
       );
+  }
+
+  getFamilia(id:Number){
+    return this.http.post<any>( this.env.API_URL+'auth/getfamilia', 
+      {id_user: id})
+      .pipe(
+        retry(1),
+        catchError(this.handleError)
+        ); 
   }
   //#endregion
 }

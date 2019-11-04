@@ -13,7 +13,6 @@ import { VirtualTimeScheduler } from 'rxjs';
   styleUrls: ['./account.page.scss'],
 })
 export class AccountPage implements OnInit {
-
   public fname: any;
   public lname: any;
   public email: any;
@@ -25,6 +24,7 @@ export class AccountPage implements OnInit {
   public id: any;
   public nivel:any;
   public cargo: any;
+  public profissao: any;
   constructor(
     private authService : AuthService,  
     private routingService: AppRoutingPreloaderService,
@@ -54,6 +54,7 @@ export class AccountPage implements OnInit {
       this.estado = data.estado.replace("\"", "");
       this.telefone = data.telefone.replace("\"", "");
       this.data_nasc = data.data_nasc.replace("\"", "");
+      this.profissao = data.profissao.replace("\"", "");
       this.authService.getIdCargos(data.cargo_id).subscribe(resul =>{
         this.cargo = resul;
       });

@@ -1,19 +1,22 @@
+<ion-header>
+  <ion-toolbar>
+      <ion-buttons slot="start">
+          <ion-back-button></ion-back-button>
+      </ion-buttons>
+  </ion-toolbar>
+</ion-header>
 <ion-content padding>
-  <ion-button fill='clear' (click)="landing()" style="color: white">
-    <ion-icon name="arrow-round-back" slot="start"></ion-icon>
-    Back
-  </ion-button>
   <ion-grid>
     <div class="box">
       <h1>Registro</h1>
       <br>
       <form #form="ngForm" (ngSubmit)="register(form)" method="POST">
         <ion-grid>
-            <ion-input ngModel name="fName" placeholder="First Name" type="text" pattern="[A-Za-z\s]+" maxlength="50" required></ion-input>
+            <ion-input ngModel name="fName" placeholder="Nome" type="text" pattern="[A-Za-z\s]+" maxlength="50" required></ion-input>
         </ion-grid>
         <br>
         <ion-grid>
-          <ion-input ngModel name="lName" placeholder="Last Name" type="text" pattern="[A-Za-z\s]+" maxlength="50" required></ion-input>
+          <ion-input ngModel name="lName" placeholder="Sobrenome" type="text" pattern="[A-Za-z\s]+" maxlength="50" required></ion-input>
         </ion-grid>
         <br>
         <ion-grid>
@@ -26,6 +29,10 @@
         <br>
         <ion-grid>
           <ion-input type="tel" ngModel name="telefone" placeholder="Telefone" required="true" pattern="[0-9.-]{8,9}$"></ion-input>
+        </ion-grid>
+        <br>
+        <ion-grid>
+          <ion-input ngModel name="profissao" placeholder="Profissão" type="text" pattern="[A-Za-z\s]+" maxlength="50" required></ion-input>
         </ion-grid>
         <br>
         <ion-grid>
@@ -77,11 +84,11 @@
         </ion-grid>
         <br>
         <ion-grid>
-          <ion-input type="password" ngModel name="password" placeholder="Password" pattern="[a-z0-9._%+-]{6,}$" required="true"title="Minimo 6 caracteres"></ion-input>
+          <ion-input type="password" ngModel name="password" placeholder="Senha" pattern="[a-z0-9._%+-]{6,}$" required="true"title="Minimo 6 caracteres"></ion-input>
         </ion-grid>
         <br>
         <ion-grid>
-          <ion-input type="password" ngModel name="password_s" placeholder="Confirm password" pattern="[a-z0-9._%+-]{6,}$" required="true"></ion-input>
+          <ion-input type="password" ngModel name="password_s" placeholder="Confirmar senha" pattern="[a-z0-9._%+-]{6,}$" required="true"></ion-input>
         </ion-grid>
         <br>
         <ion-button type="submit" round expand="block" color="danger">Register</ion-button>

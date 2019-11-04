@@ -46,6 +46,10 @@
           <ion-input ngModel name="telefone" type="text" pattern="[0-9.-]{8,9}$" required="true" value={{this.telefone}}></ion-input>
         </ion-grid>
         <br>
+        <ion-grid> 
+          <ion-input ngModel name="profissao" type="text" pattern="[A-Za-z\s]+" required="true" value={{this.profissao}}></ion-input>
+        </ion-grid> 
+        <br>
         <ion-grid>
           <ion-select value={{this.cargo}} ngModel name="cargo" required="true">
             <ion-select-option *ngFor="let cargo of cargos" value="{{cargo}}">{{cargo}}</ion-select-option>

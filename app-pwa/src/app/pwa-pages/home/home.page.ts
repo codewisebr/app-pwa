@@ -58,6 +58,6 @@ export class HomePage {
 
   register()
   {
-    this.navCtrl.navigateRoot('/register');
+    this.navCtrl.navigateForward('/register');
   }
 }

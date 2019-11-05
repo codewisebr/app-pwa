@@ -1,3 +1,4 @@
+import { DatePipe } from '@angular/common';
 import { AuthService } from 'src/app/services/auth.service';
 import { NavController } from '@ionic/angular';
 import { ActivatedRoute } from '@angular/router';
@@ -18,7 +19,8 @@ export class HisfamiliaPage implements OnInit {
     private routingService: AppRoutingPreloaderService,
     private router: ActivatedRoute,
     private navCtrl: NavController,
-    private authService: AuthService
+    private authService: AuthService,
+    private dataPipe: DatePipe
   ) { }
 
   ngOnInit() {
@@ -48,6 +50,7 @@ export class HisfamiliaPage implements OnInit {
         this.hidden = true;
         for(let i=0; i<resp.length; i++){
           this.familia[i] = resp[i];
+          this.familia[i].data_nasc = (this.dataPipe.transform(resp[i].data_nasc, "dd/MM/yyyy"));
         }
       }
     });

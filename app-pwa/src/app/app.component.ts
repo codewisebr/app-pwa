@@ -137,32 +137,32 @@ export class AppComponent {
   public disabled: boolean;
   permissao(){
     this.platform.ready().then(() => {
-      this.storage.get('user_id').then(data=>{
-        this.authService.getUserCargo(data).subscribe(resp=>{
-          //para acessar o admin tem que estar logado com cargos especificos
-          if(resp<12 || resp == 18 )
-          {
-            this.navCtrl.navigateRoot('/admin');
-            this.menu.enable(true, 'web');
-            this.menu.enable(false, 'app');
-            this.disabled = true;
-          }
-          else{
+          if(this.platform.is('cordova')||this.platform.is('android')||this.platform.is('ios'))
+          { 
             this.statusBar.styleDefault();
             this.splashScreen.hide();
-            this.navCtrl.navigateRoot('/dashboard');
             this.menu.enable(true, 'app');
             this.menu.enable(false, 'web');
             this.disabled = false;
           }
-        });
-      });
+          else if(this.platform.is('pwa')||this.platform.is('capacitor')||this.platform.is('desktop')){
+            
+            this.menu.enable(true, 'web');
+            this.menu.enable(false, 'app');
+            this.disabled = true;
+          }
+  
     });
   }
   initializeApp() {
     this.authService.getToken().then(() => {
       if(this.authService.isLoggedIn) {
+        console.log('logado');
         this.permissao();
+      }
+      else{
+        this.menu.enable(false, 'web');
+        this.menu.enable(false, 'app');
       }
     });
     this.authService.reuniao().subscribe(data=>{

@@ -31,8 +31,8 @@ export class CadastramuralPage implements OnInit{
   cadastrar(form:any){
     this.authService.user().subscribe(data=>{
       this.authService.mural(data.id, form.value.texto).subscribe(resul=>{
-          this.dismiss();
-          window.location.reload();
+        this.dismiss();
+        window.location.reload();
         }
       );
     });

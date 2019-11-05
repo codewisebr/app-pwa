@@ -1,3 +1,4 @@
+import { Storage } from '@ionic/storage';
 import { AppRoutingPreloaderService } from './route-to-preload';
 import { AlertService } from './services/alert.service';
 import { AuthService } from './services/auth.service';
@@ -122,40 +123,48 @@ export class AppComponent {
     private authService: AuthService,
     private alertService: AlertService,
     private alertCtrl : AlertController,
-    private routingService: AppRoutingPreloaderService
+    private routingService: AppRoutingPreloaderService,
+    private storage: Storage
   ) {
     this.initializeApp();
   }
-  async ionViewDidEnter() {
+  async ionViewWillEnter() {
     await this.routingService.preloadRoute('dashboard');
     await this.routingService.preloadRoute('admin');
     await this.routingService.preloadRoute('mural');
     await this.routingService.preloadRoute('account');
   }
   public disabled: boolean;
-  initializeApp() {
+  permissao(){
     this.platform.ready().then(() => {
-      this.authService.getToken();
-      //se esta no celular e é usuario comun
-      if(this.platform.is('cordova')||this.platform.is('android')||this.platform.is('ios'))
-      {
-        this.statusBar.styleDefault();
-        this.splashScreen.hide();
-        this.disabled = false;
-        //fazer verificação do login tbm
-        
-        this.menu.enable(true, 'app');
-        this.menu.enable(false, 'web');
-      }
-      //se esta no pc e é admin
-      else if(this.platform.is('pwa')||this.platform.is('capacitor')||this.platform.is('desktop'))
-      {
-        this.disabled = true;
-        this.menu.enable(true, 'web');
-        this.menu.enable(false, 'app');
+      this.storage.get('user_id').then(data=>{
+        this.authService.getUserCargo(data).subscribe(resp=>{
+          //para acessar o admin tem que estar logado com cargos especificos
+          if(resp<12 || resp == 18 )
+          {
+            this.navCtrl.navigateRoot('/admin');
+            this.menu.enable(true, 'web');
+            this.menu.enable(false, 'app');
+            this.disabled = true;
+          }
+          else{
+            this.statusBar.styleDefault();
+            this.splashScreen.hide();
+            this.navCtrl.navigateRoot('/dashboard');
+            this.menu.enable(true, 'app');
+            this.menu.enable(false, 'web');
+            this.disabled = false;
+          }
+        });
+      });
+    });
+  }
+  initializeApp() {
+    this.authService.getToken().then(() => {
+      if(this.authService.isLoggedIn) {
+        this.permissao();
       }
     });
-
     this.authService.reuniao().subscribe(data=>{
     });
   }

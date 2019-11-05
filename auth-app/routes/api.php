@@ -18,6 +18,7 @@ Route::prefix('auth')->group(function () {
     Route::put('updatepassword', 'Auth\AuthController@updatepassword');
     Route::post('checkpassword', 'Auth\AuthController@checkpassword');
     Route::post('getusers', 'Auth\AuthController@getusers');
+    Route::post('getusercargo', 'Auth\AuthController@getusercargo');
     Route::post('getbyemail', 'Auth\AuthController@getbyemail');
     Route::get('getalluser', 'Auth\AuthController@getalluser');
     Route::post('getnome', 'Auth\AuthController@getnome');

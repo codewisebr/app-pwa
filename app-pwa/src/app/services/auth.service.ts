@@ -276,6 +276,11 @@ export class AuthService {
     ); 
   }
   
+  getUserCargo(id:Number){
+    return this.http.post(this.env.API_URL + 'auth/getusercargo',
+    {id:id}
+    ); 
+  }
   getAllUser(): Observable<any>{
     return this.http.get(this.env.API_URL + 'auth/getalluser');
   }
@@ -290,17 +295,16 @@ export class AuthService {
     return this.storage.get('token').then(
       data => {
         this.token = data;
+        this.storage.set('user_id', data.token.user_id);
         if(this.token != null) {
           this.isLoggedIn=true;
         } else {
           this.isLoggedIn=false;
-          //this.isLoggedIn=true; //teste
         }
       },
       error => {
         this.token = null;
-        this.isLoggedIn=false; //--> é esse
-        //this.isLoggedIn=true; //-->teste  
+        this.isLoggedIn=false;  
       }
     );
   }

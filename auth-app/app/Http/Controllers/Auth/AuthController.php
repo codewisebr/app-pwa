@@ -515,6 +515,14 @@ class AuthController extends Controller
         return response()->json($resp);
     }
 
+    public function getusercargo(Request $request){
+        $request->validate([
+            'id'=>'required|int'
+        ]);
+        $resp = User::where('id', $request->id)->value('cargo_id');
+        return response()->json($resp);
+    }
+
     public function getalluser(){
         $info = User::select('id', 'profissao', 'telefone')->get();
         return response()->json($info);

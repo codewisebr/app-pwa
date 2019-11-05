@@ -104,13 +104,9 @@ export class CadastrausuarioPage implements OnInit {
       }
     });
 
-    if(form.value.password != form.value.password_s)
-    {
-      this.alertService.presentToast("Senha incorreta!");
-    }
-    else{
+    
       //registra o usuário
-      this.authService.register(form.value.fName, form.value.lName, form.value.email, form.value.password, 
+      this.authService.register(form.value.fName, form.value.lName, form.value.email, "123456", 
         this.daux, this.global.cargo, this.global.avental, this.auxtel, form.value.endereco, 
         form.value.cidade, form.value.estado, form.value.nivel, form.value.profissao).subscribe(
         data => {
@@ -153,6 +149,5 @@ export class CadastrausuarioPage implements OnInit {
         error => {
           this.alertService.presentToast("Preencha todos os campos corretamente!");
         });
-    }
   }
 }

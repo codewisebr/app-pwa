@@ -36,7 +36,8 @@ export class HisfinanceiroPage implements OnInit {
       this.authService.getAllFinanceiro(data.id).subscribe(resul=>{
         for(let i=0; i<resul.length; i++){
           this.financeiro[i] = resul[i];
-          if(resul[i].data_pag == '0000-00-00'){
+          console.log(resul[i].data_pag);
+          if(resul[i].data_pag == '0000-00-00' || resul[i].data_pag == null){
             this.financeiro[i].data_pag = "Aguardando"
           }
           else{

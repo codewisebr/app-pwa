@@ -19,7 +19,6 @@ export class ContatosPage implements OnInit {
   ) 
   { 
   }
-
   ngOnInit() {
   }
   async ionViewDidEnter() {

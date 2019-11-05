@@ -10,7 +10,11 @@ import { Component, OnInit } from '@angular/core';
 })
 export class FinanceiroPage implements OnInit {
   public financeiro:any[]=[];
-  constructor(private authService: AuthService, private datePipe: DatePipe, private navCtrl: NavController) { }
+  constructor(
+    private authService: AuthService, 
+    private datePipe: DatePipe, 
+    private navCtrl: NavController
+  ) { }
 
   ngOnInit() {
   }
@@ -23,7 +27,7 @@ export class FinanceiroPage implements OnInit {
       this.authService.getFinanceiro(data.id).subscribe(resul=>{
         for(let i=0; i<resul.length; i++){
           this.financeiro[i] = resul[i];
-          if(resul[i].data_pag == '0000-00-00'){
+          if(resul[i].data_pag == '0000-00-00' || resul[i].data_pag == null){
             this.financeiro[i].data_pag = "Aguardando"
           }
           else{

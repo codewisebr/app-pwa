@@ -1,8 +1,11 @@
+<ion-header>
+    <ion-toolbar>
+        <ion-buttons slot="start">
+            <ion-back-button></ion-back-button>
+        </ion-buttons>
+    </ion-toolbar>
+  </ion-header>
 <ion-content padding>
-    <ion-button fill='clear' (click)="dismiss()" style="color: white">
-      <ion-icon name="arrow-round-back" slot="start"></ion-icon>
-      Back
-    </ion-button>
     <ion-grid text-center>
       <ion-icon name="card" class="icon"></ion-icon>
     </ion-grid> 
@@ -15,6 +18,23 @@
           <br>
           <ion-grid>
             <ion-input ngModel placeholder="00,00" name="valor" type="number" required="true"></ion-input>
+          </ion-grid>
+          <br>
+          <ion-grid>
+            <ion-select placeHolder="Selecione o mês" ngModel name="mes" required="true">
+              <ion-select-option value="1">Janeiro</ion-select-option>
+              <ion-select-option value="2">Fevereiro</ion-select-option>
+              <ion-select-option value="3">Março</ion-select-option>
+              <ion-select-option value="4">Abril</ion-select-option>
+              <ion-select-option value="5">Maio</ion-select-option>
+              <ion-select-option value="6">Junho</ion-select-option>
+              <ion-select-option value="7">Julho</ion-select-option>
+              <ion-select-option value="8">Agosto</ion-select-option>
+              <ion-select-option value="9">Setembro</ion-select-option>
+              <ion-select-option value="10">Outubro</ion-select-option>
+              <ion-select-option value="11">Novembro</ion-select-option>
+              <ion-select-option value="12">Dezembro</ion-select-option>
+            </ion-select>
           </ion-grid>
           <br>
           <ion-grid>

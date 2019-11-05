@@ -1,3 +1,4 @@
+import { AppRoutingPreloaderService } from './../../../route-to-preload';
 import { AngularFirestore } from '@angular/fire/firestore';
 import { DatePipe } from '@angular/common';
 import { ModalController, NavController } from '@ionic/angular';
@@ -10,20 +11,28 @@ import { Component, OnInit } from '@angular/core';
   templateUrl: './cadastramural.page.html',
   styleUrls: ['./cadastramural.page.scss'],
 })
-export class CadastramuralPage{
+export class CadastramuralPage implements OnInit{
   constructor(
     private authService: AuthService, 
     private alertService:AlertService,
-    private navCtrl: NavController
+    private navCtrl: NavController,
+    private routingService: AppRoutingPreloaderService
   ) { }
+
+  ngOnInit(){
+
+  }
+  async ionViewDidEnter() {
+    await this.routingService.preloadRoute('mural');
+  }
   dismiss(){
     this.navCtrl.navigateForward('/mural');
   }
   cadastrar(form:any){
     this.authService.user().subscribe(data=>{
       this.authService.mural(data.id, form.value.texto).subscribe(resul=>{
-          this.dismiss();
-          window.location.reload();
+        this.dismiss();
+        window.location.reload();
         }
       );
     });

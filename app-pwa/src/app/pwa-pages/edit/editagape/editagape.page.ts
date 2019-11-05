@@ -1,3 +1,4 @@
+import { AppRoutingPreloaderService } from './../../../route-to-preload';
 import { ActivatedRoute } from '@angular/router';
 import { DatePipe } from '@angular/common';
 import { ModalController, NavParams, NavController } from '@ionic/angular';
@@ -10,7 +11,7 @@ import { Component, OnInit } from '@angular/core';
   templateUrl: './editagape.page.html',
   styleUrls: ['./editagape.page.scss'],
 })
-export class EditagapePage{
+export class EditagapePage implements OnInit{
   public agape: any;
   public data: any;
   public id:any;
@@ -18,8 +19,13 @@ export class EditagapePage{
     private authService: AuthService, 
     private alertService:AlertService,
     private navCtrl:NavController,
-    private router:ActivatedRoute
+    private router:ActivatedRoute,
+    private routingService:AppRoutingPreloaderService
   ) { }
+    ngOnInit(){}
+  async ionViewDidEnter() {
+    await this.routingService.preloadRoute('adminagape');
+  }
   ionViewWillEnter(){
     this.router.queryParams.subscribe(params => {
       this.id = params["id"];

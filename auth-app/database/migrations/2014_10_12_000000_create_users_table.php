@@ -26,6 +26,7 @@ class CreateUsersTable extends Migration
             $table->string('password');
             $table->bigInteger('cargo_id')->unsigned();
             $table->foreign('cargo_id')->references('id')->on('cargos')->onDelete('cascade');
+            $table->string('profissao');
             $table->bigInteger('avental_id')->unsigned();
             $table->foreign('avental_id')->references('id')->on('avental')->onDelete('cascade');
             $table->string('telefone');

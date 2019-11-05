@@ -1,0 +1,82 @@
+<ion-header>
+    <ion-toolbar>
+        <ion-buttons slot="start">
+            <ion-menu-button></ion-menu-button>
+        </ion-buttons>
+      <ion-title>Contatos</ion-title>
+    </ion-toolbar>
+  </ion-header>
+    
+  <ion-content padding>
+    <ion-card *ngIf="this.plataforma == 1">
+      <ion-card-header>
+        <ion-card-title text-center>Lista de contatos</ion-card-title>
+      </ion-card-header>
+      <ion-card-content>
+          <ion-list lines="none">
+              <ion-row>
+                <ion-col>
+                  <ion-item>
+                   <h2>Nome</h2> 
+                  </ion-item>
+                </ion-col>
+                <ion-col>
+                  <ion-item>
+                    <h2>Profissão</h2>
+                  </ion-item>
+                </ion-col>
+                <ion-col>
+                  <ion-item>
+                    <h2>Telefone</h2>
+                  </ion-item>
+                </ion-col>
+              </ion-row>
+              <ion-row>
+                <ion-col>
+                  <ion-item-sliding lines="none" *ngFor="let nomes of nome">
+                    <ion-item>
+                      <ion-label>{{nomes}}</ion-label>
+                    </ion-item>
+                  </ion-item-sliding>
+                </ion-col>
+                <ion-col>
+                  <ion-item-sliding lines="none" *ngFor="let users of user">
+                    <ion-item>
+                      <ion-label>{{users.profissao}}</ion-label>
+                    </ion-item>
+                  </ion-item-sliding>
+                </ion-col>
+                <ion-col>
+                  <ion-item-sliding lines="none" *ngFor="let users of user">
+                    <ion-item>
+                      <ion-label>{{users.telefone}}</ion-label>
+                    </ion-item>
+                  </ion-item-sliding>
+                </ion-col>
+              </ion-row>
+            </ion-list>
+      </ion-card-content>
+    </ion-card>
+    <ion-card *ngIf="this.plataforma == 0">
+      <ion-card-header>
+        <ion-card-title text-center>Lista de contatos</ion-card-title>
+      </ion-card-header>
+      <ion-card-content>
+        <ion-list lines="none">
+          <ion-item-sliding lines="none" *ngFor="let users of user">
+              <ion-item>
+                <ion-label>Nome: {{users.id}}</ion-label>
+              </ion-item>
+              <ion-item>
+                <ion-label>Profissão: {{users.profissao}}</ion-label>
+              </ion-item>
+              <ion-item>
+                <ion-label>Telefone: <a href="tel:{{users.telefone}}">{{users.telefone}}</a></ion-label>
+              </ion-item>
+              <ion-item></ion-item>
+          </ion-item-sliding>
+        </ion-list>
+      </ion-card-content>
+    </ion-card>
+  </ion-content>
+    

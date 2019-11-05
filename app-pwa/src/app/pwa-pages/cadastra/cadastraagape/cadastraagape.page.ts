@@ -1,3 +1,4 @@
+import { AppRoutingPreloaderService } from './../../../route-to-preload';
 import { NavController } from '@ionic/angular';
 
 import { AlertService } from './../../../services/alert.service';
@@ -14,10 +15,14 @@ export class CadastraagapePage implements OnInit{
   constructor(
     private authService: AuthService, 
     private alertService:AlertService,
-    private navCtrl: NavController  
+    private navCtrl: NavController, 
+    private routingService: AppRoutingPreloaderService
   ) { }
 
   ngOnInit() {
+  }
+  async ionViewDidEnter() {
+    await this.routingService.preloadRoute('adminagape');
   }
   dismiss(){
     this.navCtrl.navigateForward('/adminagape');

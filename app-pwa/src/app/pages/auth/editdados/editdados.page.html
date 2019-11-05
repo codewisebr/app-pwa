@@ -1,8 +1,11 @@
+<ion-header>
+    <ion-toolbar>
+        <ion-buttons slot="start">
+            <ion-back-button></ion-back-button>
+        </ion-buttons>
+    </ion-toolbar>
+  </ion-header>
 <ion-content padding>
-  <ion-button fill='clear' (click)="dismiss()" style="color: white">
-    <ion-icon name="arrow-round-back" slot="start"></ion-icon>
-    Back
-  </ion-button>
   <ion-grid text-center>
       <ion-icon name="person" class="icon"></ion-icon>
   </ion-grid> 
@@ -42,6 +45,10 @@
         <ion-grid> 
           <ion-input ngModel name="telefone" type="text" pattern="[0-9.-]{8,9}$" required="true" value={{this.telefone}}></ion-input>
         </ion-grid>
+        <br>
+        <ion-grid> 
+          <ion-input ngModel name="profissao" type="text" pattern="[A-Za-z\s]+" required="true" value={{this.profissao}}></ion-input>
+        </ion-grid> 
         <br>
         <ion-grid>
           <ion-select value={{this.cargo}} ngModel name="cargo" required="true">

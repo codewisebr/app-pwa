@@ -11,5 +11,6 @@ export class User {
     telefone: string;
     nivel: number;
     cargo_id: number;
+    profissao: string;
     avental_id: number;
 }

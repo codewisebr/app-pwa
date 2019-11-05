@@ -16,14 +16,14 @@
               <ion-label>Mês: {{finan.mes}}</ion-label>
             </ion-item>
             <ion-item>
-              <ion-label>Data do pagamento: {{finan.data_pag}}</ion-label>
+              <ion-label>Pagamento: {{finan.data_pag}}</ion-label>
             </ion-item>
             <ion-item>
               <ion-label>Valor: {{finan.valor}}</ion-label>
             </ion-item>
-            <ion-item>
-              <!-- espaco -->
-            </ion-item>
+            <ion-item *ngIf="financeiro.length>1">
+                <!-- espaco -->
+              </ion-item>
           </ion-item-sliding>
         </ion-list>
       </ion-card-content>

@@ -60,7 +60,7 @@ export class AdminordemPage implements OnInit {
   }
 
   async cadastrar(){
-    this.navCtrl.navigateRoot('/cadastraordem');
+    this.navCtrl.navigateForward('/cadastraordem');
   }
 
   async editar(id:any){

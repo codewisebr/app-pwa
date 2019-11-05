@@ -45,7 +45,8 @@ class CreateCargos extends Migration
             ['id'=>21, 'cargo'=>'Bibliotecário'],
             ['id'=>22, 'cargo'=>'Arquiteto'],
             ['id'=>23, 'cargo'=>'Hospitaleiro'],
-            ['id'=>24, 'cargo'=>'Porta Bandeira']
+            ['id'=>24, 'cargo'=>'Porta Bandeira'],
+            ['id'=>25, 'cargo'=>'Nenhum']
         ]);
     }
 

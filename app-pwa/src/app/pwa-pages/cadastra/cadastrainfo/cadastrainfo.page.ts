@@ -1,3 +1,4 @@
+import { AppRoutingPreloaderService } from './../../../route-to-preload';
 import { DatePipe } from '@angular/common';
 import { AngularFirestore } from '@angular/fire/firestore';
 import { AlertService } from './../../../services/alert.service';
@@ -14,9 +15,14 @@ export class CadastrainfoPage implements OnInit {
 
   constructor(
     private authService: AuthService, 
-    private navCtrl:NavController) { }
+    private navCtrl:NavController,
+    private routingService: AppRoutingPreloaderService
+  ) { }
 
   ngOnInit() {
+  }
+  async ionViewDidEnter() {
+    await this.routingService.preloadRoute('admininfo');
   }
   dismiss(){
     this.navCtrl.navigateForward('/admininfo');

@@ -1,3 +1,4 @@
+import { AppRoutingPreloaderService } from './../../../route-to-preload';
 import { AuthService } from 'src/app/services/auth.service';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
@@ -18,10 +19,14 @@ export class HislistaPage implements OnInit {
   public aux = " ";
   constructor(
     private router:ActivatedRoute, 
-    private authService: AuthService
+    private authService: AuthService,
+    private routingService:AppRoutingPreloaderService
   ) { }
 
   ngOnInit() {
+  }
+  async ionViewDidEnter() {
+    await this.routingService.preloadRoute('hispresenca');
   }
   ionViewWillEnter()
   {
@@ -42,7 +47,7 @@ export class HislistaPage implements OnInit {
               this.presenca[i]= "Presente";
             this.id_user[i] = data[i].id_user;
             this.authService.getNome(this.id_user[i]).subscribe(resul=>{
-              this.name[i] = resul;
+              this.name[i] = resul[0];
             });
           }
           this.handlelista();

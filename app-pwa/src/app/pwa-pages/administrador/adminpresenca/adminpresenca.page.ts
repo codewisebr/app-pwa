@@ -75,7 +75,7 @@ export class AdminpresencaPage implements OnInit {
               this.lista[i].presenca = "Estará presente";
             }
             this.authService.getNome(data[i].id_user).subscribe(resul=>{
-              this.name[i] = resul;
+              this.name[i] = resul[0];
             });
           }
         }

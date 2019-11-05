@@ -18,7 +18,14 @@ Route::prefix('auth')->group(function () {
     Route::put('updatepassword', 'Auth\AuthController@updatepassword');
     Route::post('checkpassword', 'Auth\AuthController@checkpassword');
     Route::post('getusers', 'Auth\AuthController@getusers');
+    Route::post('getusercargo', 'Auth\AuthController@getusercargo');
+    Route::post('getbyemail', 'Auth\AuthController@getbyemail');
+    Route::get('getalluser', 'Auth\AuthController@getalluser');
     Route::post('getnome', 'Auth\AuthController@getnome');
+
+    //familia
+    Route::post('familia', 'Auth\AuthController@familia');
+    Route::post('getfamilia', 'Auth\AuthController@getfamilia');
 
     //info
     Route::post('informativo', 'Auth\AuthController@informativo');
@@ -38,6 +45,7 @@ Route::prefix('auth')->group(function () {
     Route::get('getcargos','Auth\AuthController@getcargos');
     Route::post('getidcargos','Auth\AuthController@getidcargos');
 
+    //reuniao
     Route::post('createreuniao', 'Auth\AuthController@createreuniao');
     Route::get('reuniao', 'Auth\AuthController@reuniao');
     
@@ -49,6 +57,7 @@ Route::prefix('auth')->group(function () {
     Route::get('getconfirmacao', 'Auth\AuthController@getconfirmacao');
     Route::get('getpresente', 'Auth\AuthController@getpresente');
     Route::get('getausente', 'Auth\AuthController@getausente');
+
     //reuniao
     Route::get('getreuniao', 'Auth\AuthController@getreuniao');
     Route::get('getallreuniao', 'Auth\AuthController@getallreuniao');
@@ -64,8 +73,10 @@ Route::prefix('auth')->group(function () {
 
     //financeiro
     Route::post('financeiro', 'Auth\AuthController@financeiro');
+    Route::get('getadminfinanceiro', 'Auth\AuthController@getadminfinanceiro');
     Route::post('getfinanceiro', 'Auth\AuthController@getfinanceiro');
     Route::post('getallfinanceiro', 'Auth\AuthController@getallfinanceiro');
+    Route::put('updatefinanceiro', 'Auth\AuthController@updatefinanceiro');
 
     //mural
     Route::post('mural', 'Auth\AuthController@mural');

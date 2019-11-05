@@ -20,19 +20,23 @@ export class HomePage {
     ){
       this.menu.enable(false);
     }
+
+  permissao(){
+    this.platform.ready().then(() => {
+      if(this.platform.is('cordova')||this.platform.is('android')||this.platform.is('ios'))
+      {
+        this.navCtrl.navigateRoot('/dashboard');
+      }
+      else if(this.platform.is('pwa')||this.platform.is('capacitor')||this.platform.is('desktop'))
+      {
+        this.navCtrl.navigateRoot('/admin');
+      }
+    });
+  }
   ionViewWillEnter() {
     this.authService.getToken().then(() => {
       if(this.authService.isLoggedIn) {
-        this.platform.ready().then(() => {
-          if(this.platform.is('cordova')||this.platform.is('android')||this.platform.is('ios'))
-          {
-            this.navCtrl.navigateRoot('/dashboard');
-          }
-          else if(this.platform.is('pwa')||this.platform.is('capacitor')||this.platform.is('desktop'))
-          {
-            this.navCtrl.navigateRoot('/admin');
-          }
-        });
+        this.permissao();
       }
     });
   }
@@ -47,20 +51,13 @@ export class HomePage {
         this.alertService.presentToast('E-mail ou senha incorretos');
       },
       () => {
-        if(this.platform.is('cordova')||this.platform.is('android')||this.platform.is('ios'))
-        {
-          this.navCtrl.navigateRoot('/dashboard');
-        }
-        else if(this.platform.is('pwa')||this.platform.is('capacitor')||this.platform.is('desktop'))
-        {
-          this.navCtrl.navigateRoot('/admin');
-        }
+        this.permissao();
       }
     );
   }
 
   register()
   {
-    this.navCtrl.navigateRoot('/register');
+    this.navCtrl.navigateForward('/register');
   }
 }

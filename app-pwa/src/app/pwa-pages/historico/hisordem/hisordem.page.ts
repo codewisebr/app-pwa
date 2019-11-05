@@ -1,3 +1,4 @@
+import { AppRoutingPreloaderService } from './../../../route-to-preload';
 import { DatePipe } from '@angular/common';
 import { AuthService } from './../../../services/auth.service';
 import { Component, OnInit } from '@angular/core';
@@ -12,9 +13,16 @@ export class HisordemPage implements OnInit {
   public ordem: any[]=[];
   public date: any[]=[];
   public ativo: any[]=[];
-  constructor(public authService: AuthService, private dataPipe: DatePipe) { }
+  constructor(
+    public authService: AuthService, 
+    private dataPipe: DatePipe,
+    private routingService: AppRoutingPreloaderService
+  ) { }
 
   ngOnInit() {
+  }
+  async ionViewDidEnter() {
+    await this.routingService.preloadRoute('adminordem');
   }
   ionViewWillEnter()
   {

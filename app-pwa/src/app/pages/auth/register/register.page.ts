@@ -1,5 +1,6 @@
+import { AppRoutingPreloaderService } from 'src/app/route-to-preload';
 import { Component, OnInit } from '@angular/core';
-import { ModalController, NavController, AlertController } from '@ionic/angular';
+import { ModalController, NavController, AlertController, Platform, MenuController } from '@ionic/angular';
 import { AuthService } from 'src/app/services/auth.service';
 import { NgForm } from '@angular/forms';
 import { AlertService } from 'src/app/services/alert.service';
@@ -13,7 +14,10 @@ import { GlobalService } from 'src/app/services/global.service';
 })
 export class RegisterPage implements OnInit {
 
-  aux: number;
+  public aux: number;
+  public auxtel:any;
+  public auxdata:any;
+  public daux:any;
   public dataregister = NgForm; //armazena os dados para caso precise
   public formulario: any;
   public cargos:any[] = [];
@@ -25,28 +29,43 @@ export class RegisterPage implements OnInit {
     private navCtrl: NavController,
     private alertService: AlertService,
     private storage: Storage,
-    private global: GlobalService
+    private global: GlobalService,
+    private platform: Platform,
+    private menu: MenuController,
+    private routingService: AppRoutingPreloaderService
   ) 
   {}
 
   ngOnInit() {
   }
-
+  async ionViewDidEnter() {
+    await this.routingService.preloadRoute('dashboard');
+    await this.routingService.preloadRoute('admin');
+  }
   ionViewWillEnter(){
     this.getcargos();
     this.getavental();
   }
-  landing() {
-    this.navCtrl.navigateRoot('/home');
-  }
   loginModal() {
     this.navCtrl.navigateRoot('/home');
   }
-  auxtel:any;
-  auxdata:any;
-  daux:any;
+
+  permissao(){
+    this.platform.ready().then(() => {
+      //se esta no celular
+      if(this.platform.is('cordova')||this.platform.is('android')||this.platform.is('ios'))
+      {
+        this.navCtrl.navigateRoot('/dashboard');
+      }
+      //se esta no pc
+      else if(this.platform.is('pwa')||this.platform.is('capacitor')||this.platform.is('desktop'))
+      {
+        this.navCtrl.navigateRoot('/admin');
+      }
+    });
+  }
+
   register(form: NgForm) {
-    console.log(form.value);
     this.auxtel=form.value.telefone.replace(/\D+/g, '');
     this.auxdata=form.value.data_nasc;
     this.daux = this.auxdata.split('T')[0];
@@ -75,9 +94,8 @@ export class RegisterPage implements OnInit {
     else{
       this.authService.register(form.value.fName, form.value.lName, form.value.email, form.value.password, 
         this.daux, this.global.cargo, this.global.avental, this.auxtel, form.value.endereco, 
-        form.value.cidade, form.value.estado, form.value.nivel).subscribe(
+        form.value.cidade, form.value.estado, form.value.nivel, form.value.profissao).subscribe(
         data => {
-          
           this.authService.login(form.value.email, form.value.password).subscribe(
             data => {
             },
@@ -85,18 +103,14 @@ export class RegisterPage implements OnInit {
               this.alertService.presentToast("Verifique se você preencheu os campos corretamente corretamente");
             },
             () => {
-              this.navCtrl.navigateRoot('/dashboard');
+              this.permissao();
             }
-          );
-          console.log(data);
-          
+          );          
         },
         error => {
           this.alertService.presentToast("Preencha todos os campos corretamente!");
         },
-        () => {
-          
-        }
+        () => {}
       );
       
     }

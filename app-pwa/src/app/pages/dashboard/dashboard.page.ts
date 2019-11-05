@@ -32,12 +32,19 @@ export class DashboardPage implements OnInit {
   public info: any[] = [];
   public qtde=0;
   public agape: any[]=[];
+  public financeiro: any[]=[];
 
-  constructor(private navCtrl:NavController, private authService: AuthService, 
-    private alertService: AlertService,private http: HttpClient,
-    private env: EnvService, private route: ActivatedRoute,
-    private alertCtrl: AlertController, private global:GlobalService,
-    private storage: Storage,private dataPipe: DatePipe,
+  constructor(
+    private navCtrl:NavController, 
+    private authService: AuthService, 
+    private alertService: AlertService,
+    private http: HttpClient,
+    private env: EnvService, 
+    private route: ActivatedRoute,
+    private alertCtrl: AlertController, 
+    private global:GlobalService,
+    private storage: Storage,
+    private dataPipe: DatePipe,
     private menu: MenuController
   ) { 
     this.menu.enable(true, 'app');
@@ -54,6 +61,7 @@ export class DashboardPage implements OnInit {
     this.showordem();
     this.showinfo();
     this.showagape();
+    this.showfinanceiro();
   }
   
   verifica(){ 
@@ -240,6 +248,21 @@ export class DashboardPage implements OnInit {
     },
     error=>{
       console.log(error);
+    });
+  }
+  showfinanceiro(){
+    this.authService.user().subscribe(data=>{
+      this.authService.getFinanceiro(data.id).subscribe(resul=>{
+        for(let i=0; i<resul.length; i++){
+          this.financeiro[i] = resul[i];
+          if(resul[i].data_pag == '0000-00-00' || resul[i].data_pag == null){
+            this.financeiro[i].data_pag = "Aguardando"
+          }
+          else{
+            this.financeiro[i].data_pag = this.dataPipe.transform(resul[i].data_pag, "dd/MM");
+          }
+        }
+      });
     });
   }
 }

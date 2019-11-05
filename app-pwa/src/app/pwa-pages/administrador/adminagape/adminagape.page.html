@@ -22,26 +22,19 @@
           </ion-card-header>
           <ion-card-content>
             <ion-list lines="none">
-                <ion-item *ngIf="agape.length<1">
-                  <ion-label text-center>Nenhum Ágape cadastrado</ion-label>
-                </ion-item>
-                <ion-row>
+                <ion-row *ngFor="let agapes of agape">
                   <ion-col size="8">
-                    <ion-item-sliding *ngFor="let agapes of agape">
-                      <ion-item>
-                        <ion-label>{{agapes.agape}}</ion-label>
-                      </ion-item>
-                    </ion-item-sliding>
+                    <ion-item>
+                      <ion-label>{{agapes.agape}}</ion-label>
+                    </ion-item>
                   </ion-col>
                   <ion-col size="4">
-                    <ion-item-sliding *ngFor="let agapes of agape">
-                      <ion-item>
-                        <ion-buttons slot="end">
-                          <ion-button fill="clear" (click)="delete(agapes.id)" color="danger"><ion-icon name="trash"></ion-icon></ion-button>
-                          <ion-button color="primary" fill="clear" (click)="editar(agapes.id)"><ion-icon name="create"></ion-icon></ion-button>
-                        </ion-buttons>
-                      </ion-item>
-                    </ion-item-sliding>
+                    <ion-item>
+                      <ion-buttons slot="end">
+                        <ion-button fill="clear" (click)="delete(agapes.id)" color="danger"><ion-icon name="trash"></ion-icon></ion-button>
+                        <ion-button color="primary" fill="clear" (click)="editar(agapes.id)"><ion-icon name="create"></ion-icon></ion-button>
+                      </ion-buttons>
+                    </ion-item>
                   </ion-col>
                 </ion-row>
             </ion-list>

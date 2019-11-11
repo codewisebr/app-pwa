@@ -53,12 +53,9 @@ const routes: Routes = [
   { path: 'adminusuario', loadChildren: './pwa-pages/administrador/adminusuario/adminusuario.module#AdminusuarioPageModule', data: {preload: true}, canActivate: [AuthGuard] },
   { path: 'cadastrafamilia', loadChildren: './pwa-pages/cadastra/cadastrafamilia/cadastrafamilia.module#CadastrafamiliaPageModule', data: {preload: true}, canActivate: [AuthGuard] },
   { path: 'cadastrausuario', loadChildren: './pwa-pages/cadastra/cadastrausuario/cadastrausuario.module#CadastrausuarioPageModule', data: {preload: true}, canActivate: [AuthGuard] },
-  { path: 'hisfamilia', loadChildren: './pwa-pages/historico/hisfamilia/hisfamilia.module#HisfamiliaPageModule', data: {preload: true}, canActivate: [AuthGuard] },  { path: 'hisrelatorio', loadChildren: './pwa-pages/historico/hisrelatorio/hisrelatorio.module#HisrelatorioPageModule' },
-  { path: 'hisadminfinanceiro', loadChildren: './pwa-pages/historico/hisadminfinanceiro/hisadminfinanceiro.module#HisadminfinanceiroPageModule' }
-
-
-
-
+  { path: 'hisfamilia', loadChildren: './pwa-pages/historico/hisfamilia/hisfamilia.module#HisfamiliaPageModule', data: {preload: true}, canActivate: [AuthGuard] },
+  { path: 'hisrelatorio', loadChildren: './pwa-pages/historico/hisrelatorio/hisrelatorio.module#HisrelatorioPageModule', data: {preload: true}, canActivate: [AuthGuard] },
+  { path: 'hisadminfinanceiro', loadChildren: './pwa-pages/historico/hisadminfinanceiro/hisadminfinanceiro.module#HisadminfinanceiroPageModule', data: {preload: true}, canActivate: [AuthGuard] },
 ];
 @NgModule({
   imports: [

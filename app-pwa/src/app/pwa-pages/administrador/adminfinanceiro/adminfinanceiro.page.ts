@@ -1,3 +1,4 @@
+
 import { AppRoutingPreloaderService } from './../../../route-to-preload';
 import { AlertService } from './../../../services/alert.service';
 import { DatePipe } from '@angular/common';
@@ -27,11 +28,10 @@ export class AdminfinanceiroPage implements OnInit {
     private alertService: AlertService,
     private routingService: AppRoutingPreloaderService
   ) { }
-
   ngOnInit() {
   }
   async ionViewDidEnter() {
-    await this.routingService.preloadRoute('cadastraagape');
+    await this.routingService.preloadRoute('hisfinanceiro');
   }
   ionViewWillEnter(){
     this.showsituacao();
@@ -88,17 +88,13 @@ export class AdminfinanceiroPage implements OnInit {
     });
   }
 
-  boleto()
-  {
-
-  }
 
   async cadastrar(){
     this.navCtrl.navigateForward('/cadastrafinanceiro');
   }
 
   relatorio(){
-    
+    this.navCtrl.navigateForward('/hisrelatorio');
   }
 
   async editar(id:any){

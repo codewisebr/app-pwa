@@ -10,7 +10,7 @@ import { AuthService } from 'src/app/services/auth.service';
 import { User } from 'src/app/model/user.model';
 import { ActivatedRoute, Router } from '@angular/router';
 import { getLocaleDayNames, DatePipe } from '@angular/common';
-import { stringify } from 'querystring';
+import { AngularFireMessaging } from '@angular/fire/messaging';
 @Component({
   selector: 'app-dashboard',
   templateUrl: './dashboard.page.html',
@@ -45,13 +45,25 @@ export class DashboardPage implements OnInit {
     private global:GlobalService,
     private storage: Storage,
     private dataPipe: DatePipe,
-    private menu: MenuController
+    private menu: MenuController,
+    private afMessaging: AngularFireMessaging
   ) { 
     this.menu.enable(true, 'app');
   }
   ngOnInit() {
-    
-
+    this.notificacao();
+  }
+  notificacao(){
+    //pedido de permissão para enviar notificação, gera um token
+    this.afMessaging.requestToken
+      .subscribe(
+        (token) => {
+          console.log('Notificação permitida!');
+        },
+        (error) => {
+          console.error(error);
+        }
+      );
   }
   ionViewWillEnter()
   {

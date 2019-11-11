@@ -47,12 +47,15 @@ const routes: Routes = [
   { path: 'editinfo', loadChildren: './pwa-pages/edit/editinfo/editinfo.module#EditinfoPageModule', data: {preload: true}, canActivate: [AuthGuard] },
   { path: 'editagape', loadChildren: './pwa-pages/edit/editagape/editagape.module#EditagapePageModule', data: {preload: true}, canActivate: [AuthGuard] },
   { path: 'editpresenca', loadChildren: './pwa-pages/edit/editpresenca/editpresenca.module#EditpresencaPageModule', data: {preload: true}, canActivate: [AuthGuard] },
-  { path: 'cadastramural', loadChildren: './pwa-pages/cadastra/cadastramural/cadastramural.module#CadastramuralPageModule' },
-  { path: 'editmural', loadChildren: './pwa-pages/edit/editmural/editmural.module#EditmuralPageModule' },
-  { path: 'contatos', loadChildren: './pwa-pages/contatos/contatos.module#ContatosPageModule' },
-  { path: 'adminusuario', loadChildren: './pwa-pages/administrador/adminusuario/adminusuario.module#AdminusuarioPageModule' },  { path: 'cadastrafamilia', loadChildren: './pwa-pages/cadastra/cadastrafamilia/cadastrafamilia.module#CadastrafamiliaPageModule' },
-  { path: 'cadastrausuario', loadChildren: './pwa-pages/cadastra/cadastrausuario/cadastrausuario.module#CadastrausuarioPageModule' },
-  { path: 'hisfamilia', loadChildren: './pwa-pages/historico/hisfamilia/hisfamilia.module#HisfamiliaPageModule' }
+  { path: 'cadastramural', loadChildren: './pwa-pages/cadastra/cadastramural/cadastramural.module#CadastramuralPageModule', data: {preload: true}, canActivate: [AuthGuard] },
+  { path: 'editmural', loadChildren: './pwa-pages/edit/editmural/editmural.module#EditmuralPageModule', data: {preload: true}, canActivate: [AuthGuard] },
+  { path: 'contatos', loadChildren: './pwa-pages/contatos/contatos.module#ContatosPageModule', data: {preload: true}, canActivate: [AuthGuard] },
+  { path: 'adminusuario', loadChildren: './pwa-pages/administrador/adminusuario/adminusuario.module#AdminusuarioPageModule', data: {preload: true}, canActivate: [AuthGuard] },
+  { path: 'cadastrafamilia', loadChildren: './pwa-pages/cadastra/cadastrafamilia/cadastrafamilia.module#CadastrafamiliaPageModule', data: {preload: true}, canActivate: [AuthGuard] },
+  { path: 'cadastrausuario', loadChildren: './pwa-pages/cadastra/cadastrausuario/cadastrausuario.module#CadastrausuarioPageModule', data: {preload: true}, canActivate: [AuthGuard] },
+  { path: 'hisfamilia', loadChildren: './pwa-pages/historico/hisfamilia/hisfamilia.module#HisfamiliaPageModule', data: {preload: true}, canActivate: [AuthGuard] },  { path: 'hisrelatorio', loadChildren: './pwa-pages/historico/hisrelatorio/hisrelatorio.module#HisrelatorioPageModule' },
+  { path: 'hisadminfinanceiro', loadChildren: './pwa-pages/historico/hisadminfinanceiro/hisadminfinanceiro.module#HisadminfinanceiroPageModule' }
+
 
 
 

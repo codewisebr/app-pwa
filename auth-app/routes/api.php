@@ -4,7 +4,6 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
 Route::get('get', 'UserController@get');//mostra todos os dados
-
 /*
 php artisan serve -- > para subir a aplicação
 php artisan passport:install --> para criar o token de acesso 
@@ -22,7 +21,6 @@ Route::prefix('auth')->group(function () {
     Route::post('getbyemail', 'Auth\AuthController@getbyemail');
     Route::get('getalluser', 'Auth\AuthController@getalluser');
     Route::post('getnome', 'Auth\AuthController@getnome');
-
     //familia
     Route::post('familia', 'Auth\AuthController@familia');
     Route::post('getfamilia', 'Auth\AuthController@getfamilia');
@@ -84,11 +82,11 @@ Route::prefix('auth')->group(function () {
     Route::put('updatemural', 'Auth\AuthController@updatemural');
     Route::put('deletemural', 'Auth\AuthController@deletemural');
 
+    
     //precisa de autorizacao
     Route::middleware(['auth:api'])->group(function () {
         Route::get('logout', 'Auth\AuthController@logout');
         Route::get('user', 'Auth\AuthController@user');
-        
     });
 });
 

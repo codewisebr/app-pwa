@@ -9,15 +9,14 @@ import { Response } from 'selenium-webdriver/http';
 import { Observable, of, throwError, Observer } from 'rxjs';
 import { StringifyOptions } from 'querystring';
 import { Storage } from '@ionic/storage';
-import { ThrowStmt } from '@angular/compiler';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
   /*pipe e tab são funções independentes do metodo Observable
-  pipe cria uma cadeia de operadores
-  tab executa os efeitos colaterais 
+  -pipe cria uma cadeia de operadores
+  -tab executa os efeitos colaterais 
   */
 
   //variaveis
@@ -37,24 +36,11 @@ export class AuthService {
   constructor(
     private http: HttpClient,
     private env: EnvService, 
-    private alertctrl : AlertService, public storage : Storage,
+    private alertctrl : AlertService, 
+    private storage : Storage,
     private global : GlobalService
   )
   {  
-  }
-
-  handleError(error) {
-    let errorMessage = '';
-    if(error.error instanceof ErrorEvent) {
-    // Get client-side error
-    errorMessage = error.error.message;
-    } else {
-    // Get server-side error
-    errorMessage = `Error Code: ${error.status}\nMessage: ${error.message}`;
-    }
-    window.alert(errorMessage);
-    return throwError(errorMessage); 
-  
   }
 
   //#region POST
@@ -90,10 +76,7 @@ export class AuthService {
       estado: estado, data_nasc: data_nasc, 
       cargo_id: cargo_id, avental_id:avental_id, telefone:telefone,
       nivel: nivel, profissao:profissao
-    }).pipe(
-      retry(1),
-      catchError(this.handleError)
-    ); 
+    });
   }
 
   informativo(info:String, id_user:Number, nivel: Number){
@@ -124,27 +107,16 @@ export class AuthService {
   checkpassword(id: Number, password: String)
   {
     return this.http.post(this.env.API_URL + 'auth/checkpassword',
-      {id_user: id, password: password}
-    ).pipe(
-      retry(1),
-      catchError(this.handleError)
-    ); 
+      {id_user: id, password: password}); 
   }
 
   mural(id_user: Number, text: String){
     return this.http.post(this.env.API_URL + 'auth/mural',
-      {id_users: id_user, texto: text}
-    ).pipe(
-      retry(1),
-      catchError(this.handleError)
-    ); 
+      {id_users: id_user, texto: text});
   }
 
   financeiro(valor: String, mes: Number){
-    return this.http.post(this.env.API_URL + 'auth/financeiro', {valor:valor, mes:mes}).pipe(
-      retry(1),
-      catchError(this.handleError)
-    );
+    return this.http.post(this.env.API_URL + 'auth/financeiro', {valor:valor, mes:mes});
   }
 
   familia(id_user:Number, grau:String, data:Date){
@@ -175,38 +147,22 @@ export class AuthService {
 
   updateinfo(id: Number, info:String, ativo: Number, nivel: Number): Observable<any>{
     return this.http.put<any>(this.env.API_URL + 'auth/updateinfo',
-    {id: id, info: info, ativo: ativo, nivel:nivel}
-    ).pipe(
-      retry(1),
-      catchError(this.handleError)
-    ); 
+    {id: id, info: info, ativo: ativo, nivel:nivel});
   }
 
   updateordem(id: Number, ordem:String, ativo: Number, nivel: Number): Observable<any>{
     return this.http.put<any>(this.env.API_URL + 'auth/updateordem',
-    {id: id, ordem: ordem, ativo: ativo, nivel: nivel}
-    ).pipe(
-      retry(1),
-      catchError(this.handleError)
-    ); 
+    {id: id, ordem: ordem, ativo: ativo, nivel: nivel});
   }
 
   updateagape(id: Number, agape:String, ativo:Number, date:String): Observable<any>{
     return this.http.put<any>(this.env.API_URL + 'auth/updateagape',
-    {id: id, agape: agape, ativo: ativo, date:date}
-    ).pipe(
-      retry(1),
-      catchError(this.handleError)
-    ); 
+    {id: id, agape: agape, ativo: ativo, date:date});
   }
 
   updatelista(id: Number, motivo: String, presenca:Number) {
     return this.http.put(this.env.API_URL + 'auth/updatelista',
-    {id: id, motivo:motivo, presenca: presenca}
-    ).pipe(
-      retry(1),
-      catchError(this.handleError)
-    ); 
+    {id: id, motivo:motivo, presenca: presenca});
   }
 
   updatemural(id: Number, texto: String) {
@@ -257,11 +213,7 @@ export class AuthService {
     const headers = new HttpHeaders({
     'Authorization': "Bearer "+this.global.access
     });
-    return this.http.get<User>(this.env.API_URL + 'auth/user', { headers: headers })
-    .pipe(
-      retry(1),
-      catchError(this.handleError)
-    ); 
+    return this.http.get<User>(this.env.API_URL + 'auth/user', { headers: headers });
   }
 
   getUsers(id: Number){
@@ -371,86 +323,52 @@ export class AuthService {
 
   getCargos()
   {
-    return this.http.get<any>( this.env.API_URL+'auth/getcargos').pipe(
-      retry(1),
-      catchError(this.handleError)
-      ); 
+    return this.http.get<any>( this.env.API_URL+'auth/getcargos');
   }
 
   getIdCargos(id:Number): Observable<any>
   {
-    return this.http.post<any>( this.env.API_URL+'auth/getidcargos', {id:id}).pipe(
-      retry(1),
-      catchError(this.handleError)
-      ); 
+    return this.http.post<any>( this.env.API_URL+'auth/getidcargos', {id:id});
   }
 
   getAgape()
   {
-    return this.http.get<any>( this.env.API_URL+'auth/getagape').pipe(
-      retry(1),
-      catchError(this.handleError)
-      ); 
+    return this.http.get<any>( this.env.API_URL+'auth/getagape');
   }
 
   getAllAgape()
   {
-    return this.http.get<any>( this.env.API_URL+'auth/getallagape').pipe(
-      retry(1),
-      catchError(this.handleError)
-      ); 
+    return this.http.get<any>( this.env.API_URL+'auth/getallagape');
   }
 
   getAvental(){
-    return this.http.get<any>( this.env.API_URL+'auth/getavental').pipe(
-      retry(1),
-      catchError(this.handleError)
-      );
+    return this.http.get<any>( this.env.API_URL+'auth/getavental');
   }
 
   getAllFinanceiro(id_user: Number): Observable<any>
   {
     return this.http.post<any>( this.env.API_URL+'auth/getallfinanceiro', 
-    {id_user: id_user})
-    .pipe(
-      retry(1),
-      catchError(this.handleError)
-      ); 
+    {id_user: id_user});
   }
 
   getFinanceiro(id_user: Number): Observable<any>
   {
     return this.http.post<any>( this.env.API_URL+'auth/getfinanceiro', 
-    {id_user: id_user})
-    .pipe(
-      retry(1),
-      catchError(this.handleError)
-      ); 
+    {id_user: id_user});
   }
 
   getAdminFinanceiro():Observable<any>
   {
-    return this.http.get<any>( this.env.API_URL+'auth/getadminfinanceiro')
-    .pipe(
-      retry(1),
-      catchError(this.handleError)
-      ); 
+    return this.http.get<any>( this.env.API_URL+'auth/getadminfinanceiro');
   }
 
   getMural(){
-    return this.http.get<any>( this.env.API_URL+'auth/getmural').pipe(
-      retry(1),
-      catchError(this.handleError)
-      );
+    return this.http.get<any>( this.env.API_URL+'auth/getmural');
   }
 
   getFamilia(id:Number){
     return this.http.post<any>( this.env.API_URL+'auth/getfamilia', 
-      {id_user: id})
-      .pipe(
-        retry(1),
-        catchError(this.handleError)
-        ); 
+      {id_user: id});
   }
   //#endregion
 }

@@ -153,6 +153,7 @@ class AuthController extends Controller
         $data = strtotime($string, $now);
         //configura o formato
         $resul = date('Y-m-d', $data);
+        
         //desativa reuniao antiga toda terça
         if($day == 6)
         {
@@ -524,7 +525,7 @@ class AuthController extends Controller
     }
 
     public function getalluser(){
-        $info = User::select('id', 'profissao', 'telefone')->get();
+        $info = User::select('id', 'profissao', 'telefone') ->orderBy('first_name', 'asc')->get();
         return response()->json($info);
     }
 
@@ -535,7 +536,8 @@ class AuthController extends Controller
         $first = User::where('id', $request->id_user)->value('first_name');
         $last = User::where('id', $request->id_user)->value('last_name');
         $nome = $first." ".$last;
-        return response()->json([$nome, $request->id_user]);
+        $id = $request->id_user;
+        return response()->json([$nome, $id]);
     }
 
     public function getlista(){

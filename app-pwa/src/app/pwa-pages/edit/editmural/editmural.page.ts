@@ -47,18 +47,9 @@ export class EditmuralPage implements OnInit{
   }
 
   editar(form:any){
-    this.authService.getMural().subscribe(data=>{
-      for(let i=0; i<data.length;i++)
-      {
-        if(this.id == data[i].id){
-          
-          this.authService.updatemural(data[i].id, form.value.texto).subscribe(resul=>{
-            this.alertService.presentToast("Mural editado com sucesso!");
-              this.dismiss();
-              window.location.reload();
-          });
-        }
-      }
+    this.authService.updatemural(this.id, form.value.texto).subscribe(resul=>{
+      this.alertService.presentToast("Mural editado com sucesso!");
+      this.dismiss();
     },
     error=>{
       console.log(error);

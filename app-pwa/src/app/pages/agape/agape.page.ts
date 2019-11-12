@@ -7,14 +7,13 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./agape.page.scss'],
 })
 export class AgapePage implements OnInit {
-
+  public agape: any[] = [];
   constructor(public authService: AuthService) { }
 
-  ngOnInit() {
-    
-  }
+  ngOnInit() {}
+
   ionViewWillEnter(){this.showagape();}
-  public agape: any[] = [];
+  
   async showagape() {
     await this.authService.getAgape()
     .subscribe(
@@ -24,9 +23,8 @@ export class AgapePage implements OnInit {
         }
       }, 
       error=>{
-        console.log(error);
+        console.log('erro');
       }
     );
   }
-
 }

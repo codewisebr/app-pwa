@@ -1,3 +1,5 @@
+import { AppRoutingPreloaderService } from './../../../route-to-preload';
+import { ActivatedRoute } from '@angular/router';
 import { GlobalService } from './../../../services/global.service';
 import { Storage } from '@ionic/storage';
 import { AlertService } from './../../../services/alert.service';
@@ -34,7 +36,8 @@ export class EditdadosPage implements OnInit {
     private alertService: AlertService, 
     private navCtrl: NavController, 
     private storage: Storage,
-    private global: GlobalService
+    private global: GlobalService,
+    private routingService: AppRoutingPreloaderService
   ) { }
 
   ngOnInit() {
@@ -42,6 +45,9 @@ export class EditdadosPage implements OnInit {
   }
   ionViewWillEnter(){
     this.showdados();
+  }
+  async ionViewDidEnter() {
+    await this.routingService.preloadRoute('account');
   }
   dismiss(){
     this.navCtrl.navigateForward('/account');
@@ -74,7 +80,6 @@ export class EditdadosPage implements OnInit {
           this.checked3 = "true";
           break;
       }
-      console.log(data.cargo_id);
       this.authService.getIdCargos(data.cargo_id).subscribe(resul =>{
         this.cargo = resul;
       });
@@ -82,6 +87,7 @@ export class EditdadosPage implements OnInit {
       console.log("error: " + error);
     });
 
+    //deixa o value dos cargos como string p/ nao dar conflito
     this.authService.getCargos().subscribe(
       data=>{ 
         for(let i=0; i<data.length; i++){
@@ -95,6 +101,7 @@ export class EditdadosPage implements OnInit {
 
   editar(form: NgForm)
   {
+    //volta de nome para id
     this.authService.getCargos().subscribe(data=>{
       for(let i=0; i<data.length; i++){
         if(data[i].cargo == form.value.cargo)
@@ -104,29 +111,22 @@ export class EditdadosPage implements OnInit {
         }
       }
     });
-    this.authService.user()
-    .subscribe(
-    data=>{ 
-      this.id = data.id;
-      this.authService.updateuser(
-        this.id,form.value.fName, form.value.lName, form.value.email, 
-        form.value.endereco, form.value.cidade, form.value.estado, 
-        form.value.data_nasc, form.value.telefone, form.value.nivel, 
-        this.global.cargo, form.value.profissao).subscribe(
-        resp => {
-        },
-        error => {
-          this.alertService.presentToast('E-mail já registrado!');
-        },
-        () => {
-          this.alertService.presentToast('Usuário atualizado!');
-          this.navCtrl.navigateRoot('/account');
-        }
-      );
-    }
-    , error=>{ 
-      console.log("error: " + error);
-    });
 
+    //salva as alterações
+    this.authService.updateuser(
+      this.id,form.value.fName, form.value.lName, form.value.email, 
+      form.value.endereco, form.value.cidade, form.value.estado, 
+      form.value.data_nasc, form.value.telefone, form.value.nivel, 
+      this.global.cargo, form.value.profissao).subscribe(
+      resp => {
+      },
+      error => {
+        this.alertService.presentToast('E-mail já registrado!');
+      },
+      () => {
+        this.alertService.presentToast('Usuário atualizado!');
+        this.navCtrl.navigateRoot('/account');
+      }
+    );
   }
 }

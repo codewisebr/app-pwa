@@ -202,6 +202,9 @@ export class AuthService {
         this.isLoggedIn = false;
         this.storage.remove('access');
         this.storage.remove('token');
+        this.storage.remove('user_id');
+        this.storage.remove('avental');
+        this.storage.remove('cargo');
         delete this.token;
         delete this.global.access;
         return data;
@@ -279,18 +282,10 @@ export class AuthService {
     return this.http.post<any>( this.env.API_URL+'auth/getalllista',{id:id});
   }
 
-  getConfirmacao(){
-    return this.http.get<any>( this.env.API_URL+'auth/getconfirmacao');
+  getConfirmacao(tipo:Number){
+    return this.http.post<any>( this.env.API_URL+'auth/getconfirmacao',{tipo:tipo});
   }
-
-  getPresente(){
-    return this.http.get<any>( this.env.API_URL+'auth/getpresente');
-  }
-
-  getAusente(){
-    return this.http.get<any>( this.env.API_URL+'auth/getausente');
-  }
-
+  
   getInfo(): Observable<any>
   {
     return this.http.get<any>( this.env.API_URL+'auth/getinfo');

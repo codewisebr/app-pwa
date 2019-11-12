@@ -1,3 +1,4 @@
+
 import { Storage } from '@ionic/storage';
 import { Injectable } from '@angular/core';
 
@@ -9,7 +10,10 @@ export class GlobalService {
   public cargo:any;
   public avental: any;
   public reuniao: any;
-  constructor(private storage:Storage) {
+  public user_id: any;
+  constructor(
+    private storage:Storage
+  ) {
     this.storage.get('access').then((value)=>{
       this.access = value;
       return this.access;
@@ -29,5 +33,10 @@ export class GlobalService {
       this.reuniao = value;
       return this.reuniao;
     });
-   }
+    
+    this.storage.get('user_id').then((value)=>{
+      this.user_id = value;
+      return this.user_id;
+    });
+ }
 }

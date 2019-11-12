@@ -31,7 +31,8 @@ export class AdminfinanceiroPage implements OnInit {
   ngOnInit() {
   }
   async ionViewDidEnter() {
-    await this.routingService.preloadRoute('hisfinanceiro');
+    await this.routingService.preloadRoute('hisrelatorio');
+    await this.routingService.preloadRoute('cadastrafinanceiro');
   }
   ionViewWillEnter(){
     this.showsituacao();
@@ -134,8 +135,7 @@ export class AdminfinanceiroPage implements OnInit {
   }
 
   edit(form:any, id:number){
-      this.pagamento = this.datePipe.transform(this.data, 'yyyy-MM-dd');
-    console.log(this.pagamento);
+    this.pagamento = this.datePipe.transform(this.data, 'yyyy-MM-dd');
     this.authService.updatefinanceiro(id,form).subscribe(data=>{
       this.alertService.presentToast("Financeiro editado com sucesso!");
       window.location.reload();

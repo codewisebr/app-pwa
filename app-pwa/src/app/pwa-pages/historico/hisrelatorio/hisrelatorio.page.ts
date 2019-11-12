@@ -4,7 +4,6 @@ import { ActivatedRoute, NavigationExtras } from '@angular/router';
 import { AppRoutingPreloaderService } from './../../../route-to-preload';
 import { Component, OnInit } from '@angular/core';
 import { compilePipeFromMetadata } from '@angular/compiler';
-import { ConsoleReporter } from 'jasmine';
 
 @Component({
   selector: 'app-hisrelatorio',

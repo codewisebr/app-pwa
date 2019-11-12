@@ -1,3 +1,4 @@
+import { Storage } from '@ionic/storage';
 import { NgForm } from '@angular/forms';
 import { AuthService } from '../../services/auth.service';
 import { AlertService } from '../../services/alert.service';
@@ -16,7 +17,8 @@ export class HomePage {
     private navCtrl: NavController,
     private alertService: AlertService,
     private platform: Platform,
-    private menu: MenuController
+    private menu: MenuController,
+    private storage:Storage
     ){
       this.menu.enable(false);
     }
@@ -55,7 +57,6 @@ export class HomePage {
       }
     );
   }
-
   register()
   {
     this.navCtrl.navigateForward('/register');

@@ -16,7 +16,7 @@ export class OrdemPage implements OnInit {
   ionViewWillEnter(){this.showordem();}
   async showordem() {
     this.authService.user().subscribe(resul=>{
-      //pega o nivel do usuario
+      //pega o nivel do usuario, assim so mostra as ordens do nivel
       this.authService.getNivelOrdem(resul.nivel)
       .subscribe(
       data =>{

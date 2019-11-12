@@ -52,9 +52,7 @@ Route::prefix('auth')->group(function () {
     Route::get('getlista', 'Auth\AuthController@getlista');
     Route::post('getalllista', 'Auth\AuthController@getalllista');
     Route::put('updatelista', 'Auth\AuthController@updatelista');
-    Route::get('getconfirmacao', 'Auth\AuthController@getconfirmacao');
-    Route::get('getpresente', 'Auth\AuthController@getpresente');
-    Route::get('getausente', 'Auth\AuthController@getausente');
+    Route::post('getconfirmacao', 'Auth\AuthController@getconfirmacao');
 
     //reuniao
     Route::get('getreuniao', 'Auth\AuthController@getreuniao');

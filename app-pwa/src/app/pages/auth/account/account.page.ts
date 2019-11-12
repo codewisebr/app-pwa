@@ -1,3 +1,4 @@
+import { NavigationExtras } from '@angular/router';
 import { AppRoutingPreloaderService } from './../../../route-to-preload';
 import { EditsenhaPage } from './../editsenha/editsenha.page';
 import { EditdadosPage } from './../editdados/editdados.page';
@@ -30,10 +31,8 @@ export class AccountPage implements OnInit {
     private routingService: AppRoutingPreloaderService,
     private navCtrl:NavController
   ) {}
-
-  ngOnInit() {
-    
-  }
+  public user:any[]=[];
+  ngOnInit() {}
   ionViewWillEnter(){
     this.showuser();
   }
@@ -46,6 +45,7 @@ export class AccountPage implements OnInit {
     this.authService.user()
     .subscribe(
     data=>{ 
+      this.id = data.id;
       this.fname = data.first_name.replace("\"", "");
       this.lname = data.last_name.replace("\"", "");
       this.email = data.email.replace("\"", "");
@@ -55,6 +55,7 @@ export class AccountPage implements OnInit {
       this.telefone = data.telefone.replace("\"", "");
       this.data_nasc = data.data_nasc.replace("\"", "");
       this.profissao = data.profissao.replace("\"", "");
+
       this.authService.getIdCargos(data.cargo_id).subscribe(resul =>{
         this.cargo = resul;
       });

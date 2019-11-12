@@ -97,10 +97,10 @@ export class AdminPage implements OnInit {
   }
 
   async showlista() {
-    this.authService.getPresente().subscribe(presente =>{
+    this.authService.getConfirmacao(1).subscribe(presente =>{
       this.presente = presente;
     });
-    this.authService.getAusente().subscribe(ausente =>{
+    this.authService.getConfirmacao(2).subscribe(ausente =>{
       this.ausente = ausente;
     })
   }

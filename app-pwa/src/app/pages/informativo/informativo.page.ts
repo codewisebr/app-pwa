@@ -9,25 +9,25 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./informativo.page.scss'],
 })
 export class InformativoPage implements OnInit {
+  constructor(
+    public authService: AuthService
+  ) { }
 
-  constructor(public authService: AuthService) { }
-
-  ngOnInit() {
-    
-  }
+  ngOnInit() {}
   ionViewWillEnter(){
+    
     this.showinfo();
   }
   public info: any[] = [];
   async showinfo() {
     this.authService.user().subscribe(resul=>{
-      //pega o nivel do usuario
+      //pega o nivel do usuario, e assim mostra apenas as info de determinado nivel
       this.authService.getNivelInfo(resul.nivel)
       .subscribe(
       data =>{
         for(let i=0; i<data.length;i++)
         {
-         this.info[i] = data[i].info
+          this.info[i] = data[i].info
         }
       });
     });

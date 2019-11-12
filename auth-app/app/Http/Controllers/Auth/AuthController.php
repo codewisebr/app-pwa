@@ -560,33 +560,34 @@ class AuthController extends Controller
             return response()->json(" ");
     }
 
-    public function getconfirmacao(){
+    public function getconfirmacao(Request $request){
+        $request->validate([
+            'tipo'=>'required|int'
+        ]);
         $reuniaoInfo=Reuniao::where('ativo', '1')->value('id'); 
-        $presente = ListaPresenca::where('reuniao', $reuniaoInfo)->count();
-        if($presente != null)
-            return response()->json($presente);
-        else
-            return response()->json(0);
+        if($request->tipo == 0){
+            $presente = ListaPresenca::where('reuniao', $reuniaoInfo)->count();
+            if($presente != null)
+                return response()->json($presente);
+            else
+                return response()->json(0);  
+        }
+        else if($request->tipo == 1){
+            $presente = ListaPresenca::where(['reuniao'=> $reuniaoInfo, 'presenca'=>1])->count();
+            if($presente != null)
+                return response()->json($presente);
+            else
+                return response()->json(0);
+        }
+        else if($request->tipo == 2){
+            $ausente = ListaPresenca::where(['reuniao'=> $reuniaoInfo, 'presenca'=>0])->count();
+            if($ausente != null)
+                return response()->json($ausente);
+            else
+                return response()->json(0);
+        }
     }
-
-    public function getpresente(){
-        $reuniaoInfo=Reuniao::where('ativo', '1')->value('id'); 
-        $presente = ListaPresenca::where(['reuniao'=> $reuniaoInfo, 'presenca'=>1])->count();
-        if($presente != null)
-            return response()->json($presente);
-        else
-            return response()->json(0);
-    }
-
-    public function getausente(){
-        $reuniaoInfo=Reuniao::where('ativo', '1')->value('id'); 
-        $ausente = ListaPresenca::where(['reuniao'=> $reuniaoInfo, 'presenca'=>0])->count();
-        if($ausente != null)
-            return response()->json($ausente);
-        else
-            return response()->json(0);
-    }
-
+    
     public function getreuniao(){
         //recebe do bd o valor 
         $reuniaoInfo=Reuniao::where('ativo', '1')->get();

@@ -3,7 +3,6 @@
 namespace Laravel\Passport;
 
 use Carbon\Carbon;
-use Firebase\JWT\JWT;
 use Illuminate\Contracts\Config\Repository as Config;
 use Illuminate\Contracts\Encryption\Encrypter;
 use Symfony\Component\HttpFoundation\Cookie;

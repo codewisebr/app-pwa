@@ -11,11 +11,7 @@ import { environment } from '../environments/environment';
 import {HttpClient, HttpClientModule} from '@angular/common/http';
 import { IonicStorageModule } from '@ionic/storage';
 import {DatePipe} from '@angular/common';
-import { AngularFireModule } from '@angular/fire';
-import { AngularFireMessagingModule } from '@angular/fire/messaging';
 import { Push, PushObject } from '@ionic-native/push';
-import { AngularFireMessaging } from '@angular/fire/messaging';
-import { AngularFireFunctionsModule } from '@angular/fire/functions';
 @NgModule({
   declarations: [
     AppComponent
@@ -32,10 +28,7 @@ import { AngularFireFunctionsModule } from '@angular/fire/functions';
       name: 'new',
       driverOrder: ['localstorage', 'websql', 'sqlite' ]
     }),
-    HttpClientModule,
-    AngularFireModule.initializeApp(environment.firebaseConfig),
-    AngularFireMessagingModule,
-    AngularFireFunctionsModule
+    HttpClientModule
   ],
   providers: [
     StatusBar,

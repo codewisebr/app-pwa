@@ -1,21 +1,19 @@
-import { NotificationsService } from './services/notifications.service';
+
 import { Storage } from '@ionic/storage';
 import { AppRoutingPreloaderService } from './route-to-preload';
 import { AlertService } from './services/alert.service';
 import { AuthService } from './services/auth.service';
 import { Component, OnInit } from '@angular/core';
-import { AngularFireModule } from '@angular/fire';
 import {environment} from '../environments/environment';
 import { Platform, MenuController, NavController, IonSplitPane, AlertController } from '@ionic/angular';
 import { SplashScreen } from '@ionic-native/splash-screen/ngx';
 import { StatusBar } from '@ionic-native/status-bar/ngx';
-
 @Component({
   selector: 'app-root',
   templateUrl: 'app.component.html',
   styleUrls: ['app.component.scss']
 })
-export class AppComponent implements OnInit {
+export class AppComponent{
   public appPages = [
     {
       title: 'Home',
@@ -126,13 +124,9 @@ export class AppComponent implements OnInit {
     private alertService: AlertService,
     private alertCtrl : AlertController,
     private routingService: AppRoutingPreloaderService,
-    private storage: Storage,
-    private notificationsService: NotificationsService
+    private storage: Storage
   ) {
     this.initializeApp();
-  }
-  async ngOnInit() {
-    AngularFireModule.initializeApp(environment.firebaseConfig);
   }
   async ionViewWillEnter() {
     await this.routingService.preloadRoute('dashboard');
@@ -163,7 +157,6 @@ export class AppComponent implements OnInit {
   initializeApp() {
     this.authService.getToken().then(() => {
       if(this.authService.isLoggedIn) {
-        console.log('logado');
         this.permissao();
       }
       else{
@@ -173,7 +166,6 @@ export class AppComponent implements OnInit {
     });
     this.authService.reuniao().subscribe(data=>{
     });
-    this.notificationsService.showMessages().subscribe();
   }
 
   async logout() {

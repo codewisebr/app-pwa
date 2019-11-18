@@ -1,6 +1,5 @@
 import { AppRoutingPreloaderService } from './../../../route-to-preload';
 import { DatePipe } from '@angular/common';
-import { AngularFirestore } from '@angular/fire/firestore';
 import { AlertService } from './../../../services/alert.service';
 import { AuthService } from 'src/app/services/auth.service';
 import { AlertController, ModalController, NavController } from '@ionic/angular';

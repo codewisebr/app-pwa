@@ -101,7 +101,7 @@ class ComposerStaticInitf0dc19371040b27a3ab433bd04ff0fa7
         ),
         'F' => 
         array (
-            'Firebase\\JWT\\' => 13,
+            
         ),
         'D' => 
         array (
@@ -295,10 +295,6 @@ class ComposerStaticInitf0dc19371040b27a3ab433bd04ff0fa7
         'GuzzleHttp\\' => 
         array (
             0 => __DIR__ . '/..' . '/guzzlehttp/guzzle/src',
-        ),
-        'Firebase\\JWT\\' => 
-        array (
-            0 => __DIR__ . '/..' . '/firebase/php-jwt/src',
         ),
         'Doctrine\\Common\\Inflector\\' => 
         array (

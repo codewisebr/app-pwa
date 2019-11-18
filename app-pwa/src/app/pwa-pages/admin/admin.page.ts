@@ -4,7 +4,6 @@ import { AlertService } from './../../services/alert.service';
 import { AuthService } from 'src/app/services/auth.service';
 import { Component, OnInit } from '@angular/core';
 import { MenuController, Platform, IonSplitPane, NavController, AlertController } from '@ionic/angular';
-import { AngularFireMessaging } from '@angular/fire/messaging';
 @Component({
   selector: 'app-admin',
   templateUrl: './admin.page.html',
@@ -31,25 +30,11 @@ export class AdminPage implements OnInit {
     private alertService: AlertService,
     private alertCtrl:AlertController,
     private dataPipe: DatePipe, 
-    private routingService: AppRoutingPreloaderService,
-    private afMessaging: AngularFireMessaging
+    private routingService: AppRoutingPreloaderService
     ) { 
       this.menu.enable(true, 'web');
   }
   ngOnInit() {
-    this.notificacao();
-  }
-  notificacao(){
-    //pedido de permissão para enviar notificação, gera um token
-    this.afMessaging.requestToken
-      .subscribe(
-        (token) => {
-          console.log('Notificação permitida!');
-        },
-        (error) => {
-          console.error(error);
-        }
-      );
   }
   ionViewWillEnter()
   {

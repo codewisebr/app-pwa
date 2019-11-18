@@ -1,6 +1,5 @@
 import { GlobalService } from 'src/app/services/global.service';
 import { AppRoutingPreloaderService } from './../../../route-to-preload';
-import { AngularFirestore } from '@angular/fire/firestore';
 import { DatePipe } from '@angular/common';
 import { AlertService } from './../../../services/alert.service';
 import { AuthService } from './../../../services/auth.service';

@@ -3,7 +3,6 @@
 namespace Laravel\Passport\Guards;
 
 use Exception;
-use Firebase\JWT\JWT;
 use Illuminate\Container\Container;
 use Illuminate\Contracts\Auth\UserProvider;
 use Illuminate\Contracts\Debug\ExceptionHandler;

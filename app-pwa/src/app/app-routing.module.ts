@@ -55,7 +55,8 @@ const routes: Routes = [
   { path: 'cadastrausuario', loadChildren: './pwa-pages/cadastra/cadastrausuario/cadastrausuario.module#CadastrausuarioPageModule', data: {preload: true}, canActivate: [AuthGuard] },
   { path: 'hisfamilia', loadChildren: './pwa-pages/historico/hisfamilia/hisfamilia.module#HisfamiliaPageModule', data: {preload: true}, canActivate: [AuthGuard] },
   { path: 'hisrelatorio', loadChildren: './pwa-pages/historico/hisrelatorio/hisrelatorio.module#HisrelatorioPageModule', data: {preload: true}, canActivate: [AuthGuard] },
-  { path: 'hisadminfinanceiro', loadChildren: './pwa-pages/historico/hisadminfinanceiro/hisadminfinanceiro.module#HisadminfinanceiroPageModule', data: {preload: true}, canActivate: [AuthGuard] },
+  { path: 'hisadminfinanceiro', loadChildren: './pwa-pages/historico/hisadminfinanceiro/hisadminfinanceiro.module#HisadminfinanceiroPageModule', data: {preload: true}, canActivate: [AuthGuard] },  { path: 'senha', loadChildren: './pages/auth/senha/senha.module#SenhaPageModule' },
+
 ];
 @NgModule({
   imports: [

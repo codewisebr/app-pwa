@@ -1,3 +1,5 @@
+import { Storage } from '@ionic/storage';
+import { GlobalService } from './../../services/global.service';
 import { AppRoutingPreloaderService } from './../../route-to-preload';
 import { DatePipe } from '@angular/common';
 import { AlertService } from './../../services/alert.service';
@@ -11,17 +13,21 @@ import { MenuController, Platform, IonSplitPane, NavController, AlertController 
 })
 export class AdminPage implements OnInit {
 
-  public info: any[]=[];
-  public ordem: any[]=[];
   public data:any;
   public confirm:boolean;
-  public id_user:any[] = [];
-  public motivo: any[] = [];
+  public id:any;
+  public motivo: any;
   public name: any[]=[];
-  public agape: any[]=[];
   public presenca: any[] = [];
   public presente: Number;
   public ausente: Number;
+
+  public p1="primary";
+  public p2="danger";
+  public disabled1;//desabilitado
+  public disabled2;//desabilitado
+  public disabled3;//desabilitado
+  public opcao: Number;
   constructor(
     private menu: MenuController,
     private platform: Platform,
@@ -30,19 +36,20 @@ export class AdminPage implements OnInit {
     private alertService: AlertService,
     private alertCtrl:AlertController,
     private dataPipe: DatePipe, 
-    private routingService: AppRoutingPreloaderService
-    ) { 
+    private routingService: AppRoutingPreloaderService,
+    private global:GlobalService,
+    private storage: Storage
+  ) { 
       this.menu.enable(true, 'web');
   }
   ngOnInit() {
   }
   ionViewWillEnter()
   {
+    this.id = this.global.user_id;
     this.showlista();
     this.showdata();
-    this.showinfo();
-    this.showordem();
-    this.showagape();
+    this.verifica();
   }
   async ionViewDidEnter() {
     await this.routingService.preloadRoute('mural');
@@ -54,18 +61,110 @@ export class AdminPage implements OnInit {
   }
   //#region Show
 
-  async showagape()
-  {
-    await this.authService.getAgape().subscribe(
-      data=>{
-        for(let i=0; i<data.length;i++)
+  verifica(){ 
+    //verifica se o usuario ja respondeu
+    this.authService.getLista().subscribe(
+      resp => {
+        //verifica se esta vazio, se tiver permite q o usuario escolha a opcao
+        if(resp.length == 0)
         {
-          this.agape[i]=data[i].agape;
+          this.disabled1 = false;
+          this.disabled2 = false;
+          this.disabled3 = true;
         }
-    },
-    error=>{
-      console.log(error);
+        else
+        {
+          this.disabled1 = true;
+          this.disabled2 = true;
+          for(let i=0; i<resp.length;i++)
+          {
+            if(resp[i].presenca == 1)
+            {
+              this.p1 = "success";
+              this.p2 = "primary";
+              this.disabled3 = true;
+            }
+            else if(resp[i].presenca == 0)
+            {
+              this.p2 = "success";
+              this.p1 = "primary";
+              this.disabled3 = false;
+            }
+          }
+        }
+      },
+      error => {
+        //se nao possui o id no banco de dados, deixa habilitado para o usuario
+        console.log('erro na verificação');
+        this.disabled1=false;
+        this.disabled2=false;
+      }
+    );
+  }
+  resposta(resp: Number)
+  {
+    this.opcao = resp;
+    if(this.opcao == 0)
+    {
+      this.disabled3 = false;
+      this.bmotivo(this.opcao);
+    }
+    else{
+      this.motivo = "-";
+      this.lista(this.opcao, this.motivo);
+    }
+  }
+
+  async bmotivo(opcao: Number)
+  {
+    //abre um pop
+    let alertPrompt = await this.alertCtrl.create({
+      header: 'Informe o motivo',
+      inputs: [
+        {
+          name: 'motivo',
+          type: 'text'
+        }
+      ],
+      buttons: [
+        {
+          text: 'Cancelar',
+          role:'cancel',
+          cssClass: 'secondary'
+        },
+        {
+          text: 'Enviar',
+          handler: (data)=> {
+            if(data.motivo == "")
+              this.motivo = "Sem justificativa";
+            else
+              this.motivo = data.motivo;
+            this.lista(this.opcao,this.motivo);
+          }
+        }
+      ]
     });
+    await alertPrompt.present();
+  }
+
+  async lista(opcao: Number, motivo: String)
+  {
+      //manda pra funcão o id do usuario e a resposta, se ja tiver no bd ele atualiza para uma nova resposta
+      this.authService.confirma_presenca(this.id, this.opcao ,this.motivo,this.global.reuniao).subscribe(
+        data => {},
+        error => {
+          console.log(error);
+        },
+        () => {
+          this.alertService.presentToast('Confirmação enviada!');
+          window.location.reload();
+        }
+      );
+  }
+  editar()
+  {
+    this.disabled1 = !this.disabled1;
+    this.disabled2 = !this.disabled2;
   }
 
   async showdata()
@@ -75,6 +174,10 @@ export class AdminPage implements OnInit {
     .subscribe(
     data=>{ 
       this.data = (this.dataPipe.transform(data[0].data, "dd/MM"));
+      this.storage.set('reuniao', data[0].id);
+        this.disabled1=false;
+        this.disabled2=false;
+        this.verifica();
     }
     , error=>{ 
       console.log("error: " + error);
@@ -88,30 +191,6 @@ export class AdminPage implements OnInit {
     this.authService.getConfirmacao(2).subscribe(ausente =>{
       this.ausente = ausente;
     })
-  }
-  async showinfo() {
-    await this.authService.getInfo().subscribe(
-      data=>{
-        for(let i=0; i<data.length;i++)
-        {
-          this.info[i]=data[i].info;
-        }
-    },
-    error=>{
-      console.log(error);
-    });
-  }
-  async showordem() {
-    await this.authService.getOrdem().subscribe(
-      data=>{
-        for(let i=0; i<data.length;i++)
-        {
-          this.ordem[i]=data[i].ordem;
-        }
-    },
-    error=>{
-      console.log(error);
-    });
   }
   //#endregion
 

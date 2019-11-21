@@ -59,6 +59,7 @@ export class EditordemPage implements OnInit {
                 this.checked3 = "true";
                 break;
             }
+            break;
           }
         }
     },
@@ -81,11 +82,11 @@ export class EditordemPage implements OnInit {
           {
             this.authService.updateordem(data[i].id, form.value.novo, 1, form.value.nivel).subscribe(
               data=>{
-                this.alertService.presentToast("Ordem editado com sucesso!");
                 this.dismiss();
-                window.location.reload();
+                this.alertService.presentToast("Ordem editado com sucesso!");
               }
             );
+            break;
           }
         }
     },

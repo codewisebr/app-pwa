@@ -6,7 +6,6 @@
     </ion-toolbar>
   </ion-header>
 <ion-content padding>
-
     <ion-grid text-center >
       <div class="box">
         <h2>Editar Presença</h2>
@@ -33,9 +32,11 @@
             <ion-label>Motivo:</ion-label>
             <ion-input type="text" required="true" name="motivo" [(ngModel)]="this.motivo"></ion-input>
           </ion-grid>
+          <br>
           <ion-grid>
             <ion-button type="submit" round expand="block" color="danger">Salvar</ion-button>
           </ion-grid>
+          <br>
         </form>
       </div>
     </ion-grid>

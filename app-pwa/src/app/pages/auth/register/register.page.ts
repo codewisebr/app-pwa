@@ -75,6 +75,7 @@ export class RegisterPage implements OnInit {
         if(data[i].avental == form.value.avental)
         {
           this.storage.set('avental', data[i].id);
+          break;
         }
       }
     });
@@ -84,6 +85,7 @@ export class RegisterPage implements OnInit {
         if(data[i].cargo == form.value.cargo)
         {
           this.storage.set('cargo', data[i].id);
+          break;
         }
       }
     });

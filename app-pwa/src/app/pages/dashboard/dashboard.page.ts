@@ -184,8 +184,8 @@ export class DashboardPage implements OnInit {
   }
   editar()
   {
-    this.disabled1 = false;
-    this.disabled2 = false;
+    this.disabled1 = !this.disabled1;
+    this.disabled2 = !this.disabled2;
   }
 
   async showordem(nivel:any)

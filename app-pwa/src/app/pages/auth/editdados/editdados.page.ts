@@ -44,6 +44,7 @@ export class EditdadosPage implements OnInit {
     
   }
   ionViewWillEnter(){
+    this.id = this.global.user_id;
     this.showdados();
   }
   async ionViewDidEnter() {
@@ -121,7 +122,8 @@ export class EditdadosPage implements OnInit {
       resp => {
       },
       error => {
-        this.alertService.presentToast('E-mail já registrado!');
+        this.alertService.presentToast('Preencha corretamente o formulário!');
+        console.log(error)
       },
       () => {
         this.alertService.presentToast('Usuário atualizado!');

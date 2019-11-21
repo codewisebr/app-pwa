@@ -10,20 +10,31 @@
 <ion-content>
   <ion-grid>
     <ion-row>
-      <ion-col>
+      <ion-col text-center>
         <div class="box">
-          <h3>Reunião {{this.data}}</h3>
+          <h3>Comparecerá na reunião?</h3>
+          <ion-button [color]="p1" [disabled]="disabled1" (click)=resposta(1)>SIM</ion-button>
+          <ion-button [color]="p2" [disabled]="disabled2" (click)=resposta(0)>NÃO</ion-button>
+          <ion-buttons>
+            <ion-button color="medium" (click)=editar()>EDITAR</ion-button>
+            <ion-button color="medium" [disabled]="disabled3" (click)=bmotivo(0)>MOTIVO</ion-button>
+          </ion-buttons>
         </div>
       </ion-col>
       <ion-col>
-        <div class="box">
-          <h3>Presentes: {{this.presente}}</h3>
-        </div>
-      </ion-col>
-      <ion-col>
-        <div class="box">
-          <h3>Ausentes: {{this.ausente}}</h3>
-        </div>
+        <ion-row class="minbox1">
+          <ion-col>
+            <h3>Reunião {{this.data}}</h3>
+          </ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col class="minbox2">
+            <h3>Presentes: {{this.presente}}</h3>
+          </ion-col>
+          <ion-col class="minbox3">
+            <h3>Ausentes: {{this.ausente}}</h3>
+          </ion-col>
+        </ion-row>
       </ion-col>
     </ion-row>
     </ion-grid>

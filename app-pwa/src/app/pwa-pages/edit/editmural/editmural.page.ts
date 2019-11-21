@@ -41,6 +41,7 @@ export class EditmuralPage implements OnInit{
       {
         if(this.id == data[i].id){
           this.texto = data[i].texto;
+          break;
         }
       }
     });

@@ -191,7 +191,7 @@ export class DashboardPage implements OnInit {
   async showordem(nivel:any)
   {
       //pega o nivel do usuario
-      this.authService.getNivelOrdem(nivel)
+      this.authService.getNivelOrdem(nivel, 1)
       .subscribe(
       data =>{
         for(let i=0; i<data.length;i++)
@@ -203,7 +203,7 @@ export class DashboardPage implements OnInit {
   
   async showinfo(nivel:any)
   {
-    this.authService.getNivelInfo(nivel)
+    this.authService.getNivelInfo(nivel, 1)
       .subscribe(
       data =>{
         for(let i=0; i<data.length;i++)
@@ -223,9 +223,9 @@ export class DashboardPage implements OnInit {
     );
   }
 
-  async showagape()
+  showagape()
   {
-    await this.authService.getAgape().subscribe(
+    this.authService.getAgape(1).subscribe(
       data=>{
         for(let i=0; i<data.length;i++)
         {
@@ -239,15 +239,15 @@ export class DashboardPage implements OnInit {
 
   showfinanceiro(){
       this.authService.getFinanceiro(this.id).subscribe(resul=>{
-        for(let i=0; i<resul.length; i++){
-          this.financeiro[i] = resul[i];
-          if(resul[i].data_pag == '0000-00-00' || resul[i].data_pag == null){
-            this.financeiro[i].data_pag = "Aguardando"
+          for(let i=0; i<resul.length; i++){
+            this.financeiro[i] = resul[i];
+            if(resul[i].data_pag == '0000-00-00' || resul[i].data_pag == null){
+              this.financeiro[i].data_pag = "Aguardando"
+            }
+            else{
+              this.financeiro[i].data_pag = this.dataPipe.transform(resul[i].data_pag, "dd/MM");
+            }
           }
-          else{
-            this.financeiro[i].data_pag = this.dataPipe.transform(resul[i].data_pag, "dd/MM");
-          }
-        }
       });
   }
 }

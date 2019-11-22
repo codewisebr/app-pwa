@@ -17,7 +17,7 @@ export class OrdemPage implements OnInit {
   async showordem() {
     this.authService.user().subscribe(resul=>{
       //pega o nivel do usuario, assim so mostra as ordens do nivel
-      this.authService.getNivelOrdem(resul.nivel)
+      this.authService.getNivelOrdem(resul.nivel, 0)
       .subscribe(
       data =>{
         for(let i=0; i<data.length;i++)

@@ -1,4 +1,5 @@
-import { NgModule } from '@angular/core';
+
+import { NgModule, ɵLocaleDataIndex } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { RouteReuseStrategy, RouterModule, Routes } from '@angular/router';
 import { IonicModule, IonicRouteStrategy } from '@ionic/angular';
@@ -10,8 +11,7 @@ import { ServiceWorkerModule } from '@angular/service-worker';
 import { environment } from '../environments/environment';
 import {HttpClient, HttpClientModule} from '@angular/common/http';
 import { IonicStorageModule } from '@ionic/storage';
-import {DatePipe} from '@angular/common';
-import { Push, PushObject } from '@ionic-native/push';
+import {DatePipe, registerLocaleData} from '@angular/common';
 @NgModule({
   declarations: [
     AppComponent
@@ -28,7 +28,7 @@ import { Push, PushObject } from '@ionic-native/push';
       name: 'new',
       driverOrder: ['localstorage', 'websql', 'sqlite' ]
     }),
-    HttpClientModule
+    HttpClientModule,
   ],
   providers: [
     StatusBar,

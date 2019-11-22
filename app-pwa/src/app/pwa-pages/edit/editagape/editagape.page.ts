@@ -37,7 +37,7 @@ export class EditagapePage implements OnInit{
   }
 
   showagape() {
-    this.authService.getAgape().subscribe(
+    this.authService.getAgape(0).subscribe(
       data=>{
         for(let i=0; i<data.length;i++)
         {
@@ -53,7 +53,7 @@ export class EditagapePage implements OnInit{
     });
   }
   async editar(form:any){
-    this.authService.getAgape().subscribe(
+    this.authService.getAgape(0).subscribe(
     data=>{
       for(let i=0; i<data.length;i++)
       {

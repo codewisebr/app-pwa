@@ -22,7 +22,7 @@ export class InformativoPage implements OnInit {
   async showinfo() {
     this.authService.user().subscribe(resul=>{
       //pega o nivel do usuario, e assim mostra apenas as info de determinado nivel
-      this.authService.getNivelInfo(resul.nivel)
+      this.authService.getNivelInfo(resul.nivel, 0)
       .subscribe(
       data =>{
         for(let i=0; i<data.length;i++)

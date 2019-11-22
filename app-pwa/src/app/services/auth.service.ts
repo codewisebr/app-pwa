@@ -55,6 +55,7 @@ export class AuthService {
             this.auxtoken = val.accessToken;
             this.storage.set('access', this.auxtoken);
             this.global.access = val.accessToken;
+            this.global.user_id = val.token.user_id;
           },
           error => console.error('Erro ao armazenar o Token', error)
         );
@@ -102,6 +103,7 @@ export class AuthService {
     {id_user: id, password: password}
     );
   }
+  
   logout() {
     const headers = new HttpHeaders({
       'Authorization': "Bearer "+this.global.access
@@ -112,11 +114,12 @@ export class AuthService {
         this.isLoggedIn = false;
         this.storage.remove('access');
         this.storage.remove('token');
-        this.storage.remove('user_id');
         this.storage.remove('avental');
         this.storage.remove('cargo');
+        this.storage.remove('reuniao');
         delete this.token;
         delete this.global.access;
+        delete this.global.user_id;
         return data;
       })
     )
@@ -160,7 +163,6 @@ export class AuthService {
     return this.storage.get('token').then(
       data => {
         this.token = data;
-        this.storage.set('user_id', data.token.user_id);
         if(this.token != null) {
           this.isLoggedIn=true;
         } else {
@@ -195,9 +197,9 @@ export class AuthService {
     return this.http.get<any>( this.env.API_URL+'info/getallinfo');
   }
 
-  getNivelInfo(nivel:Number): Observable<any>
+  getNivelInfo(nivel:Number, tipo:Number): Observable<any>
   {
-    return this.http.post<any>( this.env.API_URL+'info/getnivelinfo',{nivel:nivel});  
+    return this.http.post<any>( this.env.API_URL+'info/getnivelinfo',{nivel:nivel, tipo:tipo});  
   }
   //#endregion
 
@@ -221,9 +223,9 @@ export class AuthService {
     return this.http.get<any>( this.env.API_URL+'ordem/getordem');  
   }
 
-  getNivelOrdem(nivel:Number): Observable<any>
+  getNivelOrdem(nivel:Number, tipo:Number): Observable<any>
   {
-    return this.http.post<any>( this.env.API_URL+'ordem/getnivelordem',{nivel:nivel});  
+    return this.http.post<any>( this.env.API_URL+'ordem/getnivelordem',{nivel:nivel, tipo:tipo});  
   }
   //#endregion
 
@@ -237,9 +239,9 @@ export class AuthService {
     return this.http.put<any>(this.env.API_URL + 'agape/updateagape',
     {id: id, agape: agape, ativo: ativo, date:date});
   }
-  getAgape()
+  getAgape(tipo:Number)
   {
-    return this.http.get<any>( this.env.API_URL+'agape/getagape');
+    return this.http.post<any>( this.env.API_URL+'agape/getagape', {tipo:tipo});
   }
 
   getAllAgape()

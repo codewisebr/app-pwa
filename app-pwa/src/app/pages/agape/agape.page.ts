@@ -15,7 +15,7 @@ export class AgapePage implements OnInit {
   ionViewWillEnter(){this.showagape();}
   
   async showagape() {
-    await this.authService.getAgape()
+    await this.authService.getAgape(0)
     .subscribe(
       data =>{
         for(let i=0; i<data.length; i++){

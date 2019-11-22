@@ -33,10 +33,11 @@ export class GlobalService {
       this.reuniao = value;
       return this.reuniao;
     });
-    
-    this.storage.get('user_id').then((value)=>{
-      this.user_id = value;
-      return this.user_id;
+
+    this.storage.get('token').then(
+      data => {
+        return this.user_id = data.token.user_id;
     });
  }
 }
+

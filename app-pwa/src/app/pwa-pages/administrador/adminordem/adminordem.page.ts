@@ -85,7 +85,8 @@ export class AdminordemPage implements OnInit {
                 this.alertService.presentToast("Ordem excluido com sucesso!");
                 window.location.reload();
               }
-            )
+            );
+            break;
           }
         }
     },

@@ -12,22 +12,23 @@
     <ion-row>
       <ion-col text-center>
         <div class="box">
-          <h3>Comparecerá na reunião?</h3>
-          <ion-button [color]="p1" [disabled]="disabled1" (click)=resposta(1)>SIM</ion-button>
-          <ion-button [color]="p2" [disabled]="disabled2" (click)=resposta(0)>NÃO</ion-button>
-          <ion-buttons>
-            <ion-button color="medium" (click)=editar()>EDITAR</ion-button>
-            <ion-button color="medium" [disabled]="disabled3" (click)=bmotivo(0)>MOTIVO</ion-button>
-          </ion-buttons>
+            <h3>Reunião</h3>
+            <h1>{{this.data}}</h1>
         </div>
       </ion-col>
       <ion-col>
         <ion-row class="minbox1">
-          <ion-col>
-            <h3>Reunião {{this.data}}</h3>
+          <ion-col text-center>
+              <h3>Comparecerá na reunião?</h3>
+              <ion-button [color]="p1" [disabled]="disabled1" (click)=resposta(1)>SIM</ion-button>
+              <ion-button [color]="p2" [disabled]="disabled2" (click)=resposta(0)>NÃO</ion-button>
+              <ion-buttons>
+                <ion-button color="medium" (click)=editar()>EDITAR</ion-button>
+                <ion-button color="medium" [disabled]="disabled3" (click)=bmotivo(0)>MOTIVO</ion-button>
+              </ion-buttons>
           </ion-col>
         </ion-row>
-        <ion-row>
+        <ion-row text-center>
           <ion-col class="minbox2">
             <h3>Presentes: {{this.presente}}</h3>
           </ion-col>
@@ -37,5 +38,33 @@
         </ion-row>
       </ion-col>
     </ion-row>
-    </ion-grid>
+    <ion-row>
+      <ion-col>
+        <ion-row>
+          <ion-col>
+            <div class="boxes">
+            <h3>Lista de presença</h3>
+            </div>
+          </ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col>
+          <div class="boxes">
+            <h3>Lista de presença</h3>
+          </div>
+          </ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col>
+          <div class="boxes">
+            <h3>Ágape</h3>
+          </div>
+          </ion-col>
+        </ion-row>
+      </ion-col>
+      <ion-col class="img-box">
+        <ion-img src="assets/admin.PNG" class="img"></ion-img>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
 </ion-content>

@@ -45,7 +45,7 @@ export class AdminagapePage implements OnInit {
   }
   async showagape()
   {
-    await this.authService.getAgape().subscribe(
+    await this.authService.getAgape(1).subscribe(
       data=>{
         for(let i=0; i<data.length;i++)
         {
@@ -71,7 +71,7 @@ export class AdminagapePage implements OnInit {
   }
 
   async delete(id: any){
-    await this.authService.getAgape().subscribe(
+    await this.authService.getAgape(0).subscribe(
       data=>{
         for(let i=0; i<data.length;i++)
         {
@@ -83,7 +83,8 @@ export class AdminagapePage implements OnInit {
                 this.alertService.presentToast("Ordem excluido com sucesso!");
                 window.location.reload();
               }
-            )
+            );
+            break;
           }
         }
     },

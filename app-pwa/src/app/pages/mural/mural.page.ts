@@ -1,3 +1,4 @@
+import { Storage } from '@ionic/storage';
 import { GlobalService } from 'src/app/services/global.service';
 import { AppRoutingPreloaderService } from './../../route-to-preload';
 import { NavigationExtras } from '@angular/router';
@@ -25,7 +26,8 @@ export class MuralPage implements OnInit {
     private alertService: AlertService,
     private navCtrl: NavController,
     private routingService: AppRoutingPreloaderService,
-    private global: GlobalService
+    private global: GlobalService,
+    private storage: Storage
     ) { }
 
   ngOnInit() {

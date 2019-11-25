@@ -52,7 +52,6 @@ export class AdminusuarioPage implements OnInit {
   }
 
   async adicionar(id:any){
-    console.log(id)
     let navigationExtras: NavigationExtras = {
       queryParams: {
           id: id

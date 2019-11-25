@@ -16,7 +16,8 @@ import { Component, OnInit } from '@angular/core';
 export class AdminagapePage implements OnInit {
   public agape: any[]=[];
   public disabled1=true;
-  constructor(private authService: AuthService,
+  constructor(
+    private authService: AuthService,
     private alertService: AlertService, 
     private alertCtrl:AlertController, 
     private navCtrl: NavController, 
@@ -35,6 +36,7 @@ export class AdminagapePage implements OnInit {
     this.permissao();
   }
   permissao(){
+    //permissao para cadastrar
     this.authService.user().subscribe(data=>{
       if(data.cargo_id == 11 || data.cargo_id == 8 || data.cargo_id ==4){
         this.disabled1 = false;
@@ -43,7 +45,7 @@ export class AdminagapePage implements OnInit {
   }
   async showagape()
   {
-    await this.authService.getAgape().subscribe(
+    await this.authService.getAgape(1).subscribe(
       data=>{
         for(let i=0; i<data.length;i++)
         {
@@ -69,7 +71,7 @@ export class AdminagapePage implements OnInit {
   }
 
   async delete(id: any){
-    await this.authService.getAgape().subscribe(
+    await this.authService.getAgape(0).subscribe(
       data=>{
         for(let i=0; i<data.length;i++)
         {
@@ -81,7 +83,8 @@ export class AdminagapePage implements OnInit {
                 this.alertService.presentToast("Ordem excluido com sucesso!");
                 window.location.reload();
               }
-            )
+            );
+            break;
           }
         }
     },

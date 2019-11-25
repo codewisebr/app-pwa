@@ -1,3 +1,5 @@
+import { Storage } from '@ionic/storage';
+import { GlobalService } from 'src/app/services/global.service';
 import { AppRoutingPreloaderService } from './../../route-to-preload';
 import { NavigationExtras } from '@angular/router';
 
@@ -17,12 +19,15 @@ export class MuralPage implements OnInit {
   public mural:any[]=[];
   public aux = " ";
   public disabled1=true;
+  public id:any;
   constructor(
     private authService:AuthService, 
     private modalCtrl: ModalController,
     private alertService: AlertService,
     private navCtrl: NavController,
-    private routingService: AppRoutingPreloaderService
+    private routingService: AppRoutingPreloaderService,
+    private global: GlobalService,
+    private storage: Storage
     ) { }
 
   ngOnInit() {
@@ -31,28 +36,22 @@ export class MuralPage implements OnInit {
     await this.routingService.preloadRoute('cadastramural');
   }
   ionViewWillEnter(){
+    this.id = this.global.user_id;
     this.showmural();
-    this.permissao();
-  }
-  permissao(){
-    this.authService.user().subscribe(data=>{
-      if(data.cargo_id == 11 || data.cargo_id == 8 || data.cargo_id ==4){
-        this.disabled1 = false;
-      }
-    });
   }
   async showmural(){
-    
     this.authService.getMural().subscribe(
       data=>{
         for(let i=0; i<data.length;i++){
           this.mural[i] = data[i];
-          this.authService.user().subscribe(param=>{
-            if(data[i].id_users == param.id)
+
+          //se o mural for da pessoa logada
+            if(data[i].id_users == this.id)
               this.mural[i].ativo = 1;
             else
               this.mural[i].ativo = 0;
-          });
+
+          //pega o nome
           this.authService.getNome(data[i].id_users).subscribe(resul=>{
              this.mural[i].nome = resul[0];
           });

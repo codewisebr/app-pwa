@@ -2,8 +2,10 @@
 
 namespace App\Console;
 
+use App\Cargos;
 use Illuminate\Console\Scheduling\Schedule;
 use Illuminate\Foundation\Console\Kernel as ConsoleKernel;
+use Psy\TabCompletion\Matcher\CommandsMatcher;
 
 class Kernel extends ConsoleKernel
 {
@@ -13,7 +15,9 @@ class Kernel extends ConsoleKernel
      * @var array
      */
     protected $commands = [
-        //
+        //Commands\Inspire::class,
+        Commands\CriaReuniao::class,
+        
     ];
 
     /**
@@ -24,8 +28,15 @@ class Kernel extends ConsoleKernel
      */
     protected function schedule(Schedule $schedule)
     {
-        // $schedule->command('inspire')
-        //          ->hourly();
+        //$schedule->command('inspire')->hourly();
+
+
+        //para testar se esta funcionando php artisan CriaReuniao:cron
+        $schedule->command('criareuniao:cron')
+        ->timezone('America/Sao_Paulo')
+        ->tuesdays()
+        ->at('06:00');
+        //tarefa para fazer toda as terças feiras de manha = criar nova reuniao e excluir a antiga
     }
 
     /**

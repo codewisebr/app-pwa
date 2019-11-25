@@ -1,19 +1,19 @@
+
 import { Storage } from '@ionic/storage';
 import { AppRoutingPreloaderService } from './route-to-preload';
 import { AlertService } from './services/alert.service';
 import { AuthService } from './services/auth.service';
-import { Component } from '@angular/core';
-
+import { Component, OnInit } from '@angular/core';
+import {environment} from '../environments/environment';
 import { Platform, MenuController, NavController, IonSplitPane, AlertController } from '@ionic/angular';
 import { SplashScreen } from '@ionic-native/splash-screen/ngx';
 import { StatusBar } from '@ionic-native/status-bar/ngx';
-
 @Component({
   selector: 'app-root',
   templateUrl: 'app.component.html',
   styleUrls: ['app.component.scss']
 })
-export class AppComponent {
+export class AppComponent{
   public appPages = [
     {
       title: 'Home',
@@ -137,27 +137,26 @@ export class AppComponent {
   public disabled: boolean;
   permissao(){
     this.platform.ready().then(() => {
-          if(this.platform.is('cordova')||this.platform.is('android')||this.platform.is('ios'))
-          { 
-            this.statusBar.styleDefault();
-            this.splashScreen.hide();
-            this.menu.enable(true, 'app');
-            this.menu.enable(false, 'web');
-            this.disabled = false;
-          }
-          else if(this.platform.is('pwa')||this.platform.is('capacitor')||this.platform.is('desktop')){
-            
-            this.menu.enable(true, 'web');
-            this.menu.enable(false, 'app');
-            this.disabled = true;
-          }
+      if(this.platform.is('cordova')||this.platform.is('android')||this.platform.is('ios'))
+      { 
+        this.statusBar.styleDefault();
+        this.splashScreen.hide();
+        this.menu.enable(true, 'app');
+        this.menu.enable(false, 'web');
+        this.disabled = false;
+      }
+      else if(this.platform.is('pwa')||this.platform.is('capacitor')||this.platform.is('desktop')){
+        
+        this.menu.enable(true, 'web');
+        this.menu.enable(false, 'app');
+        this.disabled = true;
+      }
   
     });
   }
   initializeApp() {
     this.authService.getToken().then(() => {
       if(this.authService.isLoggedIn) {
-        console.log('logado');
         this.permissao();
       }
       else{

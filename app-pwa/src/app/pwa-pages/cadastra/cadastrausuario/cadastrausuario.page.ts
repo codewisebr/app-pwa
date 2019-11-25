@@ -81,8 +81,6 @@ export class CadastrausuarioPage implements OnInit {
         });
   }
   register(form:any){
-    console.log(form.value);
-
     this.auxtel=form.value.telefone.replace(/\D+/g, '');
     this.auxdata=form.value.data_nasc;
     this.daux = this.auxdata.split('T')[0];

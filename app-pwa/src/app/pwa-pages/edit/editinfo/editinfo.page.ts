@@ -59,6 +59,7 @@ export class EditinfoPage implements OnInit {
                 this.checked3 = "true";
                 break;
             }
+            break;
           }
         }
     },
@@ -80,11 +81,11 @@ export class EditinfoPage implements OnInit {
         {
           this.authService.updateinfo(data[i].id, form.value.novo, 1, form.value.nivel).subscribe(
             data=>{
-              this.alertService.presentToast("Informativo editado com sucesso!");
               this.dismiss();
-              window.location.reload();
+              this.alertService.presentToast("Informativo editado com sucesso!");
             }
           );
+          break;
         }
       }
     },

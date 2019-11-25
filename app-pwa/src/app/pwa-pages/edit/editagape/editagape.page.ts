@@ -37,13 +37,14 @@ export class EditagapePage implements OnInit{
   }
 
   showagape() {
-    this.authService.getAgape().subscribe(
+    this.authService.getAgape(0).subscribe(
       data=>{
         for(let i=0; i<data.length;i++)
         {
           if(this.id == data[i].id){
             this.agape = data[i].agape;
             this.data = data[i].data;
+            break;
           }
         }
     },
@@ -52,19 +53,19 @@ export class EditagapePage implements OnInit{
     });
   }
   async editar(form:any){
-    this.authService.getAgape().subscribe(
+    this.authService.getAgape(0).subscribe(
     data=>{
       for(let i=0; i<data.length;i++)
       {
         if(this.id == data[i].id)
         {
           this.authService.updateagape(data[i].id, form.value.agape, 1, form.value.data).subscribe(
-            resul=>{
-              this.alertService.presentToast("Ágape editado com sucesso!");
+            resul=>{              
               this.dismiss();
-              window.location.reload();
+              this.alertService.presentToast("Ágape editado com sucesso!");
             }
           );
+          break;
         }
       }
     },

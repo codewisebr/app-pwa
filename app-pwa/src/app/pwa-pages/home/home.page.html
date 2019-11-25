@@ -19,11 +19,11 @@
             </ion-input>
           </ion-grid>                
           <ion-grid text-right>
-          <ion-button fill='clear' size='small'>Forgot Password?</ion-button>
+          <ion-button fill='clear' size='small' [routerLink]="['/senha']">Esqueceu a senha?</ion-button>
           </ion-grid> 
           <ion-button type="submit" round expand="block" size="large"color="primary">Login</ion-button>
         </form>
-        <p text-center>Don't have a account?</p>
+        <p text-center>Já possui uma conta?</p>
         <ion-button round expand="block" (click)="register()">Register</ion-button>
         <br>
       </div>

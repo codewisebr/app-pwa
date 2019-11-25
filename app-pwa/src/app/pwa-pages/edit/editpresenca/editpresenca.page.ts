@@ -54,6 +54,7 @@ export class EditpresencaPage implements OnInit {
             this.authService.getNome(data[i].id_user).subscribe(resul=>{
               this.name = resul[0];
             });
+            break;
           }
         }
     },
@@ -75,15 +76,14 @@ export class EditpresencaPage implements OnInit {
         {
           this.authService.updatelista(data[i].id, form.value.motivo, form.value.presenca).subscribe(
             data=>{
-              console.log(data);
               this.dismiss();
-              window.location.reload();
               this.alertService.presentToast("Presença editada com sucesso!");
             },
             error=>{
               console.log(error);
             }
           );
+          break;
         }
       }
   },

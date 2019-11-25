@@ -30,35 +30,30 @@ export class HislistaPage implements OnInit {
   }
   ionViewWillEnter()
   {
+    this.router.queryParams.subscribe(params => {
+    this.id = params["id"];
+    });
     this.showlista();
   }
   showlista(){
-    this.router.queryParams.subscribe(params => {
-      this.id = params["id"];
-      this.authService.getAllLista(this.id).subscribe(
-        data=>{   
-          this.confirm = true;
-          for(let i=0; i<data.length;i++)
-          {
-            this.motivo[i] = data[i].motivo;
-            if(data[i].presenca == 0)
-              this.presenca[i] = "Ausente";
-            else
-              this.presenca[i]= "Presente";
-            this.id_user[i] = data[i].id_user;
-            this.authService.getNome(this.id_user[i]).subscribe(resul=>{
-              this.name[i] = resul[0];
-            });
-          }
-          this.handlelista();
-      },
-      error=>{
-        console.log(error);
-      });
+    this.authService.getAllLista(this.id).subscribe(
+      data=>{   
+        this.confirm = true;
+        for(let i=0; i<data.length;i++)
+        {
+          this.motivo[i] = data[i].motivo;
+          if(data[i].presenca == 0)
+            this.presenca[i] = "Ausente";
+          else
+            this.presenca[i]= "Presente";
+          this.id_user[i] = data[i].id_user;
+          this.authService.getNome(this.id_user[i]).subscribe(resul=>{
+            this.name[i] = resul[0];
+          });
+        }
+    },
+    error=>{
+      console.log(error);
     });
-  }
-
-  handlelista(){
-    console.log(this.name);
   }
 }

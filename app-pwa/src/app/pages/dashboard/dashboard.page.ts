@@ -10,7 +10,6 @@ import { AuthService } from 'src/app/services/auth.service';
 import { User } from 'src/app/model/user.model';
 import { ActivatedRoute, Router } from '@angular/router';
 import { getLocaleDayNames, DatePipe } from '@angular/common';
-import { stringify } from 'querystring';
 @Component({
   selector: 'app-dashboard',
   templateUrl: './dashboard.page.html',
@@ -50,18 +49,19 @@ export class DashboardPage implements OnInit {
     this.menu.enable(true, 'app');
   }
   ngOnInit() {
-    
-
   }
   ionViewWillEnter()
   {
+    this.id = this.global.user_id;
+    this.authService.user().subscribe(data=>{
+      this.showordem(data.nivel);
+      this.showinfo(data.nivel);
+    });
+    this.showfinanceiro();
     this.verifica();
     this.showdata();
     this.presenca();
-    this.showordem();
-    this.showinfo();
     this.showagape();
-    this.showfinanceiro();
   }
   
   verifica(){ 
@@ -170,38 +170,28 @@ export class DashboardPage implements OnInit {
 
   async lista(opcao: Number, motivo: String)
   {
-    await this.authService.user()
-      .subscribe(
-      data=>{ 
-        this.id = data.id;
-        //manda pra funcão o id do usuario e a resposta, se ja tiver no bd ele atualiza para uma nova resposta
-        this.authService.confirma_presenca(this.id, this.opcao ,this.motivo,this.global.reuniao).subscribe(
-          data => {},
-          error => {
-            console.log(error);
-          },
-          () => {
-            this.alertService.presentToast('Confirmação enviada!');
-            window.location.reload();
-          }
-        );
-      }
-      , error=>{ 
-        console.log("error: " + error);
-      });
+      //manda pra funcão o id do usuario e a resposta, se ja tiver no bd ele atualiza para uma nova resposta
+      this.authService.confirma_presenca(this.id, this.opcao ,this.motivo,this.global.reuniao).subscribe(
+        data => {},
+        error => {
+          console.log(error);
+        },
+        () => {
+          this.alertService.presentToast('Confirmação enviada!');
+          window.location.reload();
+        }
+      );
   }
   editar()
   {
-    
-    this.disabled1 = false;
-    this.disabled2 = false;
+    this.disabled1 = !this.disabled1;
+    this.disabled2 = !this.disabled2;
   }
 
-  async showordem()
+  async showordem(nivel:any)
   {
-    this.authService.user().subscribe(resul=>{
       //pega o nivel do usuario
-      this.authService.getNivelOrdem(resul.nivel)
+      this.authService.getNivelOrdem(nivel, 1)
       .subscribe(
       data =>{
         for(let i=0; i<data.length;i++)
@@ -209,27 +199,23 @@ export class DashboardPage implements OnInit {
          this.ordem[i] = data[i].ordem
         }
       });
-    });
   }
   
-  async showinfo()
+  async showinfo(nivel:any)
   {
-    await this.authService.getInfo()
-    .subscribe(
+    this.authService.getNivelInfo(nivel, 1)
+      .subscribe(
       data =>{
-        for(let i=0; i<data.length; i++){
-          this.info[i]=data[i].info;
+        for(let i=0; i<data.length;i++)
+        {
+          this.info[i] = data[i].info
         }
-      }, 
-      error=>{
-        console.log(error);
-      }
-    );
+      });
   }
 
   presenca()
   {
-    this.authService.getConfirmacao()
+    this.authService.getConfirmacao(0)
     .subscribe(
       data=>{
         this.qtde = data;
@@ -237,9 +223,9 @@ export class DashboardPage implements OnInit {
     );
   }
 
-  async showagape()
+  showagape()
   {
-    await this.authService.getAgape().subscribe(
+    this.authService.getAgape(1).subscribe(
       data=>{
         for(let i=0; i<data.length;i++)
         {
@@ -250,19 +236,18 @@ export class DashboardPage implements OnInit {
       console.log(error);
     });
   }
+
   showfinanceiro(){
-    this.authService.user().subscribe(data=>{
-      this.authService.getFinanceiro(data.id).subscribe(resul=>{
-        for(let i=0; i<resul.length; i++){
-          this.financeiro[i] = resul[i];
-          if(resul[i].data_pag == '0000-00-00' || resul[i].data_pag == null){
-            this.financeiro[i].data_pag = "Aguardando"
+      this.authService.getFinanceiro(this.id).subscribe(resul=>{
+          for(let i=0; i<resul.length; i++){
+            this.financeiro[i] = resul[i];
+            if(resul[i].data_pag == '0000-00-00' || resul[i].data_pag == null){
+              this.financeiro[i].data_pag = "Aguardando"
+            }
+            else{
+              this.financeiro[i].data_pag = this.dataPipe.transform(resul[i].data_pag, "dd/MM");
+            }
           }
-          else{
-            this.financeiro[i].data_pag = this.dataPipe.transform(resul[i].data_pag, "dd/MM");
-          }
-        }
       });
-    });
   }
 }

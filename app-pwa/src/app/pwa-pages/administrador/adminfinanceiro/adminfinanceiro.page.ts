@@ -1,3 +1,4 @@
+
 import { AppRoutingPreloaderService } from './../../../route-to-preload';
 import { AlertService } from './../../../services/alert.service';
 import { DatePipe } from '@angular/common';
@@ -27,11 +28,11 @@ export class AdminfinanceiroPage implements OnInit {
     private alertService: AlertService,
     private routingService: AppRoutingPreloaderService
   ) { }
-
   ngOnInit() {
   }
   async ionViewDidEnter() {
-    await this.routingService.preloadRoute('cadastraagape');
+    await this.routingService.preloadRoute('hisrelatorio');
+    await this.routingService.preloadRoute('cadastrafinanceiro');
   }
   ionViewWillEnter(){
     this.showsituacao();
@@ -88,17 +89,13 @@ export class AdminfinanceiroPage implements OnInit {
     });
   }
 
-  boleto()
-  {
-
-  }
 
   async cadastrar(){
     this.navCtrl.navigateForward('/cadastrafinanceiro');
   }
 
   relatorio(){
-    
+    this.navCtrl.navigateForward('/hisrelatorio');
   }
 
   async editar(id:any){
@@ -138,8 +135,7 @@ export class AdminfinanceiroPage implements OnInit {
   }
 
   edit(form:any, id:number){
-      this.pagamento = this.datePipe.transform(this.data, 'yyyy-MM-dd');
-    console.log(this.pagamento);
+    this.pagamento = this.datePipe.transform(this.data, 'yyyy-MM-dd');
     this.authService.updatefinanceiro(id,form).subscribe(data=>{
       this.alertService.presentToast("Financeiro editado com sucesso!");
       window.location.reload();

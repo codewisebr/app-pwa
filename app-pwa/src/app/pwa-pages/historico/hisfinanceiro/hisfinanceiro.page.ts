@@ -1,3 +1,4 @@
+import { ActivatedRoute } from '@angular/router';
 import { AppRoutingPreloaderService } from './../../../route-to-preload';
 import { NavController } from '@ionic/angular';
 import { DatePipe } from '@angular/common';
@@ -15,28 +16,31 @@ export class HisfinanceiroPage implements OnInit {
   public mes:any;
   public situacao: number;
   public data_pag:any;
+  public id:any;
   constructor(
     private authService: AuthService, 
     private datePipe: DatePipe, 
     private navCtrl: NavController,
-    private routingService: AppRoutingPreloaderService
+    private routingService: AppRoutingPreloaderService,
+    private router:ActivatedRoute
   ) { }
 
   ngOnInit() {
   }
   async ionViewDidEnter() {
-    await this.routingService.preloadRoute('adminfinanceiro');
+    await this.routingService.preloadRoute('financeiro');
   }
   ionViewWillEnter(){
+    this.router.queryParams.subscribe(params => {
+      this.id = params["id"];
+    });
     this.showfinanceiro();
   }
 
   showfinanceiro(){
-    this.authService.user().subscribe(data=>{
-      this.authService.getAllFinanceiro(data.id).subscribe(resul=>{
+      this.authService.getAllFinanceiro(this.id).subscribe(resul=>{
         for(let i=0; i<resul.length; i++){
           this.financeiro[i] = resul[i];
-          console.log(resul[i].data_pag);
           if(resul[i].data_pag == '0000-00-00' || resul[i].data_pag == null){
             this.financeiro[i].data_pag = "Aguardando"
           }
@@ -45,7 +49,6 @@ export class HisfinanceiroPage implements OnInit {
           }
         }
       });
-    });
   }
 
 }

@@ -1,7 +1,6 @@
 import { AppRoutingPreloaderService } from './../../../route-to-preload';
 import { AlertService } from 'src/app/services/alert.service';
 import { AuthService } from './../../../services/auth.service';
-import { AngularFirestore } from '@angular/fire/firestore';
 import { ModalController, NavController } from '@ionic/angular';
 import { Component, OnInit } from '@angular/core';
 import { NavComponent } from '@ionic/core';

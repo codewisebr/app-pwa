@@ -1,0 +1,18 @@
+<ion-header>
+  <ion-toolbar>
+      <ion-buttons slot="start">
+          <ion-back-button></ion-back-button>
+      </ion-buttons>
+    <ion-title>Relatório</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content padding>
+  <div class="box">
+    <h2 text-center>Relatório</h2>
+    <br>
+    <ion-list lines="none" *ngFor="let nomes of nome">
+      <ion-button color="primary" fill="clear" (click)="historico(nomes[1])">{{nomes[0]}}</ion-button>
+    </ion-list>
+  </div>
+</ion-content>

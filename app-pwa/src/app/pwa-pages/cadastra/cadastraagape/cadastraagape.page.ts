@@ -1,3 +1,4 @@
+import { GlobalService } from 'src/app/services/global.service';
 import { AppRoutingPreloaderService } from './../../../route-to-preload';
 import { NavController } from '@ionic/angular';
 
@@ -12,11 +13,15 @@ import { Alert } from 'selenium-webdriver';
   styleUrls: ['./cadastraagape.page.scss'],
 })
 export class CadastraagapePage implements OnInit{
+  
+  public id:any;
+  
   constructor(
     private authService: AuthService, 
     private alertService:AlertService,
     private navCtrl: NavController, 
-    private routingService: AppRoutingPreloaderService
+    private routingService: AppRoutingPreloaderService,
+    private global: GlobalService
   ) { }
 
   ngOnInit() {
@@ -24,18 +29,19 @@ export class CadastraagapePage implements OnInit{
   async ionViewDidEnter() {
     await this.routingService.preloadRoute('adminagape');
   }
+  ionViewWillEnter(){
+    this.id = this.global.user_id;
+  }
   dismiss(){
     this.navCtrl.navigateForward('/adminagape');
   }
   cadastrar(form: any){
-    this.authService.user().subscribe(data=>{
-      this.authService.agape(form.value.agape, data.id, form.value.data).subscribe(
+      this.authService.agape(form.value.agape, this.id, form.value.data).subscribe(
         resul=> {
           this.alertService.presentToast("Ágape criada com sucesso!");          
           this.dismiss();
           window.location.reload();
         }
       );
-    });
   }
 }

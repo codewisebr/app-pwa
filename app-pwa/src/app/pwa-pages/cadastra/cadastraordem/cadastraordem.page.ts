@@ -1,5 +1,5 @@
+import { GlobalService } from 'src/app/services/global.service';
 import { AppRoutingPreloaderService } from './../../../route-to-preload';
-import { AngularFirestore } from '@angular/fire/firestore';
 import { DatePipe } from '@angular/common';
 import { AlertService } from './../../../services/alert.service';
 import { AuthService } from './../../../services/auth.service';
@@ -12,14 +12,19 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./cadastraordem.page.scss'],
 })
 export class CadastraordemPage implements OnInit {
+  public id:any;
   constructor(
     private authService: AuthService,
     private alertService: AlertService,
     private navCtrl: NavController,
-    private routingService: AppRoutingPreloaderService
+    private routingService: AppRoutingPreloaderService,
+    private global: GlobalService
   ) { }
 
   ngOnInit() {
+  }
+  ionViewWillEnter(){
+    this.id = this.global.user_id;
   }
   async ionViewDidEnter() {
     await this.routingService.preloadRoute('adminordem');
@@ -29,13 +34,11 @@ export class CadastraordemPage implements OnInit {
   }
 
   cadastrar(form:any){
-    this.authService.user().subscribe(data=>{
-      this.authService.ordem(form.value.ordem,data.id,form.value.nivel).subscribe(
+      this.authService.ordem(form.value.ordem,this.id,form.value.nivel).subscribe(
         resul=> {
           this.dismiss();
           window.location.reload();
         }
-      )
-    });
+      );
   }
 }

@@ -1,3 +1,5 @@
+import { AlertService } from './../../../services/alert.service';
+import { AlertController } from '@ionic/angular';
 import { AppRoutingPreloaderService } from './../../../route-to-preload';
 import { DatePipe } from '@angular/common';
 import { AuthService } from './../../../services/auth.service';
@@ -16,7 +18,9 @@ export class HisordemPage implements OnInit {
   constructor(
     public authService: AuthService, 
     private dataPipe: DatePipe,
-    private routingService: AppRoutingPreloaderService
+    private routingService: AppRoutingPreloaderService,
+    private alertCtrl: AlertController,
+    private alertService: AlertService
   ) { }
 
   ngOnInit() {
@@ -40,16 +44,37 @@ export class HisordemPage implements OnInit {
           else  
             this.ativo[i] = "Não";
         }
-        this.handleordem();
     },
     error=>{
       console.log(error);
     });
   }
-  handleordem()
-  {
-    this.ordem;
-    this.date;
-    this.ativo;
+
+  async popup(){
+    let alert = await this.alertCtrl.create({
+      header: 'Ao apagar o histórico os registros serão apagados permanentemente. Deseja realmente excluir?',
+      buttons: [
+        {
+          text: 'Cancelar',
+          //role cancel deixa ele como segunda opcao
+          role: 'cancel',
+          cssClass: 'secondary'
+        },
+        {
+          text: 'Continuar',
+          handler: ()=> {
+            this.delete();
+          }
+        }
+      ]
+    });
+    await alert.present();
+  }
+
+  delete(){
+    this.authService.deleteHistOrdem().subscribe(data=>{
+      window.location.reload();
+      this.alertService.presentToast("Histórico apagado com sucesso!");
+    });
   }
 }

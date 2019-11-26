@@ -62,6 +62,7 @@ export class DashboardPage implements OnInit {
     this.showdata();
     this.presenca();
     this.showagape();
+    this.authService.reuniao().subscribe(data=>{ });
   }
   
   verifica(){ 

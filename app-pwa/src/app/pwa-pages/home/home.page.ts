@@ -41,6 +41,7 @@ export class HomePage {
         this.permissao();
       }
     });
+    this.authService.reuniao().subscribe(data=>{ });
   }
   login(form: NgForm) {
     this.authService.login(form.value.email, form.value.password).subscribe(

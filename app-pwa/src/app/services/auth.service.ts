@@ -183,7 +183,7 @@ export class AuthService {
       info:info, id_user:id_user, nivel:nivel
     });
   }
-  updateinfo(id: Number, info:String, ativo: Number, nivel: Number): Observable<any>{
+  updateInfo(id: Number, info:String, ativo: Number, nivel: Number): Observable<any>{
     return this.http.put<any>(this.env.API_URL + 'info/updateinfo',
     {id: id, info: info, ativo: ativo, nivel:nivel});
   }
@@ -201,6 +201,10 @@ export class AuthService {
   {
     return this.http.post<any>( this.env.API_URL+'info/getnivelinfo',{nivel:nivel, tipo:tipo});  
   }
+
+  deleteHistInfo(){
+    return this.http.get<any>( this.env.API_URL+'info/deletehistinfo');  
+  }
   //#endregion
 
   //#region ORDEM
@@ -209,7 +213,7 @@ export class AuthService {
       ordem:ordem, id_user:id_user, nivel:nivel
     });
   }
-  updateordem(id: Number, ordem:String, ativo: Number, nivel: Number): Observable<any>{
+  updateOrdem(id: Number, ordem:String, ativo: Number, nivel: Number): Observable<any>{
     return this.http.put<any>(this.env.API_URL + 'ordem/updateordem',
     {id: id, ordem: ordem, ativo: ativo, nivel: nivel});
   }
@@ -220,12 +224,16 @@ export class AuthService {
 
   getAllOrdem(): Observable<any>
   {
-    return this.http.get<any>( this.env.API_URL+'ordem/getordem');  
+    return this.http.get<any>( this.env.API_URL+'ordem/getallordem');  
   }
 
   getNivelOrdem(nivel:Number, tipo:Number): Observable<any>
   {
     return this.http.post<any>( this.env.API_URL+'ordem/getnivelordem',{nivel:nivel, tipo:tipo});  
+  }
+
+  deleteHistOrdem(){
+    return this.http.get<any>( this.env.API_URL+'ordem/deletehistordem');  
   }
   //#endregion
 
@@ -247,6 +255,10 @@ export class AuthService {
   getAllAgape()
   {
     return this.http.get<any>( this.env.API_URL+'agape/getallagape');
+  }
+
+  deleteHistAgape(){
+    return this.http.get<any>( this.env.API_URL+'agape/deletehistagape');  
   }
   //#endregion
 

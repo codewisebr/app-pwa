@@ -13,7 +13,13 @@ export class WorkPage implements OnInit {
   user: User;
   tasks: any[] = [];
 
-  constructor(private menu: MenuController, private authService: AuthService, private toastCtrl : ToastController, private alertCtrl : AlertController, private actionSheetCtrl : ActionSheetController) {
+  constructor(
+    private menu: MenuController, 
+    private authService: AuthService, 
+    private toastCtrl : ToastController, 
+    private alertCtrl : AlertController, 
+    private actionSheetCtrl : ActionSheetController
+  ) {
     this.menu.enable(true);
     let tasksJson = localStorage.getItem('taskbd');
     if(tasksJson != null){

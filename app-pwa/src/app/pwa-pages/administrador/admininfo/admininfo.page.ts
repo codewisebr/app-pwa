@@ -79,7 +79,7 @@ export class AdmininfoPage implements OnInit {
           if(id == data[i].id)
           {
             //muda o ativo para zero
-            this.authService.updateinfo(data[i].id, data[i].info, 0, data[i].nivel).subscribe(
+            this.authService.updateInfo(data[i].id, data[i].info, 0, data[i].nivel).subscribe(
               data=>{
                 this.alertService.presentToast("Informativo excluido com sucesso!");
                 window.location.reload();

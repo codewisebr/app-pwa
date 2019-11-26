@@ -79,7 +79,7 @@ export class EditinfoPage implements OnInit {
       {
         if(this.id == data[i].id)
         {
-          this.authService.updateinfo(data[i].id, form.value.novo, 1, form.value.nivel).subscribe(
+          this.authService.updateInfo(data[i].id, form.value.novo, 1, form.value.nivel).subscribe(
             data=>{
               this.dismiss();
               this.alertService.presentToast("Informativo editado com sucesso!");

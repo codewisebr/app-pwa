@@ -154,6 +154,7 @@ export class AppComponent{
   
     });
   }
+
   initializeApp() {
     this.authService.getToken().then(() => {
       if(this.authService.isLoggedIn) {
@@ -163,8 +164,6 @@ export class AppComponent{
         this.menu.enable(false, 'web');
         this.menu.enable(false, 'app');
       }
-    });
-    this.authService.reuniao().subscribe(data=>{
     });
   }
 

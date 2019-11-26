@@ -80,7 +80,7 @@ export class AdminordemPage implements OnInit {
           if(id == data[i].id)
           {
             //muda o ativo para zero
-            this.authService.updateordem(data[i].id, data[i].ordem, 0, data[i].nivel).subscribe(
+            this.authService.updateOrdem(data[i].id, data[i].ordem, 0, data[i].nivel).subscribe(
               data=>{
                 this.alertService.presentToast("Ordem excluido com sucesso!");
                 window.location.reload();

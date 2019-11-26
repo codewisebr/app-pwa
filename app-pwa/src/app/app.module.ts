@@ -23,7 +23,7 @@ import {DatePipe, registerLocaleData} from '@angular/common';
     BrowserModule,
     IonicModule.forRoot(),
     AppRoutingModule,
-    ServiceWorkerModule.register('combined-sw.js', { enabled: environment.production }),
+    ServiceWorkerModule.register('/ngsw-worker.js', { enabled: environment.production }),
     IonicStorageModule.forRoot({
       name: 'new',
       driverOrder: ['localstorage', 'websql', 'sqlite' ]

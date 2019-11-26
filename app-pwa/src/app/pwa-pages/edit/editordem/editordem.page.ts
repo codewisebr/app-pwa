@@ -80,7 +80,7 @@ export class EditordemPage implements OnInit {
           //informação tem que estar ativa
           if(this.id == data[i].id)
           {
-            this.authService.updateordem(data[i].id, form.value.novo, 1, form.value.nivel).subscribe(
+            this.authService.updateOrdem(data[i].id, form.value.novo, 1, form.value.nivel).subscribe(
               data=>{
                 this.dismiss();
                 this.alertService.presentToast("Ordem editado com sucesso!");

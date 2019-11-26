@@ -50,6 +50,7 @@ export class AdminPage implements OnInit {
     this.showlista();
     this.showdata();
     this.verifica();
+    this.authService.reuniao().subscribe(data=>{ });
   }
   async ionViewDidEnter() {
     await this.routingService.preloadRoute('mural');
@@ -194,4 +195,5 @@ export class AdminPage implements OnInit {
   }
   //#endregion
 
+  //resto da pagina
 }

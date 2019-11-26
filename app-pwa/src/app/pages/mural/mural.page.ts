@@ -50,11 +50,6 @@ export class MuralPage implements OnInit {
               this.mural[i].ativo = 1;
             else
               this.mural[i].ativo = 0;
-
-          //pega o nome
-          this.authService.getNome(data[i].id_users).subscribe(resul=>{
-             this.mural[i].nome = resul[0];
-          });
         }
     });
     

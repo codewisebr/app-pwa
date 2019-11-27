@@ -120,6 +120,7 @@ export class AuthService {
         delete this.token;
         delete this.global.access;
         delete this.global.user_id;
+        this.isLoggedIn=false;
         return data;
       })
     )

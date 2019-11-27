@@ -73,4 +73,8 @@ export class AdminusuarioPage implements OnInit {
     };
     this.navCtrl.navigateForward(['/hisfamilia'], navigationExtras);
   }
+
+  link(){
+
+  }
 }

@@ -11,6 +11,7 @@ import { environment } from '../environments/environment';
 import {HttpClient, HttpClientModule} from '@angular/common/http';
 import { IonicStorageModule } from '@ionic/storage';
 import {DatePipe, registerLocaleData} from '@angular/common';
+import { Push } from '@ionic-native/push/ngx'
 @NgModule({
   declarations: [
     AppComponent
@@ -33,7 +34,8 @@ import {DatePipe, registerLocaleData} from '@angular/common';
     StatusBar,
     SplashScreen,
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
-    DatePipe
+    DatePipe,
+    Push
   ],
   bootstrap: [AppComponent]
 })

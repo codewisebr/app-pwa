@@ -6,7 +6,6 @@
       <div class="box">
         <h2>Login</h2>
         <br>
-        <a href="https://wa.me/+5514991223739"><ion-icon name="logo-whatsapp" color="success"></ion-icon></a>
         <form #form="ngForm" (ngSubmit)="login(form)" method="POST">
           <ion-grid>
             <ion-input ngModel type="email" name="email" placeholder="E-mail" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$" required="true">

@@ -62,7 +62,4 @@ export class ContatosPage implements OnInit {
       }
     });
   }
-
-  whatsapp(){
-  }
 }

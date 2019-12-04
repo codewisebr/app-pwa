@@ -65,7 +65,6 @@ export class AdminusuarioPage implements OnInit {
   }
 
   verfamilia(id:any){
-    console.log(id);
     let navigationExtras: NavigationExtras = {
       queryParams: {
           id: id
@@ -75,6 +74,6 @@ export class AdminusuarioPage implements OnInit {
   }
 
   link(){
-
+    
   }
 }

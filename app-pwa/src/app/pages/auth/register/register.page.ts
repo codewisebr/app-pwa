@@ -111,6 +111,7 @@ export class RegisterPage implements OnInit {
           );          
         },
         error => {
+          console.log(error);
           this.alertService.presentToast("Preencha todos os campos corretamente!");
         },
         () => {}

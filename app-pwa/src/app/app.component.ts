@@ -113,7 +113,6 @@ export class AppComponent{
       icon: 'contact'
     }
   ];
-
   constructor(
     private platform: Platform,
     private splashScreen: SplashScreen,
@@ -123,27 +122,20 @@ export class AppComponent{
     private authService: AuthService,
     private alertService: AlertService,
     private alertCtrl : AlertController,
-    private routingService: AppRoutingPreloaderService,
-    private storage: Storage
   ) {
     this.initializeApp();
   }
   async ionViewWillEnter() {
-    await this.routingService.preloadRoute('dashboard');
-    await this.routingService.preloadRoute('admin');
-    await this.routingService.preloadRoute('mural');
-    await this.routingService.preloadRoute('account');
   }
   public disabled: boolean;
   permissao(){
     this.platform.ready().then(() => {
-      this.statusBar.styleDefault();
-      this.splashScreen.hide();
       if(this.platform.is('android')||this.platform.is('ios'))
       { 
         this.menu.enable(true, 'app');
         this.menu.enable(false, 'web');
         this.disabled = false;
+        
       }
       else{        
         this.menu.enable(true, 'web');
@@ -152,8 +144,12 @@ export class AppComponent{
       }
     });
   }
-
+  
   initializeApp() {
+    this.platform.ready().then(() => {
+      this.statusBar.styleDefault();
+      this.splashScreen.hide();
+    });
     this.authService.getToken().then(() => {
       if(this.authService.isLoggedIn) {
         this.permissao();
@@ -163,6 +159,7 @@ export class AppComponent{
         this.menu.enable(false, 'app');
       }
     });
+
   }
 
   async logout() {
@@ -183,7 +180,7 @@ export class AppComponent{
                 window.location.reload();      
               },
               error => {
-                console.log(error);
+                this.navCtrl.navigateRoot('/home');
               },
               () => {
                 this.navCtrl.navigateRoot('/home');

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 use App\Financeiro;
+use App\User;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 
@@ -59,23 +60,26 @@ class FinanceiroController extends Controller
                 break;
         }
     }
-    public function financeiro(Request $request){
+    public function createfinanceiro(Request $request){
         $request->validate([
             'valor'=>'required|string',
             'mes' => 'required|int'
         ]);
+        
         $mes = $this->mes($request->mes);
-        $usuarios = User::pluck('id');
-        foreach($usuarios as $user ){
+        $usuarios = User::select('id')->get('id');
+        
+        for($i=1; $i<=count($usuarios); $i++ ){
+
             $financeiro = new Financeiro;
-            $financeiro-> id_user = $user;
-            $financeiro -> data_pag = null;
+            $teste = $financeiro-> id_user = $i;
             $financeiro-> mes = $mes;
             $financeiro-> valor = $request->valor;
-            $first = User::where('id', $user)->value('first_name');
-            $last = User::where('id', $user)->value('last_name');
+            $first = User::select('first_name')->where('id', $i)->pluck('first_name');
+            $last = User::select('last_name')->where('id', $i)->pluck('last_name');
             $nome = $first." ".$last;
-            $financeiro -> nome = $nome;
+            $nome_completo = preg_replace('/[^\p{L}\p{N}\s]/u', '', $nome);
+            $financeiro -> nome = $nome_completo;
             $financeiro ->save();
         }
         $show = Financeiro::all();

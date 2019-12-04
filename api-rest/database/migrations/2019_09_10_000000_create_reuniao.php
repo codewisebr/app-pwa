@@ -15,8 +15,6 @@ class CreateReuniao extends Migration
     {
         Schema::create('reuniao', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->bigInteger('id_user')->unsigned();
-            $table->foreign('id_user')->references('id')->on('users')->onDelete('cascade');
             $table->date('data'); 
             $table->integer('ativo');
             $table->timestamp('created_at')->nullable();

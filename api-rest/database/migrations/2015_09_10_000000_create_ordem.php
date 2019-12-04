@@ -19,7 +19,7 @@ class CreateOrdem extends Migration
             $table->bigInteger('id_user')->unsigned();
             $table->foreign('id_user')->references('id')->on('users')->onDelete('cascade');
             $table->integer('nivel');
-            $table->ativo('ativo');
+            $table->integer('ativo');
             $table->timestamp('created_at')->nullable();
             $table->timestamp('updated_at')->nullable();
         });

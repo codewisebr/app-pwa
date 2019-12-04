@@ -285,7 +285,7 @@ export class AuthService {
   
   //#region FINANCEIRO
   financeiro(valor: String, mes: Number){
-    return this.http.post(this.env.API_URL + 'financeiro/financeiro', {valor:valor, mes:mes});
+    return this.http.post(this.env.API_URL + 'financeiro/createfinanceiro', {valor:valor, mes:mes});
   }
   updatefinanceiro(id: Number, form: Number) {
     return this.http.put(this.env.API_URL + 'financeiro/updatefinanceiro',

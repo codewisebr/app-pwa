@@ -19,6 +19,12 @@ class CreateAvental extends Migration
             $table->timestamp('created_at')->nullable();
             $table->timestamp('updated_at')->nullable();
         });
+
+        DB::table('avental')->insert([
+            ['id'=>1, 'avental'=>'Aprendiz'],
+            ['id'=>2, 'avental'=>'Companheiro'],
+            ['id'=>3, 'avental'=>'Mestre']
+        ]);
     }
 
     /**

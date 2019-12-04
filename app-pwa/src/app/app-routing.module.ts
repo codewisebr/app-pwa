@@ -16,6 +16,8 @@ const routes: Routes = [
   { path: 'editdados', loadChildren: './pages/auth/editdados/editdados.module#EditdadosPageModule', data: {preload: true}, canActivate: [AuthGuard] },
   { path: 'editsenha', loadChildren: './pages/auth/editsenha/editsenha.module#EditsenhaPageModule', data: {preload: true}, canActivate: [AuthGuard] },
   { path: 'mural', loadChildren: './pages/mural/mural.module#MuralPageModule', data: {preload: true}, canActivate: [AuthGuard] },
+  { path: 'senha', loadChildren: './pages/auth/senha/senha.module#SenhaPageModule' },
+  { path: 'contatos', loadChildren: './pwa-pages/contatos/contatos.module#ContatosPageModule', data: {preload: true}, canActivate: [AuthGuard] },
   //app
   { path: 'dashboard', loadChildren: './pages/dashboard/dashboard.module#DashboardPageModule', data: {preload: true}, canActivate: [AuthGuard] },
   { path: 'financeiro', loadChildren: './pages/financeiro/financeiro.module#FinanceiroPageModule', canActivate: [AuthGuard] },
@@ -30,6 +32,7 @@ const routes: Routes = [
   { path: 'adminpresenca', loadChildren: './pwa-pages/administrador/adminpresenca/adminpresenca.module#AdminpresencaPageModule', canActivate: [AuthGuard] },
   { path: 'adminagape', loadChildren: './pwa-pages/administrador/adminagape/adminagape.module#AdminagapePageModule', canActivate: [AuthGuard] },
   { path: 'adminfinanceiro', loadChildren: './pwa-pages/administrador/adminfinanceiro/adminfinanceiro.module#AdminfinanceiroPageModule' },
+  { path: 'adminusuario', loadChildren: './pwa-pages/administrador/adminusuario/adminusuario.module#AdminusuarioPageModule', data: {preload: true}, canActivate: [AuthGuard] },
   //historico
   { path: 'hisinfo', loadChildren: './pwa-pages/historico/hisinfo/hisinfo.module#HisinfoPageModule', data: {preload: true}, canActivate: [AuthGuard] },
   { path: 'hisordem', loadChildren: './pwa-pages/historico/hisordem/hisordem.module#HisordemPageModule', data: {preload: true}, canActivate: [AuthGuard] },
@@ -37,26 +40,24 @@ const routes: Routes = [
   { path: 'hispresenca', loadChildren: './pwa-pages/historico/hispresenca/hispresenca.module#HispresencaPageModule', data: {preload: true}, canActivate: [AuthGuard] },
   { path: 'hislista', loadChildren: './pwa-pages/historico/hislista/hislista.module#HislistaPageModule', data: {preload: true}, canActivate: [AuthGuard] },
   { path: 'hisfinanceiro', loadChildren: './pwa-pages/historico/hisfinanceiro/hisfinanceiro.module#HisfinanceiroPageModule', data: {preload: true}, canActivate: [AuthGuard] },
+  { path: 'hisfamilia', loadChildren: './pwa-pages/historico/hisfamilia/hisfamilia.module#HisfamiliaPageModule', data: {preload: true}, canActivate: [AuthGuard] },
+  { path: 'hisrelatorio', loadChildren: './pwa-pages/historico/hisrelatorio/hisrelatorio.module#HisrelatorioPageModule', data: {preload: true}, canActivate: [AuthGuard] },
+  { path: 'hisadminfinanceiro', loadChildren: './pwa-pages/historico/hisadminfinanceiro/hisadminfinanceiro.module#HisadminfinanceiroPageModule', data: {preload: true}, canActivate: [AuthGuard] },
   //cadastro
   { path: 'cadastraordem', loadChildren: './pwa-pages/cadastra/cadastraordem/cadastraordem.module#CadastraordemPageModule', data: {preload: true}, canActivate: [AuthGuard] },
   { path: 'cadastrainfo', loadChildren: './pwa-pages/cadastra/cadastrainfo/cadastrainfo.module#CadastrainfoPageModule', data: {preload: true}, canActivate: [AuthGuard] },
   { path: 'cadastrafinanceiro', loadChildren: './pwa-pages/cadastra/cadastrafinanceiro/cadastrafinanceiro.module#CadastrafinanceiroPageModule', data: {preload: true}, canActivate: [AuthGuard] },
   { path: 'cadastraagape', loadChildren: './pwa-pages/cadastra/cadastraagape/cadastraagape.module#CadastraagapePageModule', data: {preload: true}, canActivate: [AuthGuard] },
+  { path: 'cadastramural', loadChildren: './pwa-pages/cadastra/cadastramural/cadastramural.module#CadastramuralPageModule', data: {preload: true}, canActivate: [AuthGuard] },
+  { path: 'cadastrafamilia', loadChildren: './pwa-pages/cadastra/cadastrafamilia/cadastrafamilia.module#CadastrafamiliaPageModule', data: {preload: true}, canActivate: [AuthGuard] },
+  { path: 'cadastrausuario', loadChildren: './pwa-pages/cadastra/cadastrausuario/cadastrausuario.module#CadastrausuarioPageModule', data: {preload: true}, canActivate: [AuthGuard] },
   //edição
   { path: 'editordem', loadChildren: './pwa-pages/edit/editordem/editordem.module#EditordemPageModule', data: {preload: true}, canActivate: [AuthGuard] },
   { path: 'editinfo', loadChildren: './pwa-pages/edit/editinfo/editinfo.module#EditinfoPageModule', data: {preload: true}, canActivate: [AuthGuard] },
   { path: 'editagape', loadChildren: './pwa-pages/edit/editagape/editagape.module#EditagapePageModule', data: {preload: true}, canActivate: [AuthGuard] },
   { path: 'editpresenca', loadChildren: './pwa-pages/edit/editpresenca/editpresenca.module#EditpresencaPageModule', data: {preload: true}, canActivate: [AuthGuard] },
-  { path: 'cadastramural', loadChildren: './pwa-pages/cadastra/cadastramural/cadastramural.module#CadastramuralPageModule', data: {preload: true}, canActivate: [AuthGuard] },
   { path: 'editmural', loadChildren: './pwa-pages/edit/editmural/editmural.module#EditmuralPageModule', data: {preload: true}, canActivate: [AuthGuard] },
-  { path: 'contatos', loadChildren: './pwa-pages/contatos/contatos.module#ContatosPageModule', data: {preload: true}, canActivate: [AuthGuard] },
-  { path: 'adminusuario', loadChildren: './pwa-pages/administrador/adminusuario/adminusuario.module#AdminusuarioPageModule', data: {preload: true}, canActivate: [AuthGuard] },
-  { path: 'cadastrafamilia', loadChildren: './pwa-pages/cadastra/cadastrafamilia/cadastrafamilia.module#CadastrafamiliaPageModule', data: {preload: true}, canActivate: [AuthGuard] },
-  { path: 'cadastrausuario', loadChildren: './pwa-pages/cadastra/cadastrausuario/cadastrausuario.module#CadastrausuarioPageModule', data: {preload: true}, canActivate: [AuthGuard] },
-  { path: 'hisfamilia', loadChildren: './pwa-pages/historico/hisfamilia/hisfamilia.module#HisfamiliaPageModule', data: {preload: true}, canActivate: [AuthGuard] },
-  { path: 'hisrelatorio', loadChildren: './pwa-pages/historico/hisrelatorio/hisrelatorio.module#HisrelatorioPageModule', data: {preload: true}, canActivate: [AuthGuard] },
-  { path: 'hisadminfinanceiro', loadChildren: './pwa-pages/historico/hisadminfinanceiro/hisadminfinanceiro.module#HisadminfinanceiroPageModule', data: {preload: true}, canActivate: [AuthGuard] },  { path: 'senha', loadChildren: './pages/auth/senha/senha.module#SenhaPageModule' },
-
+  
 ];
 @NgModule({
   imports: [

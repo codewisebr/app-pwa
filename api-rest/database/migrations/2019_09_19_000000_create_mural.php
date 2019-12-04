@@ -15,7 +15,7 @@ class CreateMural extends Migration
     {
         Schema::create('mural', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->bigInteger('id_user')->unsigned();
+            $table->bigInteger('id_users')->unsigned();
             $table->foreign('id_users')->references('id')->on('users')->onDelete('cascade');
             $table->string('nome');
             $table->string('texto');

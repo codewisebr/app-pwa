@@ -6,6 +6,7 @@ import { AlertService } from './../../../services/alert.service';
 import { AuthService } from 'src/app/services/auth.service';
 import { Component, OnInit } from '@angular/core';
 import { Storage } from '@ionic/storage';
+import { CachedSource } from 'webpack-sources';
 @Component({
   selector: 'app-cadastrausuario',
   templateUrl: './cadastrausuario.page.html',
@@ -139,10 +140,8 @@ export class CadastrausuarioPage implements OnInit {
               this.alertService.presentToast("Verifique os campos de cadastro de familiar!");
               });
             }
-            this.alertService.presentToast("Usuário cadastrado!");
             this.dismiss();
-            window.location.reload();
-            
+            this.alertService.presentToast("Usuário cadastrado!");
         },
         error => {
           this.alertService.presentToast("Preencha todos os campos corretamente!");

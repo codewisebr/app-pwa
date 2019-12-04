@@ -47,7 +47,6 @@ export class CadastrafamiliaPage implements OnInit {
     this.authService.familia(this.id, form.value.grau, this.data).subscribe(
       resul=> {
         this.dismiss();
-        window.location.reload();
         this.alertService.presentToast("Familiar cadastrado com sucesso!"); 
       }
     );

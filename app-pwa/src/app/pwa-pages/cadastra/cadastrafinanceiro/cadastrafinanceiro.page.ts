@@ -35,7 +35,10 @@ export class CadastrafinanceiroPage implements OnInit {
     this.authService.financeiro(this.valor, form.value.mes).subscribe(data=>{
       this.alertService.presentToast("Financeiro criado com sucesso!");          
       this.dismiss();
-      //window.location.reload();
-    });
+    },
+    error=>{
+      console.log(error);
+    }
+    );
   }
 }

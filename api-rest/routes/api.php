@@ -31,7 +31,7 @@ Route::prefix('ordem')->group(function () {
 
 Route::prefix('financeiro')->group(function () {
     //financeiro
-    Route::post('financeiro', 'FinanceiroController@financeiro');
+    Route::post('createfinanceiro', 'FinanceiroController@createfinanceiro');
     Route::get('getadminfinanceiro', 'FinanceiroController@getadminfinanceiro');
     Route::post('getfinanceiro', 'FinanceiroController@getfinanceiro');
     Route::post('getallfinanceiro', 'FinanceiroController@getallfinanceiro');
@@ -66,7 +66,6 @@ Route::prefix('agape')->group(function () {
 
 Route::prefix('reuniao')->group(function () {
    //reuniao
-   Route::post('createreuniao', 'ReuniaoController@createreuniao');
    Route::get('reuniao', 'ReuniaoController@reuniao');
    Route::get('getreuniao', 'ReuniaoController@getreuniao');
    Route::get('getallreuniao', 'ReuniaoController@getallreuniao');

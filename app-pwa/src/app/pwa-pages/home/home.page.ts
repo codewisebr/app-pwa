@@ -1,3 +1,4 @@
+
 import { Storage } from '@ionic/storage';
 import { NgForm } from '@angular/forms';
 import { AuthService } from '../../services/auth.service';
@@ -18,8 +19,9 @@ export class HomePage {
     private alertService: AlertService,
     private platform: Platform,
     private menu: MenuController,
-    private storage:Storage
-    ){
+    private storage:Storage,
+    )
+    {
       this.menu.enable(false);
     }
 

@@ -6,7 +6,7 @@ use App\Avental;
 use App\Cargos;
 use App\Familia;
 use App\User;
-use Hash;
+use Illuminate\Support\Facades\Hash;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -53,7 +53,7 @@ class AuthController extends Controller
         $user->password = bcrypt($request->password);
         //salva o user
         $user->save();
-        //Mail::to($request->email)->send(new Welcome()); 
+        Mail::to($request->email)->send(new Welcome()); 
         $info = User::where('email', $request->email)->value('id');
         return response()->json($info);
     }

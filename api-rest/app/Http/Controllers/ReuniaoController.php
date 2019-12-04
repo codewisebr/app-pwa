@@ -40,7 +40,7 @@ class ReuniaoController extends Controller
         {
             $reuniao = new Reuniao;
             $reuniao->data = $resul;
-            $reuniao->ativo=1;
+            $reuniao->ativo = 1;
             $reuniao->save();
             return response()->json([
                 'message' => 'Reuniao criada!'
@@ -59,6 +59,7 @@ class ReuniaoController extends Controller
         $atual = date('w');
         switch($atual){
             case 1: //segunda
+                $this->notificacao();
                 return $this->createreuniao(0);
                 break;
             case 2:
@@ -71,29 +72,26 @@ class ReuniaoController extends Controller
                 return $this->createreuniao(4);
                 break;
             case 5:
+                $this->notificacao();
                 return $this->createreuniao(3);
                 break;
             case 6:
                 return $this->createreuniao(2);
                 break;
             case 0: //domingo
+                $this->notificacao();
                 return $this->createreuniao(1);
                 break;
         }
-        $this->notificacao();
+        
     }
 
     public function notificacao(){
-        $atual = date('w');
-        //se for segunda, sexta ou domingo
-        if($atual == 0 || $atual == 1 || $atual == 3)
+        $info = User::select('email')->where('cargo_id','<',12)->get();
+        for($i=0; $i<count($info); $i++)
         {
-            $info = User::select('email')->where('cargo_id','<',12)->pluck('email');
-            for($i=0; $i<count($info); $i++)
-            {
-                Mail::to($info[$i])->send(new Confirmation()); 
-                Mail::to($info[$i])->send(new Register());
-            }
+            Mail::to($info[$i])->send(new Confirmation()); 
+            Mail::to($info[$i])->send(new Register());
         }
     }
 

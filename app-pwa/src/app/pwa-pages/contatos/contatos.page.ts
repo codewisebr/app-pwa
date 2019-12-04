@@ -12,10 +12,11 @@ export class ContatosPage implements OnInit {
   public user:any[]=[];
   public nome:any[]=[];
   public plataforma:number;
+  public url:any;
   constructor(
     private authService: AuthService,
     private routingService: AppRoutingPreloaderService,
-    private platform: Platform
+    private platform: Platform,
   ) 
   { 
   }
@@ -60,5 +61,8 @@ export class ContatosPage implements OnInit {
         });
       }
     });
+  }
+
+  whatsapp(){
   }
 }

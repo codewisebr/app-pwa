@@ -1,4 +1,3 @@
-
 import { Storage } from '@ionic/storage';
 import { NgForm } from '@angular/forms';
 import { AuthService } from '../../services/auth.service';
@@ -64,4 +63,6 @@ export class HomePage {
   {
     this.navCtrl.navigateForward('/register');
   }
+
+  
 }

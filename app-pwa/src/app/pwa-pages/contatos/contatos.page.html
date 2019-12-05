@@ -74,7 +74,8 @@
                 <ion-label>Telefone: <a href="tel:{{users.telefone}}">{{users.telefone}}</a></ion-label>
               </ion-item>
               <ion-item>
-                <a href="https://wa.me/+55{{users.telefone}}"><ion-icon name="logo-whatsapp" color="success"></ion-icon></a>
+                  Enviar mensagem via: 
+                <ion-button fill="clear" (click)="whatsapp(users.telefone)"><ion-icon name="logo-whatsapp" color="success" class="icon"></ion-icon></ion-button>
               </ion-item>
               <ion-item></ion-item>
           </ion-item-sliding>

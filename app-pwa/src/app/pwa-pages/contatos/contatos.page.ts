@@ -2,6 +2,7 @@ import { Platform } from '@ionic/angular';
 import { AuthService } from './../../services/auth.service';
 import { Component, OnInit } from '@angular/core';
 import { AppRoutingPreloaderService } from 'src/app/route-to-preload';
+import { SocialSharing } from '@ionic-native/social-sharing/ngx';
 
 @Component({
   selector: 'app-contatos',
@@ -12,11 +13,13 @@ export class ContatosPage implements OnInit {
   public user:any[]=[];
   public nome:any[]=[];
   public plataforma:number;
-  public url:any;
+  public link:any;
+
   constructor(
     private authService: AuthService,
     private routingService: AppRoutingPreloaderService,
     private platform: Platform,
+    private socialSharing: SocialSharing,
   ) 
   { 
   }
@@ -60,6 +63,19 @@ export class ContatosPage implements OnInit {
           this.user[i].id = resul[0];
         });
       }
+    });
+  }
+
+  whatsapp(tel:string){
+    console.log(tel);
+    this.link = '+55'+tel;
+    this.platform.ready().then(() => {
+      this.socialSharing.shareViaWhatsAppToReceiver(this.link, ' ', null, null)
+      .then(()=>{
+        console.log("WhatsApp share successful");
+      }).catch((err)=> {
+      console.log("An error occurred ", err);
+    });
     });
   }
 }

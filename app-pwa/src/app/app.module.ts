@@ -1,3 +1,4 @@
+import { SocialSharing } from '@ionic-native/social-sharing/ngx';
 import { NgModule, ɵLocaleDataIndex } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { RouteReuseStrategy, RouterModule, Routes } from '@angular/router';
@@ -11,7 +12,7 @@ import { environment } from '../environments/environment';
 import {HttpClient, HttpClientModule} from '@angular/common/http';
 import { IonicStorageModule } from '@ionic/storage';
 import {DatePipe, registerLocaleData} from '@angular/common';
-import { Push } from '@ionic-native/push/ngx'
+import { Push } from '@ionic-native/push/ngx';
 @NgModule({
   declarations: [
     AppComponent
@@ -35,7 +36,8 @@ import { Push } from '@ionic-native/push/ngx'
     SplashScreen,
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
     DatePipe,
-    Push
+    Push,
+    SocialSharing,
   ],
   bootstrap: [AppComponent]
 })

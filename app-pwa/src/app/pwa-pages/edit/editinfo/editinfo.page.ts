@@ -36,10 +36,10 @@ export class EditinfoPage implements OnInit {
     this.router.queryParams.subscribe(params => {
       this.id = params["id"];
     });
-    this.showinfo();
+    this.showInfo();
   }
 
-  showinfo() {
+  showInfo() {
     this.authService.getInfo().subscribe(
       data=>{
         for(let i=0; i<data.length;i++)
@@ -64,7 +64,7 @@ export class EditinfoPage implements OnInit {
         }
     },
     error=>{
-      console.log(error);
+      // console.log(error);
     });
   }
 
@@ -90,7 +90,7 @@ export class EditinfoPage implements OnInit {
       }
     },
     error=>{
-      console.log(error);
+      // console.log(error);
     });
   }
 

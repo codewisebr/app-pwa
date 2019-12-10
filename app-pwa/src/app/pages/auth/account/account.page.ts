@@ -26,21 +26,21 @@ export class AccountPage implements OnInit {
   public nivel:any;
   public cargo: any;
   public profissao: any;
+  public user: User;
   constructor(
     private authService : AuthService,  
     private routingService: AppRoutingPreloaderService,
     private navCtrl:NavController
   ) {}
-  public user:any[]=[];
   ngOnInit() {}
   ionViewWillEnter(){
-    this.showuser();
+    this.showUser();
   }
   async ionViewDidEnter() {
     await this.routingService.preloadRoute('editsenha');
     await this.routingService.preloadRoute('editdados');
   }
-  showuser()
+  showUser()
   {
     this.authService.user()
     .subscribe(
@@ -67,15 +67,15 @@ export class AccountPage implements OnInit {
         this.nivel = "Mestre"
     }
     , error=>{ 
-      console.log("error: " + error);
+      //console.log("error: " + error);
     });
   }
 
-  async editardados(){
+  async editarDados(){
     this.navCtrl.navigateForward('/editdados');
   }
 
-  async editarsenha(){
+  async editarSenha(){
     this.navCtrl.navigateForward('/editsenha');
   }
   

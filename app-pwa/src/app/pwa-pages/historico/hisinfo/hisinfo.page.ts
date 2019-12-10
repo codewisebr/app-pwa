@@ -32,9 +32,9 @@ export class HisinfoPage implements OnInit {
   }
   ionViewWillEnter()
   {
-    this.showinfo();
+    this.showInfo();
   }
-  async showinfo() {
+  async showInfo() {
     await this.authService.getAllInfo().subscribe(
       data=>{
         for(let i=0; i<data.length;i++)
@@ -48,11 +48,11 @@ export class HisinfoPage implements OnInit {
         }
     },
     error=>{
-      console.log(error);
+      // console.log(error);
     });
   }
 
-  async popup(){
+  async popUp(){
     let alert = await this.alertCtrl.create({
       header: 'Ao apagar o histórico os registros serão apagados permanentemente. Deseja realmente excluir?',
       buttons: [

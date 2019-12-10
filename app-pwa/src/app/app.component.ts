@@ -1,6 +1,3 @@
-
-import { Storage } from '@ionic/storage';
-import { AppRoutingPreloaderService } from './route-to-preload';
 import { AlertService } from './services/alert.service';
 import { AuthService } from './services/auth.service';
 import { Component, OnInit } from '@angular/core';
@@ -9,6 +6,7 @@ import { Platform, MenuController, NavController, IonSplitPane, AlertController 
 import { SplashScreen } from '@ionic-native/splash-screen/ngx';
 import { StatusBar } from '@ionic-native/status-bar/ngx';
 import { Push, PushOptions, PushObject } from '@ionic-native/push/ngx';
+import {firebase} from '@firebase/app';
 @Component({
   selector: 'app-root',
   templateUrl: 'app.component.html',
@@ -109,6 +107,11 @@ export class AppComponent{
       icon: 'person-add'
     },
     {
+      title: 'Notificações',
+      url: '/push',
+      icon: 'notifications'
+    },
+    {
       title: 'Minha conta',
       url: '/account',
       icon: 'contact'
@@ -124,11 +127,14 @@ export class AppComponent{
     private alertService: AlertService,
     private alertCtrl : AlertController,
     private push: Push,
-  ) {
+  ){
     this.initializeApp();
   }
   async ionViewWillEnter() {
   }
+  async ngOnInit() {
+    firebase.initializeApp(environment.firebaseConfig);
+}
   public disabled: boolean;
   permissao(){
     this.platform.ready().then(() => {
@@ -163,19 +169,36 @@ export class AppComponent{
       }
     });
   }
-
   private initializeFirebase() {
     const options: PushOptions = {
       android: {
-        senderID: '378697952415'
+        senderID: '378697952415',
+        topics: ['all'],
+      },
+      browser: {
+        pushServiceURL: 'http://push.api.phonegap.com/v1/push'
       }
     }
+    this.platform.ready().then(() => {
+      if(this.platform.is('android')){
+        const pushObject: PushObject = this.push.init(options);
 
-    const pushObject: PushObject = this.push.init(options)
-
-    pushObject.on('registration').subscribe(res => console.log(` ${res.registrationId}`))
-
-    pushObject.on('notification').subscribe(res => console.log(`${res.message}`))
+        pushObject.on('registration').subscribe(
+          res => {
+            console.log(` ${res.registrationId}`);
+            pushObject.subscribe('all').then((res:any) => {
+              console.log("subscribed to topic: ", res);
+          });
+          }
+        );
+    
+        pushObject.on('notification').subscribe(
+          res => console.log(`${res.message}`)
+        );
+      }
+      else{
+      }
+    });
   }
 
   async logout() {

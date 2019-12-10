@@ -32,7 +32,7 @@ export class AdminagapePage implements OnInit {
     await this.routingService.preloadRoute('hisagape');
   }
   ionViewWillEnter(){
-    this.showagape();
+    this.showAgape();
     this.permissao();
   }
   permissao(){
@@ -43,7 +43,7 @@ export class AdminagapePage implements OnInit {
       }
     });
   }
-  async showagape()
+  async showAgape()
   {
     await this.authService.getAgape(1).subscribe(
       data=>{
@@ -53,7 +53,7 @@ export class AdminagapePage implements OnInit {
         }
     },
     error=>{
-      console.log(error);
+      // console.log(error);
     });
   }
 
@@ -78,7 +78,7 @@ export class AdminagapePage implements OnInit {
           if(id== data[i].id)
           {
             //muda o ativo para zero
-            this.authService.updateagape(data[i].id, data[i].agape, 0, data[i].data).subscribe(
+            this.authService.updateAgape(data[i].id, data[i].agape, 0, data[i].data).subscribe(
               data=>{
                 this.alertService.presentToast("Ordem excluido com sucesso!");
                 window.location.reload();
@@ -89,7 +89,7 @@ export class AdminagapePage implements OnInit {
         }
     },
     error=>{
-      console.log(error);
+      //console.log(error);
     });
   }
 

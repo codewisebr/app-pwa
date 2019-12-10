@@ -16,10 +16,10 @@ export class InformativoPage implements OnInit {
   ngOnInit() {}
   ionViewWillEnter(){
     
-    this.showinfo();
+    this.showInfo();
   }
   public info: any[] = [];
-  async showinfo() {
+  async showInfo() {
     this.authService.user().subscribe(resul=>{
       //pega o nivel do usuario, e assim mostra apenas as info de determinado nivel
       this.authService.getNivelInfo(resul.nivel, 0)

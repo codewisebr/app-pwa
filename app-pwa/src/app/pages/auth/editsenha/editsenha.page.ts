@@ -39,7 +39,7 @@ export class EditsenhaPage implements OnInit {
   editar(form: NgForm)
   {
       //verifica a senha atraves da senha
-      this.authService.checkpassword(this.id, form.value.password1).subscribe(
+      this.authService.checkPassword(this.id, form.value.password1).subscribe(
         resp => {
         },
         error => {
@@ -47,7 +47,7 @@ export class EditsenhaPage implements OnInit {
         }
       );
       //atualiza a nova senha
-      this.authService.updatepassword(this.id, form.value.password2).subscribe(
+      this.authService.updatePassword(this.id, form.value.password2).subscribe(
         resp => {
         },
         error => {

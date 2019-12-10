@@ -18,7 +18,6 @@ export class HomePage {
     private alertService: AlertService,
     private platform: Platform,
     private menu: MenuController,
-    private storage:Storage,
     )
     {
       this.menu.enable(false);
@@ -51,7 +50,7 @@ export class HomePage {
         this.alertService.presentToast("Logado!");
       },
       error => {
-        console.log(error);
+        // console.log(error);
         this.alertService.presentToast('E-mail ou senha incorretos');
       },
       () => {
@@ -64,5 +63,4 @@ export class HomePage {
     this.navCtrl.navigateForward('/register');
   }
 
-  
 }

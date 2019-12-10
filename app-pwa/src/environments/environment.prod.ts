@@ -8,6 +8,7 @@ export const environment = {
     storageBucket: "appcodewisebr.appspot.com",
     messagingSenderId: "378697952415",
     appId: "1:378697952415:web:7b9843b6117d9caf1fc6aa",
-    measurementId: "G-LM6XNV17VE"
+    measurementId: "G-LM6XNV17VE",
+    vapidKey: "BOSqqhCi29goxBovcU9iqfCuFe7BiDCKqjLAFwzwWbhnYwYMATdMMsY7HqMFhOdTBX0suafikWzlhnb03t8BY_k",
   }
 };

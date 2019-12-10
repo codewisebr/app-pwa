@@ -33,9 +33,9 @@ export class HislistaPage implements OnInit {
     this.router.queryParams.subscribe(params => {
     this.id = params["id"];
     });
-    this.showlista();
+    this.showLista();
   }
-  showlista(){
+  showLista(){
     this.authService.getAllLista(this.id).subscribe(
       data=>{   
         this.confirm = true;
@@ -53,7 +53,7 @@ export class HislistaPage implements OnInit {
         }
     },
     error=>{
-      console.log(error);
+      // console.log(error);
     });
   }
 }

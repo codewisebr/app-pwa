@@ -26,13 +26,13 @@ export class FinanceiroPage implements OnInit {
   }
   ionViewWillEnter(){
     this.id = this.global.user_id;
-    this.showfinanceiro();
+    this.showFinanceiro();
   }
   async ionViewDidEnter() {
     await this.routingService.preloadRoute('hisfinanceiro');
   }
 
-  showfinanceiro(){
+  showFinanceiro(){
       this.authService.getFinanceiro(this.id).subscribe(resul=>{
         for(let i=0; i<resul.length; i++){
           this.financeiro[i] = resul[i];

@@ -12,9 +12,9 @@ export class AgapePage implements OnInit {
 
   ngOnInit() {}
 
-  ionViewWillEnter(){this.showagape();}
+  ionViewWillEnter(){this.showAgape();}
   
-  async showagape() {
+  async showAgape() {
     await this.authService.getAgape(0)
     .subscribe(
       data =>{
@@ -23,7 +23,7 @@ export class AgapePage implements OnInit {
         }
       }, 
       error=>{
-        console.log('erro');
+        //console.log('erro');
       }
     );
   }

@@ -1,13 +1,10 @@
 import { User } from 'src/app/model/user.model';
 import { GlobalService } from './global.service';
-import { AlertService } from 'src/app/services/alert.service';
 import { HttpClient, HttpHeaders,HttpHandler } from '@angular/common/http';
 import { Injectable, ErrorHandler } from '@angular/core';
 import { tap, catchError,retry } from 'rxjs/operators';
 import { EnvService } from './env.service';
-import { Response } from 'selenium-webdriver/http';
 import { Observable, of, throwError, Observer } from 'rxjs';
-import { StringifyOptions } from 'querystring';
 import { Storage } from '@ionic/storage';
 
 @Injectable({
@@ -36,7 +33,6 @@ export class AuthService {
   constructor(
     private http: HttpClient,
     private env: EnvService, 
-    private alertctrl : AlertService, 
     private storage : Storage,
     private global : GlobalService
   )
@@ -80,13 +76,13 @@ export class AuthService {
     });
   }
 
-  checkpassword(id: Number, password: String)
+  checkPassword(id: Number, password: String)
   {
     return this.http.post(this.env.API_URL + 'auth/checkpassword',
       {id_user: id, password: password}); 
   }
 
-  updateuser(
+  updateUser(
     id: Number,fName: String, lName: String, email: String, 
     endereco: String, cidade: String, estado: String, 
     data_nasc: String, telefone: Number, nivel:Number, cargo:Number, profissao: String) {
@@ -98,7 +94,7 @@ export class AuthService {
     );
   }
 
-  updatepassword(id: Number, password: String) {
+  updatePassword(id: Number, password: String) {
     return this.http.put(this.env.API_URL + 'auth/updatepassword',
     {id_user: id, password: password}
     );
@@ -244,7 +240,7 @@ export class AuthService {
       agape:agape, id_user:id_user, date:date
     });
   }
-  updateagape(id: Number, agape:String, ativo:Number, date:String): Observable<any>{
+  updateAgape(id: Number, agape:String, ativo:Number, date:String): Observable<any>{
     return this.http.put<any>(this.env.API_URL + 'agape/updateagape',
     {id: id, agape: agape, ativo: ativo, date:date});
   }
@@ -271,12 +267,12 @@ export class AuthService {
   getMural(){
     return this.http.get<any>( this.env.API_URL+'mural/getmural');
   }
-  updatemural(id: Number, texto: String) {
+  updateMural(id: Number, texto: String) {
     return this.http.put(this.env.API_URL + 'mural/updatemural',
     {id: id, texto: texto}
     );
   }
-  deletemural(id: Number) {
+  deleteMural(id: Number) {
     return this.http.put(this.env.API_URL + 'mural/deletemural',
     {id: id}
     );
@@ -287,7 +283,7 @@ export class AuthService {
   financeiro(valor: String, mes: Number){
     return this.http.post(this.env.API_URL + 'financeiro/createfinanceiro', {valor:valor, mes:mes});
   }
-  updatefinanceiro(id: Number, form: Number) {
+  updateFinanceiro(id: Number, form: Number) {
     return this.http.put(this.env.API_URL + 'financeiro/updatefinanceiro',
     {id: id, form: form}
     );
@@ -311,7 +307,7 @@ export class AuthService {
   //#endregion
 
   //#region LISTA
-  confirma_presenca(id_user: Number, resp: Number, motivo: String, reuniao: Number)
+  confirmaPresenca(id_user: Number, resp: Number, motivo: String, reuniao: Number)
   {
     return this.http.post(this.env.API_URL + 'lista/listapresenca',
       {id_user: id_user, presenca: resp, motivo: motivo, reuniao:reuniao}
@@ -330,7 +326,7 @@ export class AuthService {
   getConfirmacao(tipo:Number){
     return this.http.post<any>( this.env.API_URL+'lista/getconfirmacao',{tipo:tipo});
   }
-  updatelista(id: Number, motivo: String, presenca:Number) {
+  updateLista(id: Number, motivo: String, presenca:Number) {
     return this.http.put(this.env.API_URL + 'lista/updatelista',
     {id: id, motivo:motivo, presenca: presenca});
   }
@@ -377,7 +373,7 @@ export class AuthService {
       {id_user: id});
   }
 
-  forgotpassword(email: String)
+  forgotPassword(email: String)
   {
     return this.http.post(this.env.API_URL + 'email/forgotpassword',
       {email: email}); 

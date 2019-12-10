@@ -34,7 +34,7 @@ export class AdminordemPage implements OnInit {
     await this.routingService.preloadRoute('hisordem');
   }
   ionViewWillEnter(){
-    this.showordem();
+    this.showOrdem();
     this.permissao();
   }
   
@@ -45,7 +45,7 @@ export class AdminordemPage implements OnInit {
       }
     });
   }
-  async showordem() {
+  async showOrdem() {
     await this.authService.getOrdem().subscribe(
       data=>{
         for(let i=0; i<data.length;i++)
@@ -54,7 +54,7 @@ export class AdminordemPage implements OnInit {
         }
     },
     error=>{
-      console.log(error);
+      // console.log(error);
     });
     
   }
@@ -91,7 +91,7 @@ export class AdminordemPage implements OnInit {
         }
     },
     error=>{
-      console.log(error);
+      // console.log(error);
     });
   }
 

@@ -32,13 +32,13 @@ export class HisfamiliaPage implements OnInit {
     this.router.queryParams.subscribe(params => {
       this.id = params["id"];
     });
-    this.showfamilia();
+    this.showFamilia();
   }
   dismiss(){
     this.navCtrl.navigateForward('/adminagape');
   }
 
-  showfamilia(){
+  showFamilia(){
     
     this.authService.getUsers(this.id).subscribe(data=>{
       this.nome = data[0].last_name;

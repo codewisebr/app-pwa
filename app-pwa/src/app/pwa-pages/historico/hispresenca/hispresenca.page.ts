@@ -31,9 +31,9 @@ export class HispresencaPage implements OnInit {
   }
   ionViewWillEnter()
   {
-    this.showdata();
+    this.showData();
   }
-  async showdata()
+  async showData()
   {
     await this.authService.getAllReuniao()
     .subscribe(
@@ -44,7 +44,7 @@ export class HispresencaPage implements OnInit {
         }
       }
     , error=>{ 
-      console.log("error: " + error);
+      // console.log("error: " + error);
     });
   }
 

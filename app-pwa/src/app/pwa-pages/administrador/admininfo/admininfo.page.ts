@@ -36,7 +36,7 @@ export class AdmininfoPage implements OnInit {
   }
   ionViewWillEnter()
   {
-    this.showinfo();
+    this.showInfo();
     this.permissao();
   }
   permissao(){
@@ -46,7 +46,7 @@ export class AdmininfoPage implements OnInit {
       }
     });
   }
-  async showinfo() {
+  async showInfo() {
     await this.authService.getInfo().subscribe(
       data=>{
         for(let i=0; i<data.length;i++)
@@ -55,7 +55,7 @@ export class AdmininfoPage implements OnInit {
         }
     },
     error=>{
-      console.log(error);
+      // console.log(error);
     });
   }
   async cadastrar(){
@@ -89,7 +89,7 @@ export class AdmininfoPage implements OnInit {
         }
     },
     error=>{
-      console.log(error);
+      // console.log(error);
     });
   }
 

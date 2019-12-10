@@ -47,8 +47,8 @@ export class AdminPage implements OnInit {
   ionViewWillEnter()
   {
     this.id = this.global.user_id;
-    this.showlista();
-    this.showdata();
+    this.showLista();
+    this.showData();
     this.verifica();
     this.authService.reuniao().subscribe(data=>{ });
   }
@@ -96,7 +96,7 @@ export class AdminPage implements OnInit {
       },
       error => {
         //se nao possui o id no banco de dados, deixa habilitado para o usuario
-        console.log('erro na verificação');
+        //console.log('erro na verificação');
         this.disabled1=false;
         this.disabled2=false;
       }
@@ -151,7 +151,7 @@ export class AdminPage implements OnInit {
   async lista(opcao: Number, motivo: String)
   {
       //manda pra funcão o id do usuario e a resposta, se ja tiver no bd ele atualiza para uma nova resposta
-      this.authService.confirma_presenca(this.id, this.opcao ,this.motivo,this.global.reuniao).subscribe(
+      this.authService.confirmaPresenca(this.id, this.opcao ,this.motivo,this.global.reuniao).subscribe(
         data => {},
         error => {
           console.log(error);
@@ -168,7 +168,7 @@ export class AdminPage implements OnInit {
     this.disabled2 = !this.disabled2;
   }
 
-  async showdata()
+  async showData()
   {
     //mostra a data se tiver
     await this.authService.getReuniao()
@@ -185,7 +185,7 @@ export class AdminPage implements OnInit {
     });
   }
 
-  async showlista() {
+  async showLista() {
     this.authService.getConfirmacao(1).subscribe(presente =>{
       this.presente = presente;
     });
@@ -194,6 +194,4 @@ export class AdminPage implements OnInit {
     })
   }
   //#endregion
-
-  //resto da pagina
 }

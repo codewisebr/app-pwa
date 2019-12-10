@@ -36,9 +36,9 @@ export class EditordemPage implements OnInit {
     this.router.queryParams.subscribe(params => {
       this.id = params["id"];
     });
-    this.showordem();
+    this.showOrdem();
   }
-  showordem() {
+  showOrdem() {
     
     this.authService.getOrdem().subscribe(
       data=>{
@@ -64,7 +64,7 @@ export class EditordemPage implements OnInit {
         }
     },
     error=>{
-      console.log(error);
+      // console.log(error);
     });
   }
   
@@ -91,7 +91,7 @@ export class EditordemPage implements OnInit {
         }
     },
     error=>{
-      console.log(error);
+      // console.log(error);
     });
   }
 

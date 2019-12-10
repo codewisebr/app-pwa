@@ -1,0 +1,29 @@
+<ion-header>
+  <ion-toolbar>
+      <ion-buttons slot="start">
+          <ion-menu-button></ion-menu-button>
+      </ion-buttons>
+    <ion-title>Notificações</ion-title>
+  </ion-toolbar>
+</ion-header>
+  
+<ion-content padding>
+  <ion-grid text-center >
+    <div class="box">
+      <h2 text-center>Enviar Notificação</h2>
+        <form #form="ngForm" (ngSubmit)="showPush(form)" method="POST">
+          <ion-grid>
+            <ion-input ngModel placeholder="Titulo" name="titulo" type="text" required="true" ></ion-input>
+          </ion-grid>
+          <br>
+          <ion-grid>
+            <ion-textarea ngModel placeholder="Corpo" name="corpo" type="text" required="true"></ion-textarea>
+          </ion-grid>
+          <br>
+          <ion-grid>
+            <ion-button type="submit" round expand="block" color="danger">Cadastrar</ion-button>
+          </ion-grid>
+      </form>
+    </div>
+  </ion-grid>
+</ion-content>

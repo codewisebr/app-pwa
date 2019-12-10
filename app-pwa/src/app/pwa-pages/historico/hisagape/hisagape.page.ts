@@ -29,9 +29,9 @@ export class HisagapePage implements OnInit {
   }
   ionViewWillEnter()
   {
-    this.showagape();
+    this.showAgape();
   }
-  async showagape() {
+  async showAgape() {
     await this.authService.getAllAgape().subscribe(
       data=>{
         
@@ -46,11 +46,11 @@ export class HisagapePage implements OnInit {
         }
     },
     error=>{
-      console.log(error);
+      // console.log(error);
     });
   }
 
-  async popup(){
+  async popUp(){
     let alert = await this.alertCtrl.create({
       header: 'Ao apagar o histórico os registros serão apagados permanentemente. Deseja realmente excluir?',
       buttons: [

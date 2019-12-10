@@ -28,9 +28,9 @@ export class AdminusuarioPage implements OnInit {
   }
   ionViewWillEnter()
   {
-    this.showusuarios();
+    this.showUsuarios();
   }
-  showusuarios(){
+  showUsuarios(){
     this.authService.getAllUser().subscribe(data=>{
       for(let i=0; i<data.length; i++){
         this.user[i]=data[i];
@@ -64,16 +64,12 @@ export class AdminusuarioPage implements OnInit {
     this.navCtrl.navigateForward(['/cadastrausuario']);
   }
 
-  verfamilia(id:any){
+  verFamilia(id:any){
     let navigationExtras: NavigationExtras = {
       queryParams: {
           id: id
       }
     };
     this.navCtrl.navigateForward(['/hisfamilia'], navigationExtras);
-  }
-
-  link(){
-    
   }
 }

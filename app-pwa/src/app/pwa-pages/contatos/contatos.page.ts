@@ -13,7 +13,7 @@ export class ContatosPage implements OnInit {
   public user:any[]=[];
   public nome:any[]=[];
   public plataforma:number;
-  public link:any;
+  public tel:any;
 
   constructor(
     private authService: AuthService,
@@ -34,17 +34,17 @@ export class ContatosPage implements OnInit {
       if(this.platform.is('cordova')||this.platform.is('android')||this.platform.is('ios'))
       {
         this.plataforma = 0;
-        this.showcontatoapp();
+        this.showContatoApp();
       }
       else if(this.platform.is('pwa')||this.platform.is('capacitor')||this.platform.is('desktop'))
       {
         this.plataforma = 1;
-        this.showcontato();
+        this.showContato();
       }
     }); 
   }
 
-  showcontato(){
+  showContato(){
     this.authService.getAllUser().subscribe(data=>{
       for(let i=0; i<data.length; i++){
         this.user[i] = data[i];
@@ -55,7 +55,7 @@ export class ContatosPage implements OnInit {
     });
   }
 
-  showcontatoapp(){
+  showContatoApp(){
     this.authService.getAllUser().subscribe(data=>{
       for(let i=0; i<data.length; i++){
         this.user[i] = data[i];
@@ -67,14 +67,14 @@ export class ContatosPage implements OnInit {
   }
 
   whatsapp(tel:string){
-    console.log(tel);
-    this.link = '+55'+tel;
+    // console.log(tel);
+    this.tel = '+55'+tel;
     this.platform.ready().then(() => {
-      this.socialSharing.shareViaWhatsAppToReceiver(this.link, ' ', null, null)
+      this.socialSharing.shareViaWhatsAppToReceiver(this.tel, ' ', null, null)
       .then(()=>{
-        console.log("WhatsApp share successful");
+        // console.log("WhatsApp share successful");
       }).catch((err)=> {
-      console.log("An error occurred ", err);
+      // console.log("An error occurred ", err);
     });
     });
   }

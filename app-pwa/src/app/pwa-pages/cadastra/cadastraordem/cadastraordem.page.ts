@@ -37,7 +37,7 @@ export class CadastraordemPage implements OnInit {
       this.authService.ordem(form.value.ordem,this.id,form.value.nivel).subscribe(
         resul=> {
           this.dismiss();
-          window.location.reload();
+          this.alertService.presentToast("Ordem cadastrada com sucesso!");
         }
       );
   }

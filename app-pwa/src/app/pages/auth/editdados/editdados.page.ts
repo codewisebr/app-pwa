@@ -45,7 +45,7 @@ export class EditdadosPage implements OnInit {
   }
   ionViewWillEnter(){
     this.id = this.global.user_id;
-    this.showdados();
+    this.showDados();
   }
   async ionViewDidEnter() {
     await this.routingService.preloadRoute('account');
@@ -54,7 +54,7 @@ export class EditdadosPage implements OnInit {
     this.navCtrl.navigateForward('/account');
   }
 
-  showdados()
+  showDados()
   {
     this.authService.user()
     .subscribe(
@@ -114,7 +114,7 @@ export class EditdadosPage implements OnInit {
     });
 
     //salva as alterações
-    this.authService.updateuser(
+    this.authService.updateUser(
       this.id,form.value.fName, form.value.lName, form.value.email, 
       form.value.endereco, form.value.cidade, form.value.estado, 
       form.value.data_nasc, form.value.telefone, form.value.nivel, 

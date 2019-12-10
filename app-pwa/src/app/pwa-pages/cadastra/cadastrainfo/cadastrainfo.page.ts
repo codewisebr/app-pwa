@@ -15,7 +15,8 @@ export class CadastrainfoPage implements OnInit {
   constructor(
     private authService: AuthService, 
     private navCtrl:NavController,
-    private routingService: AppRoutingPreloaderService
+    private routingService: AppRoutingPreloaderService,
+    private alertService: AlertService
   ) { }
 
   ngOnInit() {
@@ -31,7 +32,7 @@ export class CadastrainfoPage implements OnInit {
       this.authService.informativo(form.value.info,data.id,form.value.nivel).subscribe(
         resul=> {
           this.dismiss();
-          window.location.reload();
+          this.alertService.presentToast("Informativo cadastrada com sucesso!");
         }
       );
     });

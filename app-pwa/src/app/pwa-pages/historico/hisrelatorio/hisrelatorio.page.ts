@@ -26,9 +26,9 @@ export class HisrelatorioPage implements OnInit {
   }
   ionViewWillEnter()
   {
-    this.showlista();
+    this.showLista();
   }
-  showlista(){
+  showLista(){
     this.authService.getAllUser().subscribe(data=>{
       for(let i=0; i<data.length; i++){
         this.authService.getNome(data[i].id).subscribe(resul=>{

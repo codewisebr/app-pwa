@@ -34,10 +34,10 @@ export class HisfinanceiroPage implements OnInit {
     this.router.queryParams.subscribe(params => {
       this.id = params["id"];
     });
-    this.showfinanceiro();
+    this.showFinanceiro();
   }
 
-  showfinanceiro(){
+  showFinanceiro(){
       this.authService.getAllFinanceiro(this.id).subscribe(resul=>{
         for(let i=0; i<resul.length; i++){
           this.financeiro[i] = resul[i];

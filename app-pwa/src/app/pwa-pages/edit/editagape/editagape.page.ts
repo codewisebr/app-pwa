@@ -30,13 +30,13 @@ export class EditagapePage implements OnInit{
     this.router.queryParams.subscribe(params => {
       this.id = params["id"];
     });
-    this.showagape();
+    this.showAgape();
   }
   dismiss(){
     this.navCtrl.navigateForward('/adminagape');
   }
 
-  showagape() {
+  showAgape() {
     this.authService.getAgape(0).subscribe(
       data=>{
         for(let i=0; i<data.length;i++)
@@ -49,7 +49,7 @@ export class EditagapePage implements OnInit{
         }
     },
     error=>{
-      console.log(error);
+      // console.log(error);
     });
   }
   async editar(form:any){
@@ -59,7 +59,7 @@ export class EditagapePage implements OnInit{
       {
         if(this.id == data[i].id)
         {
-          this.authService.updateagape(data[i].id, form.value.agape, 1, form.value.data).subscribe(
+          this.authService.updateAgape(data[i].id, form.value.agape, 1, form.value.data).subscribe(
             resul=>{              
               this.dismiss();
               this.alertService.presentToast("Ágape editado com sucesso!");
@@ -70,7 +70,7 @@ export class EditagapePage implements OnInit{
       }
     },
     error=>{
-      console.log(error);
+      // console.log(error);
     });
   }
 }

@@ -54,14 +54,15 @@ export class DashboardPage implements OnInit {
   {
     this.id = this.global.user_id;
     this.authService.user().subscribe(data=>{
-      this.showordem(data.nivel);
-      this.showinfo(data.nivel);
+      this.showOrdem(data.nivel);
+      this.showInfo(data.nivel);
     });
-    this.showfinanceiro();
+    this.showFinanceiro();
     this.verifica();
-    this.showdata();
+    this.showData();
     this.presenca();
-    this.showagape();
+    this.showAgape();
+    this.authService.reuniao().subscribe(data=>{ });
   }
   
   verifica(){ 
@@ -105,7 +106,7 @@ export class DashboardPage implements OnInit {
     );
   }
 
-  async showdata()
+  async showData()
   {
     //mostra a data se tiver
     await this.authService.getReuniao()
@@ -171,7 +172,7 @@ export class DashboardPage implements OnInit {
   async lista(opcao: Number, motivo: String)
   {
       //manda pra funcão o id do usuario e a resposta, se ja tiver no bd ele atualiza para uma nova resposta
-      this.authService.confirma_presenca(this.id, this.opcao ,this.motivo,this.global.reuniao).subscribe(
+      this.authService.confirmaPresenca(this.id, this.opcao ,this.motivo,this.global.reuniao).subscribe(
         data => {},
         error => {
           console.log(error);
@@ -188,7 +189,7 @@ export class DashboardPage implements OnInit {
     this.disabled2 = !this.disabled2;
   }
 
-  async showordem(nivel:any)
+  async showOrdem(nivel:any)
   {
       //pega o nivel do usuario
       this.authService.getNivelOrdem(nivel, 1)
@@ -201,7 +202,7 @@ export class DashboardPage implements OnInit {
       });
   }
   
-  async showinfo(nivel:any)
+  async showInfo(nivel:any)
   {
     this.authService.getNivelInfo(nivel, 1)
       .subscribe(
@@ -223,7 +224,7 @@ export class DashboardPage implements OnInit {
     );
   }
 
-  showagape()
+  showAgape()
   {
     this.authService.getAgape(1).subscribe(
       data=>{
@@ -237,7 +238,7 @@ export class DashboardPage implements OnInit {
     });
   }
 
-  showfinanceiro(){
+  showFinanceiro(){
       this.authService.getFinanceiro(this.id).subscribe(resul=>{
           for(let i=0; i<resul.length; i++){
             this.financeiro[i] = resul[i];

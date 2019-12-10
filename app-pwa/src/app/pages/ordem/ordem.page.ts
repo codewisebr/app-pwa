@@ -13,8 +13,8 @@ export class OrdemPage implements OnInit {
   ngOnInit() {
     
   }
-  ionViewWillEnter(){this.showordem();}
-  async showordem() {
+  ionViewWillEnter(){this.showOrdem();}
+  async showOrdem() {
     this.authService.user().subscribe(resul=>{
       //pega o nivel do usuario, assim so mostra as ordens do nivel
       this.authService.getNivelOrdem(resul.nivel, 0)

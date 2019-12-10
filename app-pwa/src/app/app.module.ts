@@ -1,4 +1,4 @@
-
+import { SocialSharing } from '@ionic-native/social-sharing/ngx';
 import { NgModule, ɵLocaleDataIndex } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { RouteReuseStrategy, RouterModule, Routes } from '@angular/router';
@@ -12,6 +12,7 @@ import { environment } from '../environments/environment';
 import {HttpClient, HttpClientModule} from '@angular/common/http';
 import { IonicStorageModule } from '@ionic/storage';
 import {DatePipe, registerLocaleData} from '@angular/common';
+import { Push } from '@ionic-native/push/ngx';
 @NgModule({
   declarations: [
     AppComponent
@@ -23,7 +24,7 @@ import {DatePipe, registerLocaleData} from '@angular/common';
     BrowserModule,
     IonicModule.forRoot(),
     AppRoutingModule,
-    ServiceWorkerModule.register('combined-sw.js', { enabled: environment.production }),
+    ServiceWorkerModule.register('/ngsw-worker.js', { enabled: environment.production }),
     IonicStorageModule.forRoot({
       name: 'new',
       driverOrder: ['localstorage', 'websql', 'sqlite' ]
@@ -34,7 +35,9 @@ import {DatePipe, registerLocaleData} from '@angular/common';
     StatusBar,
     SplashScreen,
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
-    DatePipe
+    DatePipe,
+    Push,
+    SocialSharing,
   ],
   bootstrap: [AppComponent]
 })

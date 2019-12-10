@@ -43,8 +43,8 @@ export class RegisterPage implements OnInit {
     await this.routingService.preloadRoute('admin');
   }
   ionViewWillEnter(){
-    this.getcargos();
-    this.getavental();
+    this.getCargos();
+    this.getAvental();
   }
   loginModal() {
     this.navCtrl.navigateRoot('/home');
@@ -111,6 +111,7 @@ export class RegisterPage implements OnInit {
           );          
         },
         error => {
+          //console.log(error);
           this.alertService.presentToast("Preencha todos os campos corretamente!");
         },
         () => {}
@@ -119,7 +120,7 @@ export class RegisterPage implements OnInit {
     }
   }
 
-  getcargos()
+  getCargos()
   {
     this.authService.getCargos().subscribe(
       data=>{ 
@@ -132,7 +133,7 @@ export class RegisterPage implements OnInit {
       });
   }
 
-  getavental(){
+  getAvental(){
     this.authService.getAvental().subscribe(
       data=>{ 
         for(let i=0; i<data.length; i++){

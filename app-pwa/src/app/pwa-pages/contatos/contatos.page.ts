@@ -2,6 +2,7 @@ import { Platform } from '@ionic/angular';
 import { AuthService } from './../../services/auth.service';
 import { Component, OnInit } from '@angular/core';
 import { AppRoutingPreloaderService } from 'src/app/route-to-preload';
+import { SocialSharing } from '@ionic-native/social-sharing/ngx';
 
 @Component({
   selector: 'app-contatos',
@@ -12,10 +13,13 @@ export class ContatosPage implements OnInit {
   public user:any[]=[];
   public nome:any[]=[];
   public plataforma:number;
+  public tel:any;
+
   constructor(
     private authService: AuthService,
     private routingService: AppRoutingPreloaderService,
-    private platform: Platform
+    private platform: Platform,
+    private socialSharing: SocialSharing,
   ) 
   { 
   }
@@ -30,17 +34,17 @@ export class ContatosPage implements OnInit {
       if(this.platform.is('cordova')||this.platform.is('android')||this.platform.is('ios'))
       {
         this.plataforma = 0;
-        this.showcontatoapp();
+        this.showContatoApp();
       }
       else if(this.platform.is('pwa')||this.platform.is('capacitor')||this.platform.is('desktop'))
       {
         this.plataforma = 1;
-        this.showcontato();
+        this.showContato();
       }
     }); 
   }
 
-  showcontato(){
+  showContato(){
     this.authService.getAllUser().subscribe(data=>{
       for(let i=0; i<data.length; i++){
         this.user[i] = data[i];
@@ -51,7 +55,7 @@ export class ContatosPage implements OnInit {
     });
   }
 
-  showcontatoapp(){
+  showContatoApp(){
     this.authService.getAllUser().subscribe(data=>{
       for(let i=0; i<data.length; i++){
         this.user[i] = data[i];
@@ -59,6 +63,19 @@ export class ContatosPage implements OnInit {
           this.user[i].id = resul[0];
         });
       }
+    });
+  }
+
+  whatsapp(tel:string){
+    // console.log(tel);
+    this.tel = '+55'+tel;
+    this.platform.ready().then(() => {
+      this.socialSharing.shareViaWhatsAppToReceiver(this.tel, ' ', null, null)
+      .then(()=>{
+        // console.log("WhatsApp share successful");
+      }).catch((err)=> {
+      // console.log("An error occurred ", err);
+    });
     });
   }
 }

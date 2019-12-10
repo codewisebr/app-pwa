@@ -18,18 +18,18 @@ export class HomePage {
     private alertService: AlertService,
     private platform: Platform,
     private menu: MenuController,
-    private storage:Storage
-    ){
+    )
+    {
       this.menu.enable(false);
     }
 
   permissao(){
     this.platform.ready().then(() => {
-      if(this.platform.is('cordova')||this.platform.is('android')||this.platform.is('ios'))
+      if(this.platform.is('android')||this.platform.is('ios'))
       {
         this.navCtrl.navigateRoot('/dashboard');
       }
-      else if(this.platform.is('pwa')||this.platform.is('capacitor')||this.platform.is('desktop'))
+      else
       {
         this.navCtrl.navigateRoot('/admin');
       }
@@ -41,6 +41,7 @@ export class HomePage {
         this.permissao();
       }
     });
+    this.authService.reuniao().subscribe(data=>{ });
   }
   login(form: NgForm) {
     this.authService.login(form.value.email, form.value.password).subscribe(
@@ -49,7 +50,7 @@ export class HomePage {
         this.alertService.presentToast("Logado!");
       },
       error => {
-        console.log(error);
+        // console.log(error);
         this.alertService.presentToast('E-mail ou senha incorretos');
       },
       () => {
@@ -61,4 +62,5 @@ export class HomePage {
   {
     this.navCtrl.navigateForward('/register');
   }
+
 }

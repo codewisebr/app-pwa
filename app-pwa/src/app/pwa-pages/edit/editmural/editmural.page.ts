@@ -29,13 +29,13 @@ export class EditmuralPage implements OnInit{
     this.router.queryParams.subscribe(params => {
       this.id = params["id"];
     });
-    this.showmural();
+    this.showMural();
   }
   dismiss(){
     this.navCtrl.navigateForward('/mural');
   }
 
-  showmural(){
+  showMural(){
     this.authService.getMural().subscribe(data=>{
       for(let i=0; i<data.length;i++)
       {
@@ -48,12 +48,12 @@ export class EditmuralPage implements OnInit{
   }
 
   editar(form:any){
-    this.authService.updatemural(this.id, form.value.texto).subscribe(resul=>{
+    this.authService.updateMural(this.id, form.value.texto).subscribe(resul=>{
       this.alertService.presentToast("Mural editado com sucesso!");
       this.dismiss();
     },
     error=>{
-      console.log(error);
+      // console.log(error);
     });
   }
 

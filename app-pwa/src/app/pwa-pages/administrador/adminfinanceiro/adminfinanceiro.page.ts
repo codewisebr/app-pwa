@@ -35,7 +35,7 @@ export class AdminfinanceiroPage implements OnInit {
     await this.routingService.preloadRoute('cadastrafinanceiro');
   }
   ionViewWillEnter(){
-    this.showsituacao();
+    this.showSituacao();
     this.permissao();
   }
   permissao(){
@@ -45,7 +45,7 @@ export class AdminfinanceiroPage implements OnInit {
       }
     });
   }
-  showmes(mes:any){
+  showMes(mes:any){
     if(mes == 1)
     this.atual = "Janeiro";
     else if(mes == 2)
@@ -72,15 +72,12 @@ export class AdminfinanceiroPage implements OnInit {
     this.atual = "Dezembro";
   }
 
-  showsituacao(){
+  showSituacao(){
     this.mes = this.datePipe.transform(this.data, 'MM');
-    this.showmes(this.mes);
+    this.showMes(this.mes);
     this.authService.getAdminFinanceiro().subscribe(data=>{
       for(let i=0; i<data.length; i++){
         this.financeiro[i] = data[i];
-        this.authService.getNome(data[i].id_user).subscribe(resul=>{
-          this.financeiro[i].nome = resul[0];
-        });
         if(data[i].data_pag == null)
           this.financeiro[i].data_pag = "Aguardando";
         else
@@ -99,7 +96,7 @@ export class AdminfinanceiroPage implements OnInit {
   }
 
   async editar(id:any){
-    let alertTeste = await this.alertCtrl.create({
+    let alert = await this.alertCtrl.create({
       header: 'Editar situação',
       inputs: [
         {
@@ -131,12 +128,12 @@ export class AdminfinanceiroPage implements OnInit {
         }
       ]
     });
-    await alertTeste.present();
+    await alert.present();
   }
 
   edit(form:any, id:number){
     this.pagamento = this.datePipe.transform(this.data, 'yyyy-MM-dd');
-    this.authService.updatefinanceiro(id,form).subscribe(data=>{
+    this.authService.updateFinanceiro(id,form).subscribe(data=>{
       this.alertService.presentToast("Financeiro editado com sucesso!");
       window.location.reload();
     });

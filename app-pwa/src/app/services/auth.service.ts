@@ -1,13 +1,10 @@
 import { User } from 'src/app/model/user.model';
 import { GlobalService } from './global.service';
-import { AlertService } from 'src/app/services/alert.service';
 import { HttpClient, HttpHeaders,HttpHandler } from '@angular/common/http';
 import { Injectable, ErrorHandler } from '@angular/core';
 import { tap, catchError,retry } from 'rxjs/operators';
 import { EnvService } from './env.service';
-import { Response } from 'selenium-webdriver/http';
 import { Observable, of, throwError, Observer } from 'rxjs';
-import { StringifyOptions } from 'querystring';
 import { Storage } from '@ionic/storage';
 
 @Injectable({
@@ -36,7 +33,6 @@ export class AuthService {
   constructor(
     private http: HttpClient,
     private env: EnvService, 
-    private alertctrl : AlertService, 
     private storage : Storage,
     private global : GlobalService
   )
@@ -80,13 +76,13 @@ export class AuthService {
     });
   }
 
-  checkpassword(id: Number, password: String)
+  checkPassword(id: Number, password: String)
   {
     return this.http.post(this.env.API_URL + 'auth/checkpassword',
       {id_user: id, password: password}); 
   }
 
-  updateuser(
+  updateUser(
     id: Number,fName: String, lName: String, email: String, 
     endereco: String, cidade: String, estado: String, 
     data_nasc: String, telefone: Number, nivel:Number, cargo:Number, profissao: String) {
@@ -98,7 +94,7 @@ export class AuthService {
     );
   }
 
-  updatepassword(id: Number, password: String) {
+  updatePassword(id: Number, password: String) {
     return this.http.put(this.env.API_URL + 'auth/updatepassword',
     {id_user: id, password: password}
     );
@@ -120,6 +116,7 @@ export class AuthService {
         delete this.token;
         delete this.global.access;
         delete this.global.user_id;
+        this.isLoggedIn=false;
         return data;
       })
     )
@@ -183,7 +180,7 @@ export class AuthService {
       info:info, id_user:id_user, nivel:nivel
     });
   }
-  updateinfo(id: Number, info:String, ativo: Number, nivel: Number): Observable<any>{
+  updateInfo(id: Number, info:String, ativo: Number, nivel: Number): Observable<any>{
     return this.http.put<any>(this.env.API_URL + 'info/updateinfo',
     {id: id, info: info, ativo: ativo, nivel:nivel});
   }
@@ -201,6 +198,10 @@ export class AuthService {
   {
     return this.http.post<any>( this.env.API_URL+'info/getnivelinfo',{nivel:nivel, tipo:tipo});  
   }
+
+  deleteHistInfo(){
+    return this.http.get<any>( this.env.API_URL+'info/deletehistinfo');  
+  }
   //#endregion
 
   //#region ORDEM
@@ -209,7 +210,7 @@ export class AuthService {
       ordem:ordem, id_user:id_user, nivel:nivel
     });
   }
-  updateordem(id: Number, ordem:String, ativo: Number, nivel: Number): Observable<any>{
+  updateOrdem(id: Number, ordem:String, ativo: Number, nivel: Number): Observable<any>{
     return this.http.put<any>(this.env.API_URL + 'ordem/updateordem',
     {id: id, ordem: ordem, ativo: ativo, nivel: nivel});
   }
@@ -220,12 +221,16 @@ export class AuthService {
 
   getAllOrdem(): Observable<any>
   {
-    return this.http.get<any>( this.env.API_URL+'ordem/getordem');  
+    return this.http.get<any>( this.env.API_URL+'ordem/getallordem');  
   }
 
   getNivelOrdem(nivel:Number, tipo:Number): Observable<any>
   {
     return this.http.post<any>( this.env.API_URL+'ordem/getnivelordem',{nivel:nivel, tipo:tipo});  
+  }
+
+  deleteHistOrdem(){
+    return this.http.get<any>( this.env.API_URL+'ordem/deletehistordem');  
   }
   //#endregion
 
@@ -235,7 +240,7 @@ export class AuthService {
       agape:agape, id_user:id_user, date:date
     });
   }
-  updateagape(id: Number, agape:String, ativo:Number, date:String): Observable<any>{
+  updateAgape(id: Number, agape:String, ativo:Number, date:String): Observable<any>{
     return this.http.put<any>(this.env.API_URL + 'agape/updateagape',
     {id: id, agape: agape, ativo: ativo, date:date});
   }
@@ -248,6 +253,10 @@ export class AuthService {
   {
     return this.http.get<any>( this.env.API_URL+'agape/getallagape');
   }
+
+  deleteHistAgape(){
+    return this.http.get<any>( this.env.API_URL+'agape/deletehistagape');  
+  }
   //#endregion
 
   //#region MURAL
@@ -258,12 +267,12 @@ export class AuthService {
   getMural(){
     return this.http.get<any>( this.env.API_URL+'mural/getmural');
   }
-  updatemural(id: Number, texto: String) {
+  updateMural(id: Number, texto: String) {
     return this.http.put(this.env.API_URL + 'mural/updatemural',
     {id: id, texto: texto}
     );
   }
-  deletemural(id: Number) {
+  deleteMural(id: Number) {
     return this.http.put(this.env.API_URL + 'mural/deletemural',
     {id: id}
     );
@@ -272,9 +281,9 @@ export class AuthService {
   
   //#region FINANCEIRO
   financeiro(valor: String, mes: Number){
-    return this.http.post(this.env.API_URL + 'financeiro/financeiro', {valor:valor, mes:mes});
+    return this.http.post(this.env.API_URL + 'financeiro/createfinanceiro', {valor:valor, mes:mes});
   }
-  updatefinanceiro(id: Number, form: Number) {
+  updateFinanceiro(id: Number, form: Number) {
     return this.http.put(this.env.API_URL + 'financeiro/updatefinanceiro',
     {id: id, form: form}
     );
@@ -298,7 +307,7 @@ export class AuthService {
   //#endregion
 
   //#region LISTA
-  confirma_presenca(id_user: Number, resp: Number, motivo: String, reuniao: Number)
+  confirmaPresenca(id_user: Number, resp: Number, motivo: String, reuniao: Number)
   {
     return this.http.post(this.env.API_URL + 'lista/listapresenca',
       {id_user: id_user, presenca: resp, motivo: motivo, reuniao:reuniao}
@@ -317,7 +326,7 @@ export class AuthService {
   getConfirmacao(tipo:Number){
     return this.http.post<any>( this.env.API_URL+'lista/getconfirmacao',{tipo:tipo});
   }
-  updatelista(id: Number, motivo: String, presenca:Number) {
+  updateLista(id: Number, motivo: String, presenca:Number) {
     return this.http.put(this.env.API_URL + 'lista/updatelista',
     {id: id, motivo:motivo, presenca: presenca});
   }
@@ -364,7 +373,7 @@ export class AuthService {
       {id_user: id});
   }
 
-  forgotpassword(email: String)
+  forgotPassword(email: String)
   {
     return this.http.post(this.env.API_URL + 'email/forgotpassword',
       {email: email}); 

@@ -1,3 +1,6 @@
+import { AlertService } from './../../../services/alert.service';
+import { GlobalService } from './../../../services/global.service';
+import { AlertController } from '@ionic/angular';
 import { AppRoutingPreloaderService } from './../../../route-to-preload';
 import { DatePipe } from '@angular/common';
 import { AuthService } from './../../../services/auth.service';
@@ -13,10 +16,13 @@ export class HisinfoPage implements OnInit {
   public info: any[]=[];
   public date: any[]=[];
   public ativo: any[]=[];
+
   constructor(
     public authService: AuthService, 
     private dataPipe: DatePipe,
-    private routingService: AppRoutingPreloaderService
+    private routingService: AppRoutingPreloaderService,
+    private alertCtrl: AlertController,
+    private alertService: AlertService
   ) { }
 
   ngOnInit() {
@@ -26,9 +32,9 @@ export class HisinfoPage implements OnInit {
   }
   ionViewWillEnter()
   {
-    this.showinfo();
+    this.showInfo();
   }
-  async showinfo() {
+  async showInfo() {
     await this.authService.getAllInfo().subscribe(
       data=>{
         for(let i=0; i<data.length;i++)
@@ -42,7 +48,35 @@ export class HisinfoPage implements OnInit {
         }
     },
     error=>{
-      console.log(error);
+      // console.log(error);
+    });
+  }
+
+  async popUp(){
+    let alert = await this.alertCtrl.create({
+      header: 'Ao apagar o histórico os registros serão apagados permanentemente. Deseja realmente excluir?',
+      buttons: [
+        {
+          text: 'Cancelar',
+          //role cancel deixa ele como segunda opcao
+          role: 'cancel',
+          cssClass: 'secondary'
+        },
+        {
+          text: 'Continuar',
+          handler: ()=> {
+            this.delete();
+          }
+        }
+      ]
+    });
+    await alert.present();
+  }
+
+  delete(){
+    this.authService.deleteHistInfo().subscribe(data=>{
+      this.alertService.presentToast("Histórico apagado com sucesso!");
+      window.location.reload();
     });
   }
 }

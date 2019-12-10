@@ -1,6 +1,3 @@
-
-import { Storage } from '@ionic/storage';
-import { AppRoutingPreloaderService } from './route-to-preload';
 import { AlertService } from './services/alert.service';
 import { AuthService } from './services/auth.service';
 import { Component, OnInit } from '@angular/core';
@@ -8,6 +5,8 @@ import {environment} from '../environments/environment';
 import { Platform, MenuController, NavController, IonSplitPane, AlertController } from '@ionic/angular';
 import { SplashScreen } from '@ionic-native/splash-screen/ngx';
 import { StatusBar } from '@ionic-native/status-bar/ngx';
+import { Push, PushOptions, PushObject } from '@ionic-native/push/ngx';
+import {firebase} from '@firebase/app';
 @Component({
   selector: 'app-root',
   templateUrl: 'app.component.html',
@@ -108,12 +107,16 @@ export class AppComponent{
       icon: 'person-add'
     },
     {
+      title: 'Notificações',
+      url: '/push',
+      icon: 'notifications'
+    },
+    {
       title: 'Minha conta',
       url: '/account',
       icon: 'contact'
     }
   ];
-
   constructor(
     private platform: Platform,
     private splashScreen: SplashScreen,
@@ -123,38 +126,39 @@ export class AppComponent{
     private authService: AuthService,
     private alertService: AlertService,
     private alertCtrl : AlertController,
-    private routingService: AppRoutingPreloaderService,
-    private storage: Storage
-  ) {
+    private push: Push,
+  ){
     this.initializeApp();
   }
   async ionViewWillEnter() {
-    await this.routingService.preloadRoute('dashboard');
-    await this.routingService.preloadRoute('admin');
-    await this.routingService.preloadRoute('mural');
-    await this.routingService.preloadRoute('account');
   }
+  async ngOnInit() {
+    firebase.initializeApp(environment.firebaseConfig);
+}
   public disabled: boolean;
   permissao(){
     this.platform.ready().then(() => {
-      if(this.platform.is('cordova')||this.platform.is('android')||this.platform.is('ios'))
+      if(this.platform.is('android')||this.platform.is('ios'))
       { 
-        this.statusBar.styleDefault();
-        this.splashScreen.hide();
         this.menu.enable(true, 'app');
         this.menu.enable(false, 'web');
         this.disabled = false;
-      }
-      else if(this.platform.is('pwa')||this.platform.is('capacitor')||this.platform.is('desktop')){
         
+      }
+      else{        
         this.menu.enable(true, 'web');
         this.menu.enable(false, 'app');
         this.disabled = true;
       }
-  
     });
   }
+  
   initializeApp() {
+    this.platform.ready().then(() => {
+      this.statusBar.styleDefault();
+      this.splashScreen.hide();
+      this.initializeFirebase();
+    });
     this.authService.getToken().then(() => {
       if(this.authService.isLoggedIn) {
         this.permissao();
@@ -164,7 +168,36 @@ export class AppComponent{
         this.menu.enable(false, 'app');
       }
     });
-    this.authService.reuniao().subscribe(data=>{
+  }
+  private initializeFirebase() {
+    const options: PushOptions = {
+      android: {
+        senderID: '378697952415',
+        topics: ['all'],
+      },
+      browser: {
+        pushServiceURL: 'http://push.api.phonegap.com/v1/push'
+      }
+    }
+    this.platform.ready().then(() => {
+      if(this.platform.is('android')){
+        const pushObject: PushObject = this.push.init(options);
+
+        pushObject.on('registration').subscribe(
+          res => {
+            console.log(` ${res.registrationId}`);
+            pushObject.subscribe('all').then((res:any) => {
+              console.log("subscribed to topic: ", res);
+          });
+          }
+        );
+    
+        pushObject.on('notification').subscribe(
+          res => console.log(`${res.message}`)
+        );
+      }
+      else{
+      }
     });
   }
 
@@ -186,7 +219,7 @@ export class AppComponent{
                 window.location.reload();      
               },
               error => {
-                console.log(error);
+                this.navCtrl.navigateRoot('/home');
               },
               () => {
                 this.navCtrl.navigateRoot('/home');

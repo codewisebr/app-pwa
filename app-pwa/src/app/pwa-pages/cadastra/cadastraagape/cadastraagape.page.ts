@@ -40,7 +40,6 @@ export class CadastraagapePage implements OnInit{
         resul=> {
           this.alertService.presentToast("Ágape criada com sucesso!");          
           this.dismiss();
-          window.location.reload();
         }
       );
   }

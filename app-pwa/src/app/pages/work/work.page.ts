@@ -13,7 +13,13 @@ export class WorkPage implements OnInit {
   user: User;
   tasks: any[] = [];
 
-  constructor(private menu: MenuController, private authService: AuthService, private toastCtrl : ToastController, private alertCtrl : AlertController, private actionSheetCtrl : ActionSheetController) {
+  constructor(
+    private menu: MenuController, 
+    private authService: AuthService, 
+    private toastCtrl : ToastController, 
+    private alertCtrl : AlertController, 
+    private actionSheetCtrl : ActionSheetController
+  ) {
     this.menu.enable(true);
     let tasksJson = localStorage.getItem('taskbd');
     if(tasksJson != null){
@@ -24,9 +30,9 @@ export class WorkPage implements OnInit {
   ngOnInit() {
   }
   
-  async abrirTeste()
+  async abrir()
   {
-    let alertTeste = await this.alertCtrl.create({
+    let alert = await this.alertCtrl.create({
       header: 'Adicionar tarefa',
       inputs: [
         {
@@ -42,19 +48,19 @@ export class WorkPage implements OnInit {
           role: 'cancel',
           cssClass: 'secondary',
           handler: ()=>{
-            console.log('cancelado')
+            //sconsole.log('cancelado')
           }
         },
         {
           text: 'Ok',
           handler: (form)=> {
-            console.log(form),
+            //console.log(form),
             this.add(form.taskToDo);
           }
         }
       ]
     });
-    await alertTeste.present();
+    await alert.present();
   }
 
   async add(taskToDo : string){
@@ -90,7 +96,7 @@ export class WorkPage implements OnInit {
         //role cancel deixa ele como segunda opcao
         role: 'cancel',
         handler: ()=>{
-          console.log('cancelado')
+          //console.log('cancelado')
         }
       }]
     });

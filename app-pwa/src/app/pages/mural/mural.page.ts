@@ -37,9 +37,9 @@ export class MuralPage implements OnInit {
   }
   ionViewWillEnter(){
     this.id = this.global.user_id;
-    this.showmural();
+    this.showMural();
   }
-  async showmural(){
+  async showMural(){
     this.authService.getMural().subscribe(
       data=>{
         for(let i=0; i<data.length;i++){
@@ -50,11 +50,6 @@ export class MuralPage implements OnInit {
               this.mural[i].ativo = 1;
             else
               this.mural[i].ativo = 0;
-
-          //pega o nome
-          this.authService.getNome(data[i].id_users).subscribe(resul=>{
-             this.mural[i].nome = resul[0];
-          });
         }
     });
     
@@ -74,7 +69,7 @@ export class MuralPage implements OnInit {
   }
 
   delete(id:any){
-    this.authService.deletemural(id).subscribe(data=>{
+    this.authService.deleteMural(id).subscribe(data=>{
       window.location.reload();
       this.alertService.presentToast("Postagem excluída com sucesso!");
     });

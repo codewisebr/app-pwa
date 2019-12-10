@@ -37,10 +37,10 @@ export class AdminpresencaPage implements OnInit {
   }
   ionViewWillEnter()
   {
-    this.showdata();
-    this.showlista();
+    this.showData();
+    this.showLista();
   }
-  async showdata()
+  async showData()
   {
     //mostra a data se tiver
     await this.authService.getReuniao()
@@ -49,11 +49,11 @@ export class AdminpresencaPage implements OnInit {
       this.data = (this.dataPipe.transform(data[0].data, "dd/MM"));
     }
     , error=>{ 
-      console.log("error: " + error);
+      // console.log("error: " + error);
     });
   }
 
-  async showlista() {
+  async showLista() {
 
     await this.authService.getLista().subscribe(
       data=>{
@@ -81,7 +81,7 @@ export class AdminpresencaPage implements OnInit {
         }
     },
     error=>{
-      console.log(error);
+      // console.log(error);
     });
   }
 

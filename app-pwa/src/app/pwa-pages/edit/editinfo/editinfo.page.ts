@@ -36,10 +36,10 @@ export class EditinfoPage implements OnInit {
     this.router.queryParams.subscribe(params => {
       this.id = params["id"];
     });
-    this.showinfo();
+    this.showInfo();
   }
 
-  showinfo() {
+  showInfo() {
     this.authService.getInfo().subscribe(
       data=>{
         for(let i=0; i<data.length;i++)
@@ -64,7 +64,7 @@ export class EditinfoPage implements OnInit {
         }
     },
     error=>{
-      console.log(error);
+      // console.log(error);
     });
   }
 
@@ -79,7 +79,7 @@ export class EditinfoPage implements OnInit {
       {
         if(this.id == data[i].id)
         {
-          this.authService.updateinfo(data[i].id, form.value.novo, 1, form.value.nivel).subscribe(
+          this.authService.updateInfo(data[i].id, form.value.novo, 1, form.value.nivel).subscribe(
             data=>{
               this.dismiss();
               this.alertService.presentToast("Informativo editado com sucesso!");
@@ -90,7 +90,7 @@ export class EditinfoPage implements OnInit {
       }
     },
     error=>{
-      console.log(error);
+      // console.log(error);
     });
   }
 

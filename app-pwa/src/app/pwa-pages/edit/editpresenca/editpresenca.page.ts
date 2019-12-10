@@ -31,9 +31,9 @@ export class EditpresencaPage implements OnInit {
     this.router.queryParams.subscribe(params => {
       this.id = params["id"];
     });
-    this.showlista();
+    this.showLista();
   }
-  showlista() {
+  showLista() {
     this.authService.getLista().subscribe(
       data=>{
         for(let i=0; i<data.length;i++)
@@ -59,7 +59,7 @@ export class EditpresencaPage implements OnInit {
         }
     },
     error=>{
-      console.log(error);
+      // console.log(error);
     });
   }
   dismiss(){
@@ -74,13 +74,13 @@ export class EditpresencaPage implements OnInit {
         //checa o id da lista
         if(this.id == data[i].id)
         {
-          this.authService.updatelista(data[i].id, form.value.motivo, form.value.presenca).subscribe(
+          this.authService.updateLista(data[i].id, form.value.motivo, form.value.presenca).subscribe(
             data=>{
               this.dismiss();
               this.alertService.presentToast("Presença editada com sucesso!");
             },
             error=>{
-              console.log(error);
+              // console.log(error);
             }
           );
           break;
@@ -88,7 +88,7 @@ export class EditpresencaPage implements OnInit {
       }
   },
   error=>{
-    console.log(error);
+    // console.log(error);
   });
   }
 }

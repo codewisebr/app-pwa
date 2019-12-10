@@ -18,7 +18,7 @@ export class SenhaPage implements OnInit {
   }
   
   senha(form:any){
-   this.authService.forgotpassword(form.value.email).subscribe(data=>{
+   this.authService.forgotPassword(form.value.email).subscribe(data=>{
     this.alertService.presentToast(data);
    });
   }

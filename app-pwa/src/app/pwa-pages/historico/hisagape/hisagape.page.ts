@@ -1,3 +1,5 @@
+import { AlertController } from '@ionic/angular';
+import { AlertService } from './../../../services/alert.service';
 import { AppRoutingPreloaderService } from './../../../route-to-preload';
 import { DatePipe } from '@angular/common';
 import { AuthService } from './../../../services/auth.service';
@@ -15,7 +17,9 @@ export class HisagapePage implements OnInit {
   constructor(
     public authService: AuthService, 
     private dataPipe: DatePipe,
-    private routingService:AppRoutingPreloaderService
+    private routingService:AppRoutingPreloaderService,
+    private alertService: AlertService,
+    private alertCtrl: AlertController
   ) { }
 
   ngOnInit() {
@@ -25,9 +29,9 @@ export class HisagapePage implements OnInit {
   }
   ionViewWillEnter()
   {
-    this.showagape();
+    this.showAgape();
   }
-  async showagape() {
+  async showAgape() {
     await this.authService.getAllAgape().subscribe(
       data=>{
         
@@ -42,7 +46,35 @@ export class HisagapePage implements OnInit {
         }
     },
     error=>{
-      console.log(error);
+      // console.log(error);
+    });
+  }
+
+  async popUp(){
+    let alert = await this.alertCtrl.create({
+      header: 'Ao apagar o histórico os registros serão apagados permanentemente. Deseja realmente excluir?',
+      buttons: [
+        {
+          text: 'Cancelar',
+          //role cancel deixa ele como segunda opcao
+          role: 'cancel',
+          cssClass: 'secondary'
+        },
+        {
+          text: 'Continuar',
+          handler: ()=> {
+            this.delete();
+          }
+        }
+      ]
+    });
+    await alert.present();
+  }
+
+  delete(){
+    this.authService.deleteHistAgape().subscribe(data=>{
+      this.alertService.presentToast("Histórico apagado com sucesso!");
+      window.location.reload();
     });
   }
 }

@@ -36,9 +36,9 @@ export class EditordemPage implements OnInit {
     this.router.queryParams.subscribe(params => {
       this.id = params["id"];
     });
-    this.showordem();
+    this.showOrdem();
   }
-  showordem() {
+  showOrdem() {
     
     this.authService.getOrdem().subscribe(
       data=>{
@@ -64,7 +64,7 @@ export class EditordemPage implements OnInit {
         }
     },
     error=>{
-      console.log(error);
+      // console.log(error);
     });
   }
   
@@ -80,7 +80,7 @@ export class EditordemPage implements OnInit {
           //informação tem que estar ativa
           if(this.id == data[i].id)
           {
-            this.authService.updateordem(data[i].id, form.value.novo, 1, form.value.nivel).subscribe(
+            this.authService.updateOrdem(data[i].id, form.value.novo, 1, form.value.nivel).subscribe(
               data=>{
                 this.dismiss();
                 this.alertService.presentToast("Ordem editado com sucesso!");
@@ -91,7 +91,7 @@ export class EditordemPage implements OnInit {
         }
     },
     error=>{
-      console.log(error);
+      // console.log(error);
     });
   }
 

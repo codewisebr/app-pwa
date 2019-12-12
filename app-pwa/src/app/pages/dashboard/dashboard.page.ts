@@ -99,7 +99,7 @@ export class DashboardPage implements OnInit {
       },
       error => {
         //se nao possui o id no banco de dados, deixa habilitado para o usuario
-        console.log('erro na verificação');
+        //console.log('erro na verificação');
         this.disabled1=false;
         this.disabled2=false;
       }
@@ -119,7 +119,7 @@ export class DashboardPage implements OnInit {
         this.verifica();
     }
     , error=>{ 
-      console.log("error: " + error);
+      // console.log("error: " + error);
     });
   }
 
@@ -175,7 +175,7 @@ export class DashboardPage implements OnInit {
       this.authService.confirmaPresenca(this.id, this.opcao ,this.motivo,this.global.reuniao).subscribe(
         data => {},
         error => {
-          console.log(error);
+          // console.log(error);
         },
         () => {
           this.alertService.presentToast('Confirmação enviada!');
@@ -234,7 +234,7 @@ export class DashboardPage implements OnInit {
         }
     },
     error=>{
-      console.log(error);
+      // console.log(error);
     });
   }
 

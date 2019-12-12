@@ -69,7 +69,7 @@ export class CadastrausuarioPage implements OnInit {
         }
       }
       , error=>{ 
-        console.log("error: " + error);
+        // console.log("error: " + error);
       });
       this.authService.getAvental().subscribe(
         data=>{ 
@@ -78,7 +78,7 @@ export class CadastrausuarioPage implements OnInit {
           }
         }
         , error=>{ 
-          console.log("error: " + error);
+          // console.log("error: " + error);
         });
   }
   register(form:any){
@@ -114,7 +114,7 @@ export class CadastrausuarioPage implements OnInit {
               this.data_nasc = this.dataPipe.transform(form.value.data1, 'yyyy-MM-dd');
               //adiciona membro da familia 1
               this.authService.familia(this.id, form.value.grau1, this.data_nasc).subscribe(resp=>{
-              console.log('1 de 3 cadastrado');
+              // console.log('1 de 3 cadastrado');
               },
               error => {
               this.alertService.presentToast("Verifique os campos de cadastro de familiar!");
@@ -124,7 +124,7 @@ export class CadastrausuarioPage implements OnInit {
               this.data_nasc = this.dataPipe.transform(form.value.data2, 'yyyy-MM-dd');
               //adiciona membro da familia 2
               this.authService.familia(this.id, form.value.grau2, this.data_nasc).subscribe(resp=>{
-              console.log('2 de 3 cadastrado');
+              // console.log('2 de 3 cadastrado');
               },
               error => {
               this.alertService.presentToast("Verifique os campos de cadastro de familiar!");
@@ -134,7 +134,7 @@ export class CadastrausuarioPage implements OnInit {
               this.data_nasc = this.dataPipe.transform(form.value.data3, 'yyyy-MM-dd');
               //adiciona membro da familia 3
               this.authService.familia(this.id, form.value.grau3, this.data_nasc).subscribe(resp=>{
-              console.log('3 de 3 cadastrado');
+              // console.log('3 de 3 cadastrado');
               },
               error => {
               this.alertService.presentToast("Verifique os campos de cadastro de familiar!");

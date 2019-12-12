@@ -129,7 +129,7 @@ export class RegisterPage implements OnInit {
         }
       }
       , error=>{ 
-        console.log("error: " + error);
+        //console.log("error: " + error);
       });
   }
 
@@ -141,7 +141,7 @@ export class RegisterPage implements OnInit {
         }
       }
       , error=>{ 
-        console.log("error: " + error);
+        //console.log("error: " + error);
       });
   }
 }

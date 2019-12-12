@@ -47,13 +47,13 @@ export class AuthService {
       tap(access_token => {
         this.storage.set('token', access_token).then(
           (val) => {
-            console.log('Token armazenado');
+            // console.log('Token armazenado');
             this.auxtoken = val.accessToken;
             this.storage.set('access', this.auxtoken);
             this.global.access = val.accessToken;
             this.global.user_id = val.token.user_id;
           },
-          error => console.error('Erro ao armazenar o Token', error)
+          // error => console.error('Erro ao armazenar o Token', error)
         );
         this.token = access_token;
         this.isLoggedIn = true;

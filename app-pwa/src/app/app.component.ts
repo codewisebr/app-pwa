@@ -191,15 +191,17 @@ export class AppComponent{
 
         pushObject.on('registration').subscribe(
           res => {
-            console.log(` ${res.registrationId}`);
+            //console.log(` ${res.registrationId}`);
             pushObject.subscribe('all').then((res:any) => {
-              console.log("subscribed to topic: ", res);
+              //console.log("subscribed to topic: ", res);
           });
           }
         );
     
         pushObject.on('notification').subscribe(
-          res => console.log(`${res.message}`)
+          res => {
+            //console.log(`${res.message}`)
+          }
         );
       }
       else{

@@ -51,9 +51,8 @@ export class EditmuralPage implements OnInit{
     this.authService.updateMural(this.id, form.value.texto).subscribe(resul=>{
       this.alertService.presentToast("Mural editado com sucesso!");
       this.dismiss();
-    },
-    error=>{
-      // console.log(error);
+    },error=>{
+      this.alertService.presentToast('Preencha todos os campos!');
     });
   }
 

@@ -31,14 +31,13 @@ export class CadastrafinanceiroPage implements OnInit {
   }
 
   cadastrar(form:any){
-    this.valor = JSON.stringify(form.value.valor);
-    this.authService.financeiro(this.valor, form.value.mes).subscribe(data=>{
-      this.alertService.presentToast("Financeiro criado com sucesso!");          
-      this.dismiss();
-    },
-    error=>{
-      console.log(error);
-    }
-    );
+      this.valor = JSON.stringify(form.value.valor);
+      this.authService.financeiro(this.valor, form.value.mes).subscribe(data=>{
+        this.alertService.presentToast("Financeiro criado com sucesso!");          
+        this.dismiss();
+      }, error => {
+        this.alertService.presentToast('Preencha todos os campos!');
+      }
+      );
   }
 }

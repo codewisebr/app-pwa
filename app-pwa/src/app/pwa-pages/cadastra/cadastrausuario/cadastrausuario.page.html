@@ -90,36 +90,36 @@
             <div *ngIf="hideme">
                 <h2>Cadastrar Familiar</h2>
                 <ion-grid>
-                    <ion-select ngModel name="grau1" required placeholder="Grau de parentesco">
+                    <ion-select ngModel name="grau1" placeholder="Grau de parentesco">
                       <ion-select-option *ngFor="let graus of grau" value="{{graus}}">{{graus}}</ion-select-option>
                     </ion-select> 
                 </ion-grid>
                 <br>
                 <ion-grid>
-                  <ion-datetime ngModel name="data1" placeholder="Data de nascimento" display-format="DD/MM/YYYY" required></ion-datetime>
+                  <ion-datetime ngModel name="data1" placeholder="Data de nascimento" display-format="DD/MM/YYYY"></ion-datetime>
                 </ion-grid>
                 <ion-button (click)="plus()">Mais</ion-button>
                 <div *ngIf="more">
                   <ion-grid>
-                      <ion-select ngModel name="grau2" required placeholder="Grau de parentesco">
+                      <ion-select ngModel name="grau2" placeholder="Grau de parentesco">
                         <ion-select-option *ngFor="let graus of grau" value="{{graus}}">{{graus}}</ion-select-option>
                       </ion-select> 
                   </ion-grid>
                   <br>
                   <ion-grid>
-                    <ion-datetime ngModel name="data2" placeholder="Data de nascimento" display-format="DD/MM/YYYY" required></ion-datetime>
+                    <ion-datetime ngModel name="data2" placeholder="Data de nascimento" display-format="DD/MM/YYYY"></ion-datetime>
                   </ion-grid>
                   <ion-button (click)="plus2()">Mais</ion-button>
                 </div>
                 <div *ngIf="more2">
                     <ion-grid>
-                        <ion-select ngModel name="grau3" required placeholder="Grau de parentesco">
+                        <ion-select ngModel name="grau3" placeholder="Grau de parentesco">
                           <ion-select-option *ngFor="let graus of grau" value="{{graus}}">{{graus}}</ion-select-option>
                         </ion-select> 
                     </ion-grid>
                     <br>
                     <ion-grid>
-                      <ion-datetime ngModel name="data3" placeholder="Data de nascimento" display-format="DD/MM/YYYY" required></ion-datetime>
+                      <ion-datetime ngModel name="data3" placeholder="Data de nascimento" display-format="DD/MM/YYYY"></ion-datetime>
                     </ion-grid>
                   </div>
             </div>

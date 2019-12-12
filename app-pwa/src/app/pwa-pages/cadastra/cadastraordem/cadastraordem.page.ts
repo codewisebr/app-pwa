@@ -38,6 +38,8 @@ export class CadastraordemPage implements OnInit {
         resul=> {
           this.dismiss();
           this.alertService.presentToast("Ordem cadastrada com sucesso!");
+        }, error => {
+          this.alertService.presentToast('Preencha todos os campos!');
         }
       );
   }

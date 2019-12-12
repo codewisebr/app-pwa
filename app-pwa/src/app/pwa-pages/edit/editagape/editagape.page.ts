@@ -63,14 +63,13 @@ export class EditagapePage implements OnInit{
             resul=>{              
               this.dismiss();
               this.alertService.presentToast("Ágape editado com sucesso!");
+            }, error=>{
+              this.alertService.presentToast('Preencha todos os campos!');
             }
           );
           break;
         }
       }
-    },
-    error=>{
-      // console.log(error);
     });
   }
 }

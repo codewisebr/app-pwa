@@ -154,7 +154,7 @@ export class AdminPage implements OnInit {
       this.authService.confirmaPresenca(this.id, this.opcao ,this.motivo,this.global.reuniao).subscribe(
         data => {},
         error => {
-          console.log(error);
+          // console.log(error);
         },
         () => {
           this.alertService.presentToast('Confirmação enviada!');
@@ -181,7 +181,7 @@ export class AdminPage implements OnInit {
         this.verifica();
     }
     , error=>{ 
-      console.log("error: " + error);
+      // console.log("error: " + error);
     });
   }
 

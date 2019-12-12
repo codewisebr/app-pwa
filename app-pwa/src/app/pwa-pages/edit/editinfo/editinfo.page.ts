@@ -62,9 +62,6 @@ export class EditinfoPage implements OnInit {
             break;
           }
         }
-    },
-    error=>{
-      // console.log(error);
     });
   }
 
@@ -83,14 +80,13 @@ export class EditinfoPage implements OnInit {
             data=>{
               this.dismiss();
               this.alertService.presentToast("Informativo editado com sucesso!");
+            }, error=>{
+              this.alertService.presentToast('Preencha todos os campos!');
             }
           );
           break;
         }
       }
-    },
-    error=>{
-      // console.log(error);
     });
   }
 

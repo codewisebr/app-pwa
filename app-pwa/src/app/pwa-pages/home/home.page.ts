@@ -43,20 +43,23 @@ export class HomePage {
     });
     this.authService.reuniao().subscribe(data=>{ });
   }
-  login(form: NgForm) {
-    this.authService.login(form.value.email, form.value.password).subscribe(
-      data => {
-        this.authService.token = data['access_token'];
-        this.alertService.presentToast("Logado!");
-      },
-      error => {
-        // console.log(error);
-        this.alertService.presentToast('E-mail ou senha incorretos');
-      },
-      () => {
-        this.permissao();
-      }
-    );
+  login(form: any) {
+      this.authService.login(form.value.email, form.value.password).subscribe(
+        data => {
+          if(data == true){
+            this.authService.token = data['access_token'];
+            this.alertService.presentToast("Logado!");
+            this.permissao();
+          }
+          else{
+            this.alertService.presentToast('E-mail ou senha incorretos!');
+          }
+        },
+        error => {
+          // console.log(error);
+          this.alertService.presentToast('Preencha todos os campos!');
+        }
+      );
   }
   register()
   {

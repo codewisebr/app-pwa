@@ -84,15 +84,13 @@ export class EditordemPage implements OnInit {
               data=>{
                 this.dismiss();
                 this.alertService.presentToast("Ordem editado com sucesso!");
+              }, error=>{
+                this.alertService.presentToast('Preencha todos os campos!');
               }
             );
             break;
           }
         }
-    },
-    error=>{
-      // console.log(error);
     });
   }
-
 }

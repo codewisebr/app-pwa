@@ -28,13 +28,15 @@ export class CadastrainfoPage implements OnInit {
     this.navCtrl.navigateForward('/admininfo');
   }
   async cadastrar(form:any){
-    this.authService.user().subscribe(data=>{
-      this.authService.informativo(form.value.info,data.id,form.value.nivel).subscribe(
-        resul=> {
-          this.dismiss();
-          this.alertService.presentToast("Informativo cadastrada com sucesso!");
-        }
-      );
-    });
-  }
+      this.authService.user().subscribe(data=>{
+        this.authService.informativo(form.value.info,data.id,form.value.nivel).subscribe(
+          resul=> {
+            this.dismiss();
+            this.alertService.presentToast("Informativo cadastrada com sucesso!");
+          }, error => {
+            this.alertService.presentToast('Preencha todos os campos!');
+          }
+        );
+      });
+    }
 }

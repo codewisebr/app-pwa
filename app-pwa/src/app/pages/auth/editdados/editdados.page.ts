@@ -84,8 +84,6 @@ export class EditdadosPage implements OnInit {
       this.authService.getIdCargos(data.cargo_id).subscribe(resul =>{
         this.cargo = resul;
       });
-    }, error=>{ 
-      console.log("error: " + error);
     });
 
     //deixa o value dos cargos como string p/ nao dar conflito
@@ -94,41 +92,37 @@ export class EditdadosPage implements OnInit {
         for(let i=0; i<data.length; i++){
           this.cargos[i]=data[i].cargo;
         }
-      }
-      , error=>{ 
-        console.log("error: " + error);
       });
   }
 
-  editar(form: NgForm)
+  editar(form: any)
   {
-    //volta de nome para id
-    this.authService.getCargos().subscribe(data=>{
-      for(let i=0; i<data.length; i++){
-        if(data[i].cargo == form.value.cargo)
-        {
-          this.global.cargo = data[i].id;
-          this.storage.set('cargo', data[i].id);
+      //volta de nome para id
+      this.authService.getCargos().subscribe(data=>{
+        for(let i=0; i<data.length; i++){
+          if(data[i].cargo == form.value.cargo)
+          {
+            this.global.cargo = data[i].id;
+            this.storage.set('cargo', data[i].id);
+          }
         }
-      }
-    });
+      });
 
-    //salva as alterações
-    this.authService.updateUser(
-      this.id,form.value.fName, form.value.lName, form.value.email, 
-      form.value.endereco, form.value.cidade, form.value.estado, 
-      form.value.data_nasc, form.value.telefone, form.value.nivel, 
-      this.global.cargo, form.value.profissao).subscribe(
-      resp => {
-      },
-      error => {
-        this.alertService.presentToast('Preencha corretamente o formulário!');
-        console.log(error)
-      },
-      () => {
-        this.alertService.presentToast('Usuário atualizado!');
-        this.navCtrl.navigateRoot('/account');
-      }
-    );
+      //salva as alterações
+      this.authService.updateUser(
+        this.id,form.value.fName, form.value.lName, form.value.email, 
+        form.value.endereco, form.value.cidade, form.value.estado, 
+        form.value.data_nasc, form.value.telefone, form.value.nivel, 
+        this.global.cargo, form.value.profissao).subscribe(
+        resp => {
+          if(resp == true){
+            this.alertService.presentToast('Usuário atualizado!');
+            this.navCtrl.navigateRoot('/account');
+          }
+        },
+        error => {
+          this.alertService.presentToast('Verifique se você preencheu corretamente os dados!');
+        }
+      );    
   }
 }

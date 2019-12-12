@@ -1,3 +1,4 @@
+import { HomePage } from './pwa-pages/home/home.page';
 import { AlertService } from './services/alert.service';
 import { AuthService } from './services/auth.service';
 import { Component, OnInit } from '@angular/core';
@@ -14,6 +15,7 @@ import { timer } from 'rxjs';
   styleUrls: ['app.component.scss']
 })
 export class AppComponent{
+  rootPage = HomePage;
   public appPages = [
     {
       title: 'Home',

@@ -29,6 +29,7 @@ export class AdminordemPage implements OnInit {
     
   }
   async ionViewDidEnter() {
+    await this.routingService.preloadRoute('admin');
     await this.routingService.preloadRoute('editordem');
     await this.routingService.preloadRoute('cadastraordem');
     await this.routingService.preloadRoute('hisordem');

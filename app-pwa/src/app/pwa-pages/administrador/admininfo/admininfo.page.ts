@@ -30,6 +30,7 @@ export class AdmininfoPage implements OnInit {
     
   }
   async ionViewDidEnter() {
+    await this.routingService.preloadRoute('admin');
     await this.routingService.preloadRoute('editinfo');
     await this.routingService.preloadRoute('cadastrainfo');
     await this.routingService.preloadRoute('hisinfo');

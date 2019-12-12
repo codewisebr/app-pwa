@@ -32,6 +32,7 @@ export class AdminpresencaPage implements OnInit {
   ngOnInit() {
   }
   async ionViewDidEnter() {
+    await this.routingService.preloadRoute('admin');
     await this.routingService.preloadRoute('editpresenca');
     await this.routingService.preloadRoute('hispresenca');
   }

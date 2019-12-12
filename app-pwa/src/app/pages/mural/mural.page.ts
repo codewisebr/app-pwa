@@ -33,6 +33,7 @@ export class MuralPage implements OnInit {
   ngOnInit() {
   }
   async ionViewDidEnter() {
+    await this.routingService.preloadRoute('admin');
     await this.routingService.preloadRoute('cadastramural');
   }
   ionViewWillEnter(){

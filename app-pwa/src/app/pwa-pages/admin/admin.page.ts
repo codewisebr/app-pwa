@@ -28,6 +28,9 @@ export class AdminPage implements OnInit {
   public disabled2;//desabilitado
   public disabled3;//desabilitado
   public opcao: Number;
+  public ordem: any[] = [];
+  public info:any[] = [];
+  public agape: any[] = [];
   constructor(
     private menu: MenuController,
     private platform: Platform,
@@ -49,6 +52,7 @@ export class AdminPage implements OnInit {
     this.id = this.global.user_id;
     this.showLista();
     this.showData();
+    this.showDados();
     this.verifica();
     this.authService.reuniao().subscribe(data=>{ });
   }
@@ -60,7 +64,6 @@ export class AdminPage implements OnInit {
     await this.routingService.preloadRoute('adminordem');
     await this.routingService.preloadRoute('adminpresenca');
   }
-  //#region Show
 
   verifica(){ 
     //verifica se o usuario ja respondeu
@@ -193,5 +196,31 @@ export class AdminPage implements OnInit {
       this.ausente = ausente;
     })
   }
-  //#endregion
+  
+  showDados(){
+    this.authService.getNivelOrdem(3, 0)
+    .subscribe(
+    data =>{
+      for(let i=0; i<data.length;i++)
+      {
+          this.ordem[i] = data[i].ordem;
+      }
+    });
+    this.authService.getNivelInfo(3, 0)
+    .subscribe(
+    data =>{
+      for(let i=0; i<data.length;i++)
+      {
+        this.info[i] = data[i].info;
+      }
+    });
+    this.authService.getAgape(0)
+    .subscribe(
+      data =>{
+        for(let i=0; i<data.length; i++){
+          this.agape[i]=data[i].agape;
+        }
+      });
+  }
+  
 }

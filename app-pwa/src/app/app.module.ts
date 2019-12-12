@@ -1,3 +1,4 @@
+import { HomePage } from './pwa-pages/home/home.page';
 import { SocialSharing } from '@ionic-native/social-sharing/ngx';
 import { NgModule, ɵLocaleDataIndex } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
@@ -18,7 +19,6 @@ import { Push } from '@ionic-native/push/ngx';
     AppComponent
   ],
   entryComponents: [
-
   ],
   imports: [
     BrowserModule,

@@ -37,6 +37,7 @@ export class AccountPage implements OnInit {
     this.showUser();
   }
   async ionViewDidEnter() {
+    await this.routingService.preloadRoute('admin');
     await this.routingService.preloadRoute('editsenha');
     await this.routingService.preloadRoute('editdados');
   }

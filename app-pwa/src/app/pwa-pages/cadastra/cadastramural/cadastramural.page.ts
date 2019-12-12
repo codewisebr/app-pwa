@@ -35,11 +35,14 @@ export class CadastramuralPage implements OnInit{
     this.navCtrl.navigateForward('/mural');
   }
   cadastrar(form:any){
-      this.authService.mural(this.id, form.value.texto).subscribe(resul=>{
+ 
+      this.authService.mural(this.id, form.value.texto).subscribe(
+        resul=>{
         this.dismiss();
           this.alertService.presentToast("Mural criado com sucesso!");
+        }, error => {
+          this.alertService.presentToast('Preencha todos os campos!');
         }
       );
   }
-
 }

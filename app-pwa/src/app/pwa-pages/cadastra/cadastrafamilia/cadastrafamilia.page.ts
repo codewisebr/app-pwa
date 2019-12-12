@@ -43,12 +43,15 @@ export class CadastrafamiliaPage implements OnInit {
     this.navCtrl.navigateForward('/adminusuario');
   }
   cadastrar(form:any){
-    this.data = this.dataPipe.transform(form.value.data, 'yyyy-MM-dd');
-    this.authService.familia(this.id, form.value.grau, this.data).subscribe(
-      resul=> {
-        this.dismiss();
-        this.alertService.presentToast("Familiar cadastrado com sucesso!"); 
-      }
-    );
+
+      this.data = this.dataPipe.transform(form.value.data, 'yyyy-MM-dd');
+      this.authService.familia(this.id, form.value.grau, this.data).subscribe(
+        resul=> {
+          this.dismiss();
+          this.alertService.presentToast("Familiar cadastrado com sucesso!"); 
+        }, error => {
+          this.alertService.presentToast('Preencha todos os campos!');
+        }
+      );
   }
 }

@@ -78,9 +78,8 @@ export class EditpresencaPage implements OnInit {
             data=>{
               this.dismiss();
               this.alertService.presentToast("Presença editada com sucesso!");
-            },
-            error=>{
-              // console.log(error);
+            }, error=>{
+              this.alertService.presentToast('Preencha todos os campos!');
             }
           );
           break;

@@ -82,28 +82,28 @@ export class CadastrausuarioPage implements OnInit {
         });
   }
   register(form:any){
-    this.auxtel=form.value.telefone.replace(/\D+/g, '');
-    this.auxdata=form.value.data_nasc;
-    this.daux = this.auxdata.split('T')[0];
+      this.auxtel=form.value.telefone.replace(/\D+/g, '');
+      this.auxdata=form.value.data_nasc;
+      this.daux = this.auxdata.split('T')[0];
 
-    this.authService.getAvental().subscribe(data=>{
-      for(let i=0; i<data.length; i++){
-        if(data[i].avental == form.value.avental)
-        {
-          this.storage.set('avental', data[i].id);
+      this.authService.getAvental().subscribe(data=>{
+        for(let i=0; i<data.length; i++){
+          if(data[i].avental == form.value.avental)
+          {
+            this.storage.set('avental', data[i].id);
+          }
         }
-      }
-    });
-    this.authService.getCargos().subscribe(data=>{
-      for(let i=0; i<data.length; i++){
-        if(data[i].cargo == form.value.cargo)
-        {
-          this.storage.set('cargo', data[i].id);
-        }
-      }
-    });
+      });
 
-    
+      this.authService.getCargos().subscribe(data=>{
+        for(let i=0; i<data.length; i++){
+          if(data[i].cargo == form.value.cargo)
+          {
+            this.storage.set('cargo', data[i].id);
+          }
+        }
+      });
+
       //registra o usuário
       this.authService.register(form.value.fName, form.value.lName, form.value.email, "123456", 
         this.daux, this.global.cargo, this.global.avental, this.auxtel, form.value.endereco, 

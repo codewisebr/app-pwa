@@ -70,9 +70,7 @@ class AuthController extends Controller
         ///*
         $credentials = request(['email', 'password']);
         if(!Auth::attempt($credentials))
-            return response()->json([
-            'message' => 'Login não autorizado! Verifique se a senha ou o email estão corretos'
-        ], 401);
+            return response()->json(false);
         $user= Auth::user();
         $tokenResult = $user->createToken('Token de acesso pessoal');
         return response()->json($tokenResult);
@@ -88,6 +86,7 @@ class AuthController extends Controller
                 $tokenResult->token->expires_at
             )->toDateTimeString()
         ]);
+        return response()->json(true);
     }
     
     public function logout(Request $request){
@@ -109,9 +108,9 @@ class AuthController extends Controller
         ]);
         $password = User::where('id', $request->id_user)->value('password');
         if(Hash::check($request->password, $password, []))
-            return response()->json('Senha correta!');
+            return response()->json(true);
         else
-            return response()->json('Senha incorreta!');
+            return response()->json(false);
     }
 
     
@@ -151,9 +150,9 @@ class AuthController extends Controller
             'cargo_id'=>$request->cargo, 'profissao'=>$request->profissao
         ]);
         if($resposta == null)
-            return response()->json(['message' => 'Erro!'], 201);
+            return response()->json(false);
         else
-            return response()->json(['message' => 'Usuário Atualizado!'], 201);
+            return response()->json(true);
 
     }
 

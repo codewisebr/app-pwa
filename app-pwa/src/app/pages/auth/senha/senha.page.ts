@@ -18,8 +18,11 @@ export class SenhaPage implements OnInit {
   }
   
   senha(form:any){
-   this.authService.forgotPassword(form.value.email).subscribe(data=>{
-    this.alertService.presentToast(data);
-   });
+      this.authService.forgotPassword(form.value.email).subscribe(
+        data=>{
+        this.alertService.presentToast(data);
+      }, error =>{
+        this.alertService.presentToast('Preencha o campo antes de enviar!');
+      });
   }
 }

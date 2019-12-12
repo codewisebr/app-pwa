@@ -36,26 +36,29 @@ export class EditsenhaPage implements OnInit {
     this.navCtrl.navigateForward('/account');
   }
 
-  editar(form: NgForm)
+  editar(form: any)
   {
       //verifica a senha atraves da senha
       this.authService.checkPassword(this.id, form.value.password1).subscribe(
         resp => {
+          if(resp == false){
+            this.alertService.presentToast('Senha Incorreta!');
+          }
+          else if(resp == true){
+            //atualiza a nova senha
+            this.authService.updatePassword(this.id, form.value.password2).subscribe(
+              resp => {
+                this.alertService.presentToast('Senha atualizada!');
+                this.navCtrl.navigateRoot('/account');
+              },
+              error => {
+                this.alertService.presentToast('Erro ao tentar atualizar senha, tente mais tarde.');
+              }
+            );
+          }
         },
         error => {
-          this.alertService.presentToast('Senha Incorreta!');
-        }
-      );
-      //atualiza a nova senha
-      this.authService.updatePassword(this.id, form.value.password2).subscribe(
-        resp => {
-        },
-        error => {
-          this.alertService.presentToast('Senha Incorreta!');
-        },
-        () => {
-          this.alertService.presentToast('Senha atualizada!');
-          this.navCtrl.navigateRoot('/account');
+          this.alertService.presentToast('Preencha todos os campos!');
         }
       );
   }

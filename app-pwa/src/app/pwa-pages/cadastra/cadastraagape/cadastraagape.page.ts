@@ -40,6 +40,8 @@ export class CadastraagapePage implements OnInit{
         resul=> {
           this.alertService.presentToast("Ágape criada com sucesso!");          
           this.dismiss();
+        }, error => {
+          this.alertService.presentToast('Preencha todos os campos!');
         }
       );
   }

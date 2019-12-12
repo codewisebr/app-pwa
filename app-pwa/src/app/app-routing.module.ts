@@ -56,7 +56,8 @@ const routes: Routes = [
   { path: 'editinfo', loadChildren: './pwa-pages/edit/editinfo/editinfo.module#EditinfoPageModule', data: {preload: true}, canActivate: [AuthGuard] },
   { path: 'editagape', loadChildren: './pwa-pages/edit/editagape/editagape.module#EditagapePageModule', data: {preload: true}, canActivate: [AuthGuard] },
   { path: 'editpresenca', loadChildren: './pwa-pages/edit/editpresenca/editpresenca.module#EditpresencaPageModule', data: {preload: true}, canActivate: [AuthGuard] },
-  { path: 'editmural', loadChildren: './pwa-pages/edit/editmural/editmural.module#EditmuralPageModule', data: {preload: true}, canActivate: [AuthGuard] },  { path: 'push', loadChildren: './pwa-pages/push/push.module#PushPageModule' },
+  { path: 'editmural', loadChildren: './pwa-pages/edit/editmural/editmural.module#EditmuralPageModule', data: {preload: true}, canActivate: [AuthGuard] },
+  { path: 'push', loadChildren: './pwa-pages/push/push.module#PushPageModule' },
 
   
 ];

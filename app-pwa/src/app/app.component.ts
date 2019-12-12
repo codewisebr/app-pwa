@@ -7,6 +7,7 @@ import { SplashScreen } from '@ionic-native/splash-screen/ngx';
 import { StatusBar } from '@ionic-native/status-bar/ngx';
 import { Push, PushOptions, PushObject } from '@ionic-native/push/ngx';
 import {firebase} from '@firebase/app';
+import { timer } from 'rxjs';
 @Component({
   selector: 'app-root',
   templateUrl: 'app.component.html',
@@ -117,6 +118,10 @@ export class AppComponent{
       icon: 'contact'
     }
   ];
+
+  public disabled: boolean;
+  public showSplash = true;
+
   constructor(
     private platform: Platform,
     private splashScreen: SplashScreen,
@@ -135,7 +140,7 @@ export class AppComponent{
   async ngOnInit() {
     firebase.initializeApp(environment.firebaseConfig);
 }
-  public disabled: boolean;
+  
   permissao(){
     this.platform.ready().then(() => {
       if(this.platform.is('android')||this.platform.is('ios'))
@@ -157,6 +162,7 @@ export class AppComponent{
     this.platform.ready().then(() => {
       this.statusBar.styleDefault();
       this.splashScreen.hide();
+      timer(300).subscribe(() => this.showSplash = false);
       this.initializeFirebase();
     });
     this.authService.getToken().then(() => {

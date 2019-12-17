@@ -171,6 +171,13 @@ export class AuthService {
         this.isLoggedIn=false;  
       }
     );
+    
+  }
+
+  familia(id_user:Number, grau:String, data:Date){
+    return this.http.post(this.env.API_URL + 'auth/familia', {
+      id_user:id_user, grau:grau, data:data
+    });
   }
   //#endregion
   
@@ -347,11 +354,10 @@ export class AuthService {
     return this.http.get<any>( this.env.API_URL+'reuniao/getallreuniao');
   }
 
-  familia(id_user:Number, grau:String, data:Date){
-    return this.http.post(this.env.API_URL + 'auth/familia', {
-      id_user:id_user, grau:grau, data:data
-    });
+  notificacao(){
+    return this.http.get<any>( this.env.API_URL+'reuniao/notificacao');
   }
+  
   //#endregion
 
   getCargos()

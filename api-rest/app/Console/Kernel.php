@@ -15,8 +15,7 @@ class Kernel extends ConsoleKernel
      * @var array
      */
     protected $commands = [
-        //Commands\Inspire::class,
-        Commands\CriaReuniao::class,
+        Commands\SendEmail::class,
         
     ];
 
@@ -28,15 +27,7 @@ class Kernel extends ConsoleKernel
      */
     protected function schedule(Schedule $schedule)
     {
-        //$schedule->command('inspire')->hourly();
-
-
-        //para testar se esta funcionando php artisan CriaReuniao:cron
-        $schedule->command('criareuniao:cron')
-        ->timezone('America/Sao_Paulo')
-        ->tuesdays()
-        ->at('06:00');
-        //tarefa para fazer toda as terças feiras de manha = criar nova reuniao e excluir a antiga
+        $schedule->command('ln:daily')->daily()->at('15:00');
     }
 
     /**

@@ -6,9 +6,9 @@ import {environment} from '../environments/environment';
 import { Platform, MenuController, NavController, IonSplitPane, AlertController } from '@ionic/angular';
 import { SplashScreen } from '@ionic-native/splash-screen/ngx';
 import { StatusBar } from '@ionic-native/status-bar/ngx';
-import { Push, PushOptions, PushObject } from '@ionic-native/push/ngx';
 import {firebase} from '@firebase/app';
 import { timer } from 'rxjs';
+import { FCM } from '@ionic-native/fcm/ngx';
 @Component({
   selector: 'app-root',
   templateUrl: 'app.component.html',
@@ -124,6 +124,9 @@ export class AppComponent{
   public disabled: boolean;
   public showSplash = true;
 
+  public title:any;
+  public message: any;
+  public day = new Date().getDay();
   constructor(
     private platform: Platform,
     private splashScreen: SplashScreen,
@@ -133,7 +136,7 @@ export class AppComponent{
     private authService: AuthService,
     private alertService: AlertService,
     private alertCtrl : AlertController,
-    private push: Push,
+    private fcm: FCM
   ){
     this.initializeApp();
   }
@@ -141,6 +144,7 @@ export class AppComponent{
   }
   async ngOnInit() {
     firebase.initializeApp(environment.firebaseConfig);
+    this.authService.reuniao();
 }
   
   permissao(){
@@ -167,6 +171,7 @@ export class AppComponent{
       timer(300).subscribe(() => this.showSplash = false);
       this.initializeFirebase();
     });
+
     this.authService.getToken().then(() => {
       if(this.authService.isLoggedIn) {
         this.permissao();
@@ -178,36 +183,18 @@ export class AppComponent{
     });
   }
   private initializeFirebase() {
-    const options: PushOptions = {
-      android: {
-        senderID: '378697952415',
-        topics: ['all'],
-      },
-      browser: {
-        pushServiceURL: 'http://push.api.phonegap.com/v1/push'
+    this.fcm.getToken().then(token => {
+      console.log(token);
+    });
+    this.fcm.onTokenRefresh().subscribe(newToken =>{
+      console.log(newToken);
+    });
+    this.fcm.subscribeToTopic('all');
+    this.fcm.onNotification().subscribe(data => {
+      if (!data.wasTapped) {
+        this.alertService.presentToast(data.body);
       }
-    }
-    this.platform.ready().then(() => {
-      if(this.platform.is('android')){
-        const pushObject: PushObject = this.push.init(options);
-
-        pushObject.on('registration').subscribe(
-          res => {
-            //console.log(` ${res.registrationId}`);
-            pushObject.subscribe('all').then((res:any) => {
-              //console.log("subscribed to topic: ", res);
-          });
-          }
-        );
-    
-        pushObject.on('notification').subscribe(
-          res => {
-            //console.log(`${res.message}`)
-          }
-        );
-      }
-      else{
-      }
+      
     });
   }
 

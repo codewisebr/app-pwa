@@ -44,6 +44,11 @@
           <ion-col>
             <div class="boxes">
             <h3>Informativos</h3>
+            <ion-list lines="none">
+              <ion-item *ngFor="let infos of info">
+                <ion-label>{{infos}}</ion-label>
+              </ion-item>
+            </ion-list>
             </div>
           </ion-col>
         </ion-row>
@@ -51,6 +56,11 @@
           <ion-col>
           <div class="boxes">
             <h3>Ordens</h3>
+            <ion-list lines="none">
+              <ion-item *ngFor="let ordens of ordem">
+                <ion-label>{{ordens}}</ion-label>
+              </ion-item>
+            </ion-list>
           </div>
           </ion-col>
         </ion-row>
@@ -58,6 +68,11 @@
           <ion-col>
           <div class="boxes">
             <h3>Ágapes</h3>
+            <ion-list lines="none">
+              <ion-item *ngFor="let agapes of agape">
+                <ion-label>{{agapes}}</ion-label>
+              </ion-item>
+            </ion-list>
           </div>
           </ion-col>
         </ion-row>

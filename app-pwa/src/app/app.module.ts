@@ -1,3 +1,4 @@
+import { HomePage } from './pwa-pages/home/home.page';
 import { SocialSharing } from '@ionic-native/social-sharing/ngx';
 import { NgModule, ɵLocaleDataIndex } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
@@ -12,13 +13,12 @@ import { environment } from '../environments/environment';
 import {HttpClient, HttpClientModule} from '@angular/common/http';
 import { IonicStorageModule } from '@ionic/storage';
 import {DatePipe, registerLocaleData} from '@angular/common';
-import { Push } from '@ionic-native/push/ngx';
+import { FCM } from '@ionic-native/fcm/ngx';
 @NgModule({
   declarations: [
     AppComponent
   ],
   entryComponents: [
-
   ],
   imports: [
     BrowserModule,
@@ -36,7 +36,7 @@ import { Push } from '@ionic-native/push/ngx';
     SplashScreen,
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
     DatePipe,
-    Push,
+    FCM,
     SocialSharing,
   ],
   bootstrap: [AppComponent]

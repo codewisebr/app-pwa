@@ -8,7 +8,22 @@
          height: 295px;
       }
       .boxes{
-         height: 100px;
+         height: 220px;
+      }
+      .minbox1{
+         margin-top: 0.1ch;
+         margin-bottom: 5px;
+         height: 170px;
+      }
+      .minbox2{
+         border-radius: 4px;
+         height: 55px;
+         margin-bottom:5px;
+      }
+      .minbox3{
+         margin-bottom: 0px;
+         margin-top: 7px;
+         height: 55px;
       }
       .img-box{
          display: none;
@@ -27,6 +42,24 @@
          height: 295px;
       }
       .boxes{
+         height: 220px;
+      }
+      .minbox1{
+         margin-top: 0.1ch;
+         margin-bottom: 5px;
+         padding-top:20px;
+         height: 188px;
+      }
+      .minbox2{
+         margin-right: 2.5px;
+         border-radius: 4px;
+         padding-top: 20px;
+         height:  100px;
+      }
+      .minbox3{
+         margin-bottom: 0px;
+         margin-left: 2.5px;
+         padding-top: 20px;
          height: 100px;
       }
       .img-box{
@@ -48,7 +81,7 @@
       .boxes{
         padding-bottom: 5px;
         border-radius: 4px;
-        height: 130px;
+        height: 220px;
      }
       .minbox1{
          margin-top: 0.1ch;
@@ -82,29 +115,28 @@
          padding-bottom: 5px;
          padding-top: 50px;
          border-radius: 4px;
-         height: 250px;
+         height: 220px;
       }
       .boxes{
         padding-bottom: 5px;
         border-radius: 4px;
-        height: 150px;
+        height: 220px;
      }
       .minbox1{
-         margin-top: 0.1ch;
+         margin-top: 0px;
          margin-bottom: 5px;
          height: 150px;
       }
       .minbox2{
          margin-right: 2.5px;
          border-radius: 4px;
-         padding-top: 15px;
-         height: 95px;
+         padding-bottom: 10px;
+         height: 65px;
       }
       .minbox3{
-         margin-bottom: 0px;
          margin-left: 2.5px;
-         padding-top: 15px;
-         height: 95px;
+         padding-bottom: 5px;
+         height: 65px;
       }
       .img{
          display: block;
@@ -123,29 +155,23 @@
          padding-bottom: 5px;
          padding-top: 50px;
          border-radius: 4px;
-         height: 250px;
+         height: 220px;
       }
       .boxes{
         padding-bottom: 5px;
         border-radius: 4px;
-        height: 165px;
+        height: 220px;
      }
-      .minbox1{
-         margin-top: 0.1ch;
-         margin-bottom: 5px;
-         height: 150px;
-      }
       .minbox2{
          margin-right: 2.5px;
          border-radius: 4px;
-         padding-top: 15px;
-         height: 95px;
+         padding-bottom: 10px;
+         height: 65px;
       }
       .minbox3{
-         margin-bottom: 0px;
          margin-left: 2.5px;
-         padding-top: 15px;
-         height: 95px;
+         padding-bottom: 5px;
+         height: 65px;
       }
       .img{
          display: block;

@@ -69,6 +69,7 @@ Route::prefix('reuniao')->group(function () {
    Route::get('reuniao', 'ReuniaoController@reuniao');
    Route::get('getreuniao', 'ReuniaoController@getreuniao');
    Route::get('getallreuniao', 'ReuniaoController@getallreuniao');
+   Route::get('notificacao', 'ReuniaoController@notificacao');
 });
 
 Route::prefix('email')->group(function () {

@@ -23,6 +23,7 @@ export class AdminusuarioPage implements OnInit {
   ngOnInit() {
   }
   async ionViewDidEnter() {
+    await this.routingService.preloadRoute('admin');
     await this.routingService.preloadRoute('cadastrafamilia');
     await this.routingService.preloadRoute('cadastrausuario');
   }

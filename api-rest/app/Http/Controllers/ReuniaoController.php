@@ -32,7 +32,6 @@ class ReuniaoController extends Controller
             $antiga= date('Y-m-d', $aux);
             Reuniao::where('data',$antiga)->update(['ativo'=> 0]);
         }
-        
         //verifica se ja tem uma reuniao nesse dia
         $verifica = Reuniao::where('data', $resul)->first();
         //se nao tiver
@@ -59,7 +58,6 @@ class ReuniaoController extends Controller
         $atual = date('w');
         switch($atual){
             case 1: //segunda
-                $this->notificacao();
                 return $this->createreuniao(0);
                 break;
             case 2:
@@ -72,20 +70,17 @@ class ReuniaoController extends Controller
                 return $this->createreuniao(4);
                 break;
             case 5:
-                $this->notificacao();
                 return $this->createreuniao(3);
                 break;
             case 6:
                 return $this->createreuniao(2);
                 break;
             case 0: //domingo
-                $this->notificacao();
                 return $this->createreuniao(1);
                 break;
         }
         
     }
-
     public function notificacao(){
         $info = User::select('email')->where('cargo_id','<',12)->get();
         for($i=0; $i<count($info); $i++)
@@ -93,6 +88,8 @@ class ReuniaoController extends Controller
             Mail::to($info[$i])->send(new Confirmation()); 
             Mail::to($info[$i])->send(new Register());
         }
+
+        return response()->json('emails enviados');
     }
 
     public function getreuniao(){

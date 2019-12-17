@@ -26,6 +26,7 @@ export class ContatosPage implements OnInit {
   ngOnInit() {
   }
   async ionViewDidEnter() {
+    await this.routingService.preloadRoute('admin');
     await this.routingService.preloadRoute('cadastrafamilia');
   }
   ionViewWillEnter()

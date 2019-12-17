@@ -198,7 +198,7 @@ export class AdminPage implements OnInit {
   }
   
   showDados(){
-    this.authService.getNivelOrdem(3, 0)
+    this.authService.getNivelOrdem(3, 1)
     .subscribe(
     data =>{
       for(let i=0; i<data.length;i++)
@@ -206,7 +206,7 @@ export class AdminPage implements OnInit {
           this.ordem[i] = data[i].ordem;
       }
     });
-    this.authService.getNivelInfo(3, 0)
+    this.authService.getNivelInfo(3, 1)
     .subscribe(
     data =>{
       for(let i=0; i<data.length;i++)
@@ -214,7 +214,7 @@ export class AdminPage implements OnInit {
         this.info[i] = data[i].info;
       }
     });
-    this.authService.getAgape(0)
+    this.authService.getAgape(1)
     .subscribe(
       data =>{
         for(let i=0; i<data.length; i++){

@@ -15,14 +15,14 @@ export class CadastrareuniaoPage implements OnInit {
   constructor
   (
     private authService: AuthService,
-    private alertService: AlertService,\
+    private alertService: AlertService,
+    private navCtrl: NavController,
     private routingService: AppRoutingPreloaderService,
   ) 
   { }
 
   ngOnInit() {
   }
-
   async ionViewDidEnter() {
     await this.routingService.preloadRoute('adminpresenca');
   }

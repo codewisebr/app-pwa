@@ -53,10 +53,9 @@ export class DashboardPage implements OnInit {
   ionViewWillEnter()
   {
     this.id = this.global.user_id;
-    this.authService.user().subscribe(data=>{
-      this.showOrdem(data.nivel);
-      this.showInfo(data.nivel);
-    });
+    
+    this.showOrdem();
+    this.showInfo();
     this.showFinanceiro();
     this.verifica();
     this.showData();
@@ -189,10 +188,10 @@ export class DashboardPage implements OnInit {
     this.disabled2 = !this.disabled2;
   }
 
-  async showOrdem(nivel:any)
+  async showOrdem()
   {
-      //pega o nivel do usuario
-      this.authService.getNivelOrdem(nivel, 1)
+      //pega as info de acordo com o nivel do usuario
+      this.authService.getNivelOrdem(this.global.avental, 1)
       .subscribe(
       data =>{
         for(let i=0; i<data.length;i++)
@@ -202,9 +201,9 @@ export class DashboardPage implements OnInit {
       });
   }
   
-  async showInfo(nivel:any)
+  async showInfo()
   {
-    this.authService.getNivelInfo(nivel, 1)
+    this.authService.getNivelInfo(this.global.avental, 1)
       .subscribe(
       data =>{
         for(let i=0; i<data.length;i++)

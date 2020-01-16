@@ -44,7 +44,6 @@ export class RegisterPage implements OnInit {
   }
   ionViewWillEnter(){
     this.getCargos();
-    this.getAvental();
   }
   loginModal() {
     this.navCtrl.navigateRoot('/home');
@@ -69,16 +68,6 @@ export class RegisterPage implements OnInit {
       this.auxtel=form.value.telefone.replace(/\D+/g, '');
       this.auxdata=form.value.data_nasc;
       this.daux = this.auxdata.split('T')[0];
-      //pega o id do avental
-      this.authService.getAvental().subscribe(data=>{
-        for(let i=0; i<data.length; i++){
-          if(data[i].avental == form.value.avental)
-          {
-            this.storage.set('avental', data[i].id);
-            break;
-          }
-        }
-      });
       //pega o id do cargo
       this.authService.getCargos().subscribe(data=>{
         for(let i=0; i<data.length; i++){
@@ -96,13 +85,16 @@ export class RegisterPage implements OnInit {
       }
       else{
         this.authService.register(form.value.fName, form.value.lName, form.value.email, form.value.password, 
-          this.daux, this.global.cargo, this.global.avental, this.auxtel, form.value.endereco, 
-          form.value.cidade, form.value.estado, form.value.nivel, form.value.profissao).subscribe(
+          this.daux, this.global.cargo, form.value.nivel, this.auxtel, form.value.endereco, 
+          form.value.cidade, form.value.estado, form.value.profissao).subscribe(
           data => {
+            //armazena o avental escolhido
+            this.storage.set('avental', form.value.nivel);
             this.authService.login(form.value.email, form.value.password).subscribe(
               data => {
               },
               error => {
+                console.log(error);
                 this.alertService.presentToast("Verifique se você preencheu os campos corretamente");
               },
               () => {
@@ -111,7 +103,6 @@ export class RegisterPage implements OnInit {
             );          
           },
           error => {
-            //console.log(error);
             this.alertService.presentToast("Preencha todos os campos!");
           }
         );
@@ -125,18 +116,6 @@ export class RegisterPage implements OnInit {
       data=>{ 
         for(let i=0; i<data.length; i++){
           this.cargos[i]=data[i].cargo;
-        }
-      }
-      , error=>{ 
-        //console.log("error: " + error);
-      });
-  }
-
-  getAvental(){
-    this.authService.getAvental().subscribe(
-      data=>{ 
-        for(let i=0; i<data.length; i++){
-          this.avental[i]=data[i].avental;
         }
       }
       , error=>{ 

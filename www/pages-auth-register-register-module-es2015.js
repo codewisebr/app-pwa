@@ -7,7 +7,7 @@
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<ion-header>\n  <ion-toolbar>\n      <ion-buttons slot=\"start\">\n          <ion-back-button></ion-back-button>\n      </ion-buttons>\n  </ion-toolbar>\n</ion-header>\n<ion-content padding>\n  <ion-grid>\n    <div class=\"box\">\n      <h1>Registro</h1>\n      <br>\n      <form #form=\"ngForm\" (ngSubmit)=\"register(form)\" method=\"POST\">\n        <ion-grid>\n            <ion-input ngModel name=\"fName\" placeholder=\"Nome\" type=\"text\" pattern=\"[A-Za-z\\s]+\" maxlength=\"50\" required></ion-input>\n        </ion-grid>\n        <br>\n        <ion-grid>\n          <ion-input ngModel name=\"lName\" placeholder=\"Sobrenome\" type=\"text\" pattern=\"[A-Za-z\\s]+\" maxlength=\"50\" required></ion-input>\n        </ion-grid>\n        <br>\n        <ion-grid>\n          <ion-datetime ngModel name=\"data_nasc\" placeholder=\"Data de nascimento\" display-format=\"DD/MM/YYYY\" required=\"true\"></ion-datetime>\n        </ion-grid>\n        <br>\n        <ion-grid>\n          <ion-input type=\"email\" ngModel name=\"email\" placeholder=\"E-mail\" pattern=\"[-a-zA-Z0-9~!$%^&amp;*_=+}{'?]+(\\.[-a-zA-Z0-9~!$%^&amp;*_=+}{'?]+)*@([a-zA-Z0-9_][-a-zA-Z0-9_]*(\\.[-a-zA-Z0-9_]+)*\\.([cC][oO][mM]))(:[0-9]{1,5})?\" required=\"true\"></ion-input>\n          <ion-label>exemplo@exe.com</ion-label>\n        </ion-grid>\n        <br>\n        <ion-grid>\n          <ion-input type=\"tel\" ngModel name=\"telefone\" placeholder=\"Telefone\" required=\"true\" pattern=\"[0-9.-]{11,12}$\"></ion-input>\n          <ion-label>DD00000-0000</ion-label>\n        </ion-grid>\n        <br>\n        <ion-grid>\n          <ion-input ngModel name=\"profissao\" placeholder=\"Profissão\" type=\"text\" pattern=\"[A-Za-z\\s]+\" maxlength=\"50\" required></ion-input>\n        </ion-grid>\n        <br>\n        <ion-grid>\n          <ion-input ngModel name=\"endereco\" placeholder=\"Endereço\" type=\"text\" pattern=\"[A-Za-z0-9\\s]+\" required=\"true\"></ion-input>\n        </ion-grid>\n        <br>\n        <ion-grid>\n          <ion-input ngModel name=\"cidade\" placeholder=\"Cidade\" type=\"text\" pattern=\"[A-Za-z\\s]+\" required=\"true\"></ion-input>\n        </ion-grid>\n        <br>\n        <ion-grid>\n          <ion-select placeHolder=\"Selecione o estado\" ngModel name=\"estado\" required=\"true\" >\n            <ion-select-option *ngFor=\"let uf of ufs\" value=\"{{uf}}\">{{uf}}</ion-select-option>\n          </ion-select> \n        </ion-grid>\n        <br>\n        <ion-grid>\n          <ion-select placeHolder=\"Selecione o cargo\" ngModel name=\"cargo\"  required=\"true\">\n          <ion-select-option *ngFor=\"let cargo of cargos\" value=\"{{cargo}}\">{{cargo}}</ion-select-option>\n          </ion-select> \n        </ion-grid>\n        <br>\n        <ion-grid>\n          <ion-select placeHolder=\"Selecione o avental\" ngModel name=\"avental\" required=\"true\">\n            <ion-select-option *ngFor=\"let aventals of avental\" value=\"{{aventals}}\">{{aventals}}</ion-select-option>\n          </ion-select>\n        </ion-grid>\n        <br>\n        <ion-grid>\n          <ion-list lines=\"none\">\n            <ion-radio-group ngModel name=\"nivel\">\n              <ion-list-header>\n                <ion-label>Nível</ion-label>\n              </ion-list-header>\n              <ion-item>\n                <ion-label>Aprendiz</ion-label>\n                <ion-radio value=\"1\" slot=\"start\" checked></ion-radio>\n              </ion-item>\n              <ion-item>\n                <ion-label>Companheiro</ion-label>\n                <ion-radio value=\"2\"slot=\"start\"></ion-radio>\n              </ion-item>\n              <ion-item>\n                <ion-label>Mestre</ion-label>\n                <ion-radio value=\"3\"slot=\"start\"></ion-radio>\n              </ion-item>\n            </ion-radio-group>\n          </ion-list>\n        </ion-grid>\n        <br>\n        <ion-grid>\n          <ion-input type=\"password\" ngModel name=\"password\" placeholder=\"Senha\" pattern=\"[a-z0-9._%+-]{6,}$\" required=\"true\"title=\"Minimo 6 caracteres\"></ion-input>\n          <ion-label>Mínimo 6 caracteres</ion-label>\n        </ion-grid>\n        <br>\n        <ion-grid>\n          <ion-input type=\"password\" ngModel name=\"password_s\" placeholder=\"Confirmar senha\" pattern=\"[a-z0-9._%+-]{6,}$\" required=\"true\"></ion-input>\n          <ion-label>Mínimo 6 caracteres</ion-label>\n        </ion-grid>\n        <br>\n        <ion-button type=\"submit\" round expand=\"block\" color=\"danger\">Registrar</ion-button>\n      </form>\n      <p text-center >Já possui uma conta?</p>\n      <ion-button round expand=\"block\" color=\"primary\" (click)=\"loginModal()\">Login</ion-button>\n      <br>\n    </div>\n  </ion-grid>\n</ion-content>"
+module.exports = "<ion-header>\n  <ion-toolbar>\n      <ion-buttons slot=\"start\">\n          <ion-back-button></ion-back-button>\n      </ion-buttons>\n  </ion-toolbar>\n</ion-header>\n<ion-content padding>\n  <ion-grid>\n    <div class=\"box\">\n      <h1>Registro</h1>\n      <br>\n      <form #form=\"ngForm\" (ngSubmit)=\"register(form)\" method=\"POST\">\n        <ion-grid>\n            <ion-input ngModel name=\"fName\" placeholder=\"Nome\" type=\"text\" pattern=\"[A-Za-z\\s]+\" maxlength=\"50\" required></ion-input>\n        </ion-grid>\n        <br>\n        <ion-grid>\n          <ion-input ngModel name=\"lName\" placeholder=\"Sobrenome\" type=\"text\" pattern=\"[A-Za-z\\s]+\" maxlength=\"50\" required></ion-input>\n        </ion-grid>\n        <br>\n        <ion-grid>\n          <ion-datetime ngModel name=\"data_nasc\" placeholder=\"Data de nascimento\" display-format=\"DD/MM/YYYY\" required=\"true\"></ion-datetime>\n        </ion-grid>\n        <br>\n        <ion-grid>\n          <ion-input type=\"email\" ngModel name=\"email\" placeholder=\"E-mail\" pattern=\"[-a-zA-Z0-9~!$%^&amp;*_=+}{'?]+(\\.[-a-zA-Z0-9~!$%^&amp;*_=+}{'?]+)*@([a-zA-Z0-9_][-a-zA-Z0-9_]*(\\.[-a-zA-Z0-9_]+)*\\.([cC][oO][mM]))(:[0-9]{1,5})?\" required=\"true\"></ion-input>\n          <ion-label>exemplo@exe.com</ion-label>\n        </ion-grid>\n        <br>\n        <ion-grid>\n          <ion-input type=\"tel\" ngModel name=\"telefone\" placeholder=\"Telefone\" required=\"true\" pattern=\"[0-9.-]{11,12}$\"></ion-input>\n          <ion-label>DD00000-0000</ion-label>\n        </ion-grid>\n        <br>\n        <ion-grid>\n          <ion-input ngModel name=\"profissao\" placeholder=\"Profissão\" type=\"text\" pattern=\"[A-Za-z\\s]+\" maxlength=\"50\" required></ion-input>\n        </ion-grid>\n        <br>\n        <ion-grid>\n          <ion-input ngModel name=\"endereco\" placeholder=\"Endereço\" type=\"text\" pattern=\"[A-Za-z0-9\\s]+\" required=\"true\"></ion-input>\n        </ion-grid>\n        <br>\n        <ion-grid>\n          <ion-input ngModel name=\"cidade\" placeholder=\"Cidade\" type=\"text\" pattern=\"[A-Za-z\\s]+\" required=\"true\"></ion-input>\n        </ion-grid>\n        <br>\n        <ion-grid>\n          <ion-select placeHolder=\"Selecione o estado\" ngModel name=\"estado\" required=\"true\" >\n            <ion-select-option *ngFor=\"let uf of ufs\" value=\"{{uf}}\">{{uf}}</ion-select-option>\n          </ion-select> \n        </ion-grid>\n        <br>\n        <ion-grid>\n          <ion-select placeHolder=\"Selecione o cargo\" ngModel name=\"cargo\"  required=\"true\">\n          <ion-select-option *ngFor=\"let cargo of cargos\" value=\"{{cargo}}\">{{cargo}}</ion-select-option>\n          </ion-select> \n        </ion-grid>\n        <br>\n        <ion-grid>\n          <ion-list lines=\"none\">\n            <ion-radio-group ngModel name=\"nivel\">\n              <ion-list-header>\n                <ion-label>Selecione o avental</ion-label>\n              </ion-list-header>\n              <ion-item>\n                <ion-label>Aprendiz</ion-label>\n                <ion-radio value=\"1\" slot=\"start\"></ion-radio>\n              </ion-item>\n              <ion-item>\n                <ion-label>Companheiro</ion-label>\n                <ion-radio value=\"2\"slot=\"start\"></ion-radio>\n              </ion-item>\n              <ion-item>\n                <ion-label>Mestre</ion-label>\n                <ion-radio value=\"3\"slot=\"start\"></ion-radio>\n              </ion-item>\n            </ion-radio-group>\n          </ion-list>\n        </ion-grid>\n        <br>\n        <ion-grid>\n          <ion-input type=\"password\" ngModel name=\"password\" placeholder=\"Senha\" pattern=\"[a-z0-9._%+-]{6,}$\" required=\"true\"title=\"Minimo 6 caracteres\"></ion-input>\n          <ion-label>Mínimo 6 caracteres</ion-label>\n        </ion-grid>\n        <br>\n        <ion-grid>\n          <ion-input type=\"password\" ngModel name=\"password_s\" placeholder=\"Confirmar senha\" pattern=\"[a-z0-9._%+-]{6,}$\" required=\"true\"></ion-input>\n          <ion-label>Mínimo 6 caracteres</ion-label>\n        </ion-grid>\n        <br>\n        <ion-button type=\"submit\" round expand=\"block\" color=\"danger\">Registrar</ion-button>\n      </form>\n      <p text-center >Já possui uma conta?</p>\n      <ion-button round expand=\"block\" color=\"primary\" (click)=\"loginModal()\">Login</ion-button>\n      <br>\n    </div>\n  </ion-grid>\n</ion-content>"
 
 /***/ }),
 
@@ -123,7 +123,6 @@ let RegisterPage = class RegisterPage {
     }
     ionViewWillEnter() {
         this.getCargos();
-        this.getAvental();
     }
     loginModal() {
         this.navCtrl.navigateRoot('/home');
@@ -144,15 +143,6 @@ let RegisterPage = class RegisterPage {
         this.auxtel = form.value.telefone.replace(/\D+/g, '');
         this.auxdata = form.value.data_nasc;
         this.daux = this.auxdata.split('T')[0];
-        //pega o id do avental
-        this.authService.getAvental().subscribe(data => {
-            for (let i = 0; i < data.length; i++) {
-                if (data[i].avental == form.value.avental) {
-                    this.storage.set('avental', data[i].id);
-                    break;
-                }
-            }
-        });
         //pega o id do cargo
         this.authService.getCargos().subscribe(data => {
             for (let i = 0; i < data.length; i++) {
@@ -167,15 +157,17 @@ let RegisterPage = class RegisterPage {
             this.alertService.presentToast("Senha incorreta!");
         }
         else {
-            this.authService.register(form.value.fName, form.value.lName, form.value.email, form.value.password, this.daux, this.global.cargo, this.global.avental, this.auxtel, form.value.endereco, form.value.cidade, form.value.estado, form.value.nivel, form.value.profissao).subscribe(data => {
+            this.authService.register(form.value.fName, form.value.lName, form.value.email, form.value.password, this.daux, this.global.cargo, form.value.nivel, this.auxtel, form.value.endereco, form.value.cidade, form.value.estado, form.value.profissao).subscribe(data => {
+                //armazena o avental escolhido
+                this.storage.set('avental', form.value.nivel);
                 this.authService.login(form.value.email, form.value.password).subscribe(data => {
                 }, error => {
+                    console.log(error);
                     this.alertService.presentToast("Verifique se você preencheu os campos corretamente");
                 }, () => {
                     this.permissao();
                 });
             }, error => {
-                //console.log(error);
                 this.alertService.presentToast("Preencha todos os campos!");
             });
         }
@@ -184,15 +176,6 @@ let RegisterPage = class RegisterPage {
         this.authService.getCargos().subscribe(data => {
             for (let i = 0; i < data.length; i++) {
                 this.cargos[i] = data[i].cargo;
-            }
-        }, error => {
-            //console.log("error: " + error);
-        });
-    }
-    getAvental() {
-        this.authService.getAvental().subscribe(data => {
-            for (let i = 0; i < data.length; i++) {
-                this.avental[i] = data[i].avental;
             }
         }, error => {
             //console.log("error: " + error);

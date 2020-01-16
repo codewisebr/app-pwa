@@ -86,12 +86,15 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "./node_modules/tslib/tslib.es6.js");
 /* harmony import */ var src_app_services_auth_service__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! src/app/services/auth.service */ "./src/app/services/auth.service.ts");
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
+/* harmony import */ var src_app_services_global_service__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! src/app/services/global.service */ "./src/app/services/global.service.ts");
+
 
 
 
 var OrdemPage = /** @class */ (function () {
-    function OrdemPage(authService) {
+    function OrdemPage(authService, global) {
         this.authService = authService;
+        this.global = global;
         this.ordem = [];
     }
     OrdemPage.prototype.ngOnInit = function () {
@@ -101,21 +104,20 @@ var OrdemPage = /** @class */ (function () {
         return tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"](this, void 0, void 0, function () {
             var _this = this;
             return tslib__WEBPACK_IMPORTED_MODULE_0__["__generator"](this, function (_a) {
-                this.authService.user().subscribe(function (resul) {
-                    //pega o nivel do usuario, assim so mostra as ordens do nivel
-                    _this.authService.getNivelOrdem(resul.nivel, 0)
-                        .subscribe(function (data) {
-                        for (var i = 0; i < data.length; i++) {
-                            _this.ordem[i] = data[i].ordem;
-                        }
-                    });
+                //pega o nivel do usuario, assim so mostra as ordens do nivel
+                this.authService.getNivelOrdem(this.global.avental, 0)
+                    .subscribe(function (data) {
+                    for (var i = 0; i < data.length; i++) {
+                        _this.ordem[i] = data[i].ordem;
+                    }
                 });
                 return [2 /*return*/];
             });
         });
     };
     OrdemPage.ctorParameters = function () { return [
-        { type: src_app_services_auth_service__WEBPACK_IMPORTED_MODULE_1__["AuthService"] }
+        { type: src_app_services_auth_service__WEBPACK_IMPORTED_MODULE_1__["AuthService"] },
+        { type: src_app_services_global_service__WEBPACK_IMPORTED_MODULE_3__["GlobalService"] }
     ]; };
     OrdemPage = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_2__["Component"])({
@@ -123,7 +125,8 @@ var OrdemPage = /** @class */ (function () {
             template: __webpack_require__(/*! raw-loader!./ordem.page.html */ "./node_modules/raw-loader/index.js!./src/app/pages/ordem/ordem.page.html"),
             styles: [__webpack_require__(/*! ./ordem.page.scss */ "./src/app/pages/ordem/ordem.page.scss")]
         }),
-        tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [src_app_services_auth_service__WEBPACK_IMPORTED_MODULE_1__["AuthService"]])
+        tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [src_app_services_auth_service__WEBPACK_IMPORTED_MODULE_1__["AuthService"],
+            src_app_services_global_service__WEBPACK_IMPORTED_MODULE_3__["GlobalService"]])
     ], OrdemPage);
     return OrdemPage;
 }());

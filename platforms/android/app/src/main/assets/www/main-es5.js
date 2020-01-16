@@ -1448,14 +1448,13 @@ var AuthService = /** @class */ (function () {
             return _this.token;
         }));
     };
-    AuthService.prototype.register = function (fName, lName, email, password, data_nasc, cargo_id, avental_id, telefone, endereco, cidade, estado, nivel, profissao) {
+    AuthService.prototype.register = function (fName, lName, email, password, data_nasc, cargo_id, avental_id, telefone, endereco, cidade, estado, profissao) {
         return this.http.post(this.env.API_URL + 'auth/register', {
             fName: fName, lName: lName,
             email: email, password: password,
             endereco: endereco, cidade: cidade,
             estado: estado, data_nasc: data_nasc,
-            cargo_id: cargo_id, avental_id: avental_id, telefone: telefone,
-            nivel: nivel, profissao: profissao
+            cargo_id: cargo_id, avental_id: avental_id, telefone: telefone, profissao: profissao
         });
     };
     AuthService.prototype.checkPassword = function (id, password) {
@@ -1716,7 +1715,7 @@ var EnvService = /** @class */ (function () {
     // API_URL = 'http://10.0.2.2:8000/api/';
     function EnvService() {
         // API_URL = 'https://codewisebr.com/natalia/api-rest/api/'; 
-        this.API_URL = 'http://localhost:8000/api/';
+        this.API_URL = 'https://desolate-mesa-38759.herokuapp.com/api/';
     }
     EnvService = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Injectable"])({
@@ -1803,14 +1802,14 @@ __webpack_require__.r(__webpack_exports__);
 var environment = {
     production: false,
     firebaseConfig: {
-        apiKey: "AIzaSyC_ApMsqJAGf6DtTV02Kiqj2Tcy43VWW1Y",
-        authDomain: "appcodewisebr.firebaseapp.com",
-        databaseURL: "https://appcodewisebr.firebaseio.com",
-        projectId: "appcodewisebr",
-        storageBucket: "appcodewisebr.appspot.com",
-        messagingSenderId: "378697952415",
-        appId: "1:378697952415:web:7b9843b6117d9caf1fc6aa",
-        measurementId: "G-LM6XNV17VE"
+        apiKey: "AIzaSyC9qX8CBaCDDoS72cyD_CupfXgeg5-0CNc",
+        authDomain: "uniaovii.firebaseapp.com",
+        databaseURL: "https://uniaovii.firebaseio.com",
+        projectId: "uniaovii",
+        storageBucket: "uniaovii.appspot.com",
+        messagingSenderId: "424624984293",
+        appId: "1:424624984293:web:aceab17d51b62ad73b840c",
+        measurementId: "G-VRF38PYSSL"
     }
 };
 /*

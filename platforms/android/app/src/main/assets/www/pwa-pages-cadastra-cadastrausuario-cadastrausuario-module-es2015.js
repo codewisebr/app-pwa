@@ -174,7 +174,7 @@ let CadastrausuarioPage = class CadastrausuarioPage {
             }
         });
         //registra o usuário
-        this.authService.register(form.value.fName, form.value.lName, form.value.email, "123456", this.daux, this.global.cargo, this.global.avental, this.auxtel, form.value.endereco, form.value.cidade, form.value.estado, form.value.nivel, form.value.profissao).subscribe(data => {
+        this.authService.register(form.value.fName, form.value.lName, form.value.email, "123456", this.daux, this.global.cargo, this.global.avental, this.auxtel, form.value.endereco, form.value.cidade, form.value.estado, form.value.profissao).subscribe(data => {
             this.id = data;
             if (form.value.grau1 && form.value.data1) {
                 this.data_nasc = this.dataPipe.transform(form.value.data1, 'yyyy-MM-dd');

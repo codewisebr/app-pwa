@@ -2,6 +2,7 @@
 import { Response } from 'selenium-webdriver/http';
 import { AuthService } from 'src/app/services/auth.service';
 import { Component, OnInit } from '@angular/core';
+import { GlobalService } from 'src/app/services/global.service';
 
 @Component({
   selector: 'app-informativo',
@@ -10,8 +11,9 @@ import { Component, OnInit } from '@angular/core';
 })
 export class InformativoPage implements OnInit {
   constructor(
-    public authService: AuthService
-  ) { }
+    public authService: AuthService,
+    public global: GlobalService,
+    ) { }
 
   ngOnInit() {}
   ionViewWillEnter(){
@@ -20,16 +22,14 @@ export class InformativoPage implements OnInit {
   }
   public info: any[] = [];
   async showInfo() {
-    this.authService.user().subscribe(resul=>{
-      //pega o nivel do usuario, e assim mostra apenas as info de determinado nivel
-      this.authService.getNivelInfo(resul.nivel, 0)
-      .subscribe(
-      data =>{
-        for(let i=0; i<data.length;i++)
-        {
-          this.info[i] = data[i].info
-        }
-      });
+    //pega o nivel do usuario, e assim mostra apenas as info de determinado nivel
+    this.authService.getNivelInfo(this.global.avental, 0)
+    .subscribe(
+    data =>{
+      for(let i=0; i<data.length;i++)
+      {
+        this.info[i] = data[i].info
+      }
     });
   }
 }

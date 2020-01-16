@@ -194,7 +194,6 @@ export class AppComponent{
       if (!data.wasTapped) {
         this.alertService.presentToast(data.body);
       }
-      
     });
   }
 

@@ -60,11 +60,12 @@ export class AccountPage implements OnInit {
       this.authService.getIdCargos(data.cargo_id).subscribe(resul =>{
         this.cargo = resul;
       });
-      if(data.nivel == 1)
+
+      if(data.avental_id == 1)
         this.nivel = "Aprendiz";
-      else if(data.nivel == 2)
+      else if(data.avental_id == 2)
         this.nivel = "Companheiro";
-      else if(data.nivel == 3)
+      else if(data.avental_id == 3)
         this.nivel = "Mestre"
     }
     , error=>{ 

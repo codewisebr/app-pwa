@@ -63,16 +63,15 @@ export class AuthService {
   }
 
   register(fName: String, lName: String, email: String, password: String,data_nasc: Date, 
-    cargo_id: Number, avental_id:Number, telefone: Number, 
-    endereco: String, cidade: String, estado: String, nivel: Number, profissao:String) {
+    cargo_id: Number, avental_id: Number, telefone: Number, 
+    endereco: String, cidade: String, estado: String, profissao:String) {
     return this.http.post(this.env.API_URL + 'auth/register',
     {
       fName: fName, lName: lName, 
       email: email, password: password, 
       endereco: endereco, cidade: cidade, 
       estado: estado, data_nasc: data_nasc, 
-      cargo_id: cargo_id, avental_id:avental_id, telefone:telefone,
-      nivel: nivel, profissao:profissao
+      cargo_id: cargo_id, avental_id:avental_id, telefone:telefone, profissao:profissao
     });
   }
 

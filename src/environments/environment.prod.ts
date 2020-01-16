@@ -1,14 +1,14 @@
 export const environment = {
   production: true,
   firebaseConfig: {
-    apiKey: "AIzaSyC_ApMsqJAGf6DtTV02Kiqj2Tcy43VWW1Y",
-    authDomain: "appcodewisebr.firebaseapp.com",
-    databaseURL: "https://appcodewisebr.firebaseio.com",
-    projectId: "appcodewisebr",
-    storageBucket: "appcodewisebr.appspot.com",
-    messagingSenderId: "378697952415",
-    appId: "1:378697952415:web:7b9843b6117d9caf1fc6aa",
-    measurementId: "G-LM6XNV17VE",
-    vapidKey: "BOSqqhCi29goxBovcU9iqfCuFe7BiDCKqjLAFwzwWbhnYwYMATdMMsY7HqMFhOdTBX0suafikWzlhnb03t8BY_k",
+    apiKey: "AIzaSyC9qX8CBaCDDoS72cyD_CupfXgeg5-0CNc",
+    authDomain: "uniaovii.firebaseapp.com",
+    databaseURL: "https://uniaovii.firebaseio.com",
+    projectId: "uniaovii",
+    storageBucket: "uniaovii.appspot.com",
+    messagingSenderId: "424624984293",
+    appId: "1:424624984293:web:aceab17d51b62ad73b840c",
+    measurementId: "G-VRF38PYSSL",
+    vapidKey: "BP7Wb-yODKsd-2M__F-_OtIsK5SJUsk3u0DaR9p2nvS7L2POWLDG0wB75UCBcJJaOhLJWQPqXn44J6LrYuYlNYw",
   }
 };

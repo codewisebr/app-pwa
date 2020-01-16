@@ -129,10 +129,8 @@ let DashboardPage = class DashboardPage {
     }
     ionViewWillEnter() {
         this.id = this.global.user_id;
-        this.authService.user().subscribe(data => {
-            this.showOrdem(data.nivel);
-            this.showInfo(data.nivel);
-        });
+        this.showOrdem();
+        this.showInfo();
         this.showFinanceiro();
         this.verifica();
         this.showData();
@@ -245,10 +243,10 @@ let DashboardPage = class DashboardPage {
         this.disabled1 = !this.disabled1;
         this.disabled2 = !this.disabled2;
     }
-    showOrdem(nivel) {
+    showOrdem() {
         return tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"](this, void 0, void 0, function* () {
-            //pega o nivel do usuario
-            this.authService.getNivelOrdem(nivel, 1)
+            //pega as info de acordo com o nivel do usuario
+            this.authService.getNivelOrdem(this.global.avental, 1)
                 .subscribe(data => {
                 for (let i = 0; i < data.length; i++) {
                     this.ordem[i] = data[i].ordem;
@@ -256,9 +254,9 @@ let DashboardPage = class DashboardPage {
             });
         });
     }
-    showInfo(nivel) {
+    showInfo() {
         return tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"](this, void 0, void 0, function* () {
-            this.authService.getNivelInfo(nivel, 1)
+            this.authService.getNivelInfo(this.global.avental, 1)
                 .subscribe(data => {
                 for (let i = 0; i < data.length; i++) {
                     this.info[i] = data[i].info;

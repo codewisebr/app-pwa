@@ -131,12 +131,9 @@ var DashboardPage = /** @class */ (function () {
     DashboardPage.prototype.ngOnInit = function () {
     };
     DashboardPage.prototype.ionViewWillEnter = function () {
-        var _this = this;
         this.id = this.global.user_id;
-        this.authService.user().subscribe(function (data) {
-            _this.showOrdem(data.nivel);
-            _this.showInfo(data.nivel);
-        });
+        this.showOrdem();
+        this.showInfo();
         this.showFinanceiro();
         this.verifica();
         this.showData();
@@ -274,12 +271,12 @@ var DashboardPage = /** @class */ (function () {
         this.disabled1 = !this.disabled1;
         this.disabled2 = !this.disabled2;
     };
-    DashboardPage.prototype.showOrdem = function (nivel) {
+    DashboardPage.prototype.showOrdem = function () {
         return tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"](this, void 0, void 0, function () {
             var _this = this;
             return tslib__WEBPACK_IMPORTED_MODULE_0__["__generator"](this, function (_a) {
-                //pega o nivel do usuario
-                this.authService.getNivelOrdem(nivel, 1)
+                //pega as info de acordo com o nivel do usuario
+                this.authService.getNivelOrdem(this.global.avental, 1)
                     .subscribe(function (data) {
                     for (var i = 0; i < data.length; i++) {
                         _this.ordem[i] = data[i].ordem;
@@ -289,11 +286,11 @@ var DashboardPage = /** @class */ (function () {
             });
         });
     };
-    DashboardPage.prototype.showInfo = function (nivel) {
+    DashboardPage.prototype.showInfo = function () {
         return tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"](this, void 0, void 0, function () {
             var _this = this;
             return tslib__WEBPACK_IMPORTED_MODULE_0__["__generator"](this, function (_a) {
-                this.authService.getNivelInfo(nivel, 1)
+                this.authService.getNivelInfo(this.global.avental, 1)
                     .subscribe(function (data) {
                     for (var i = 0; i < data.length; i++) {
                         _this.info[i] = data[i].info;

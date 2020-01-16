@@ -113,7 +113,7 @@ let PushPage = class PushPage {
         else {
             const headers = new _angular_common_http__WEBPACK_IMPORTED_MODULE_2__["HttpHeaders"]({
                 'Content-Type': 'application/json',
-                'Authorization': 'key=AAAAWCwoLJ8:APA91bFg4SlPUGbXFDz7kYKQpXNvGchFwV-VHD53ACgTYRz5SZHJnTZbRTJdejtJ2VTG8GPjliEfKx4EsjEjqoJYlAS6LSCTITPk7CG1WNpBSryK4TD3Xf37sYWUjIpBmWMIS1j7P2s8'
+                'Authorization': 'key=AAAAYt2fEOU:APA91bHA3KYq96a5MHCet0DAWgpwxjF6QVu1YTATVgoVUgxU8U9oZ-xz6r2AHoqMvcyMMDj1TjBB6hPYwivTVmln3ry_uKitsv1nW-SZ16ptjwneFKS2u-O5fU_SHv9gZVadzUubRy3O'
             });
             return this.http.post(this.URL, {
                 "notification": {

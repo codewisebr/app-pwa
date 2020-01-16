@@ -68,7 +68,7 @@ export class EditdadosPage implements OnInit {
       this.telefone = data.telefone.replace("\"", "");
       this.profissao = data.profissao.replace("\"", "");
       this.data_nasc = data.data_nasc.replace("\"", "");
-      this.nivel = data.nivel;
+      this.nivel = data.avental_id;
       switch (this.nivel)
       {
         case 1: 
@@ -116,11 +116,15 @@ export class EditdadosPage implements OnInit {
         this.global.cargo, form.value.profissao).subscribe(
         resp => {
           if(resp == true){
+            this.storage.set('avental', form.value.nivel);
             this.alertService.presentToast('Usuário atualizado!');
             this.navCtrl.navigateRoot('/account');
           }
+          else
+            this.alertService.presentToast('Verifique se você preencheu corretamente os dados!');
         },
         error => {
+          console.log(error)
           this.alertService.presentToast('Verifique se você preencheu corretamente os dados!');
         }
       );    

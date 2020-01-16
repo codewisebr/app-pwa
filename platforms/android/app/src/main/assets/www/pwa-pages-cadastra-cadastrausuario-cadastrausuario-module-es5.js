@@ -186,7 +186,7 @@ var CadastrausuarioPage = /** @class */ (function () {
             }
         });
         //registra o usuário
-        this.authService.register(form.value.fName, form.value.lName, form.value.email, "123456", this.daux, this.global.cargo, this.global.avental, this.auxtel, form.value.endereco, form.value.cidade, form.value.estado, form.value.nivel, form.value.profissao).subscribe(function (data) {
+        this.authService.register(form.value.fName, form.value.lName, form.value.email, "123456", this.daux, this.global.cargo, this.global.avental, this.auxtel, form.value.endereco, form.value.cidade, form.value.estado, form.value.profissao).subscribe(function (data) {
             _this.id = data;
             if (form.value.grau1 && form.value.data1) {
                 _this.data_nasc = _this.dataPipe.transform(form.value.data1, 'yyyy-MM-dd');

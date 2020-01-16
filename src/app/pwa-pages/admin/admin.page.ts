@@ -105,6 +105,7 @@ export class AdminPage implements OnInit {
       }
     );
   }
+  
   resposta(resp: Number)
   {
     this.opcao = resp;

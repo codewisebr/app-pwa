@@ -71,29 +71,11 @@ export class CadastrausuarioPage implements OnInit {
       , error=>{ 
         // console.log("error: " + error);
       });
-      this.authService.getAvental().subscribe(
-        data=>{ 
-          for(let i=0; i<data.length; i++){
-            this.aventals[i]=data[i].avental;
-          }
-        }
-        , error=>{ 
-          // console.log("error: " + error);
-        });
   }
   register(form:any){
       this.auxtel=form.value.telefone.replace(/\D+/g, '');
       this.auxdata=form.value.data_nasc;
       this.daux = this.auxdata.split('T')[0];
-
-      this.authService.getAvental().subscribe(data=>{
-        for(let i=0; i<data.length; i++){
-          if(data[i].avental == form.value.avental)
-          {
-            this.storage.set('avental', data[i].id);
-          }
-        }
-      });
 
       this.authService.getCargos().subscribe(data=>{
         for(let i=0; i<data.length; i++){
@@ -106,10 +88,11 @@ export class CadastrausuarioPage implements OnInit {
 
       //registra o usuário
       this.authService.register(form.value.fName, form.value.lName, form.value.email, "123456", 
-        this.daux, this.global.cargo, this.global.avental, this.auxtel, form.value.endereco, 
-        form.value.cidade, form.value.estado, form.value.nivel, form.value.profissao).subscribe(
+        this.daux, this.global.cargo, form.value.nivel, this.auxtel, form.value.endereco, 
+        form.value.cidade, form.value.estado, form.value.profissao).subscribe(
         data => {
             this.id = data;
+            this.storage.set('avental', form.value.nivel);
             if(form.value.grau1 && form.value.data1){
               this.data_nasc = this.dataPipe.transform(form.value.data1, 'yyyy-MM-dd');
               //adiciona membro da familia 1

@@ -1,0 +1,129 @@
+<ion-header>
+  <ion-toolbar>
+      <ion-buttons slot="start">
+          <ion-back-button></ion-back-button>
+      </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+<ion-content padding>
+    <ion-grid>
+      <div class="box">
+          <h1>Registro</h1>
+          <br>
+          <form #form="ngForm" (ngSubmit)="register(form)" method="POST">
+            <ion-grid>
+                <ion-input ngModel name="fName" placeholder="Nome" type="text" pattern="[A-Za-z\s]+" maxlength="50" required></ion-input>
+            </ion-grid>
+            <br>
+            <ion-grid>
+              <ion-input ngModel name="lName" placeholder="Sobrenome" type="text" pattern="[A-Za-z\s]+" maxlength="50" required></ion-input>
+            </ion-grid>
+            <br>
+            <ion-grid>
+              <ion-datetime ngModel name="data_nasc" placeholder="Data de nascimento" display-format="DD/MM/YYYY" required></ion-datetime>
+            </ion-grid>
+            <br>
+            <ion-grid>
+              <ion-input type="email" ngModel name="email" placeholder="E-mail" pattern="[-a-zA-Z0-9~!$%^&amp;*_=+}{'?]+(\.[-a-zA-Z0-9~!$%^&amp;*_=+}{'?]+)*@([a-zA-Z0-9_][-a-zA-Z0-9_]*(\.[-a-zA-Z0-9_]+)*\.([cC][oO][mM]))(:[0-9]{1,5})?" required></ion-input>
+              <ion-label>exemplo@exe.com</ion-label>
+            </ion-grid>
+            <br>
+            <ion-grid>
+              <ion-input type="tel" ngModel name="telefone" placeholder="Telefone" required pattern="[0-9.-]{8,10}$"></ion-input>
+                <ion-label>0000-0000</ion-label>
+            </ion-grid>
+            <br>
+            <ion-grid>
+              <ion-input ngModel name="profissao" placeholder="Profissão" type="text" pattern="[A-Za-z\s]+" maxlength="50" required></ion-input>
+            </ion-grid>
+            <br>
+            <ion-grid>
+              <ion-input ngModel name="endereco" placeholder="Endereço" type="text" pattern="[A-Za-z0-9\s]+" required></ion-input>
+            </ion-grid>
+            <br>
+            <ion-grid>
+              <ion-input ngModel name="cidade" placeholder="Cidade" type="text" pattern="[A-Za-z\s]+" required></ion-input>
+            </ion-grid>
+            <br>
+            <ion-grid>
+              <ion-select placeHolder="Selecione o estado" ngModel name="estado" required >
+                <ion-select-option *ngFor="let uf of ufs" value="{{uf}}">{{uf}}</ion-select-option>
+              </ion-select> 
+            </ion-grid>
+            <br>
+            <ion-grid>
+              <ion-select placeHolder="Selecione o cargo" ngModel name="cargo"  required>
+              <ion-select-option *ngFor="let cargo of cargos" value="{{cargo}}">{{cargo}}</ion-select-option>
+              </ion-select> 
+            </ion-grid>
+            <br>
+            <ion-grid>
+              <ion-list lines="none">
+                <ion-radio-group ngModel name="nivel">
+                  <ion-list-header>
+                    <ion-label>Nível</ion-label>
+                  </ion-list-header>
+                  <ion-item>
+                    <ion-label>Aprendiz</ion-label>
+                    <ion-radio value="1" slot="start" checked></ion-radio>
+                  </ion-item>
+                  <ion-item>
+                    <ion-label>Companheiro</ion-label>
+                    <ion-radio value="2"slot="start"></ion-radio>
+                  </ion-item>
+                  <ion-item>
+                    <ion-label>Mestre</ion-label>
+                    <ion-radio value="3"slot="start"></ion-radio>
+                  </ion-item>
+                </ion-radio-group>
+              </ion-list>
+            </ion-grid>
+            <br>
+            <ion-button (click)="hide()">Incluir familiar</ion-button>
+            <br>
+            <div *ngIf="hideme">
+                <h2>Cadastrar Familiar</h2>
+                <ion-grid>
+                    <ion-select ngModel name="grau1" placeholder="Grau de parentesco">
+                      <ion-select-option *ngFor="let graus of grau" value="{{graus}}">{{graus}}</ion-select-option>
+                    </ion-select> 
+                </ion-grid>
+                <br>
+                <ion-grid>
+                  <ion-datetime ngModel name="data1" placeholder="Data de nascimento" display-format="DD/MM/YYYY"></ion-datetime>
+                </ion-grid>
+                <ion-button (click)="plus()">Mais</ion-button>
+                <div *ngIf="more">
+                  <ion-grid>
+                      <ion-select ngModel name="grau2" placeholder="Grau de parentesco">
+                        <ion-select-option *ngFor="let graus of grau" value="{{graus}}">{{graus}}</ion-select-option>
+                      </ion-select> 
+                  </ion-grid>
+                  <br>
+                  <ion-grid>
+                    <ion-datetime ngModel name="data2" placeholder="Data de nascimento" display-format="DD/MM/YYYY"></ion-datetime>
+                  </ion-grid>
+                  <ion-button (click)="plus2()">Mais</ion-button>
+                </div>
+                <div *ngIf="more2">
+                    <ion-grid>
+                        <ion-select ngModel name="grau3" placeholder="Grau de parentesco">
+                          <ion-select-option *ngFor="let graus of grau" value="{{graus}}">{{graus}}</ion-select-option>
+                        </ion-select> 
+                    </ion-grid>
+                    <br>
+                    <ion-grid>
+                      <ion-datetime ngModel name="data3" placeholder="Data de nascimento" display-format="DD/MM/YYYY"></ion-datetime>
+                    </ion-grid>
+                  </div>
+            </div>
+            <br>
+            <ion-grid>
+              <ion-label>Senha padrão: 123456</ion-label>
+            </ion-grid>
+            <ion-button type="submit" round expand="block" color="danger">Registrar</ion-button>
+            <br>
+          </form>
+      </div>
+    </ion-grid>
+  </ion-content>

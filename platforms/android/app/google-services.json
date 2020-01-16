@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "424624984293",
+    "firebase_url": "https://uniaovii.firebaseio.com",
+    "project_id": "uniaovii",
+    "storage_bucket": "uniaovii.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:424624984293:android:c8fb0109ceaa74423b840c",
+        "android_client_info": {
+          "package_name": "app.uniao.vii"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "424624984293-6qbf5skel0b1uu4j6719poigr2vfnuss.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "app.uniao.vii",
+            "certificate_hash": "bc4c7cd75f1b86110b71396d3f2d104d28328d7d"
+          }
+        },
+        {
+          "client_id": "424624984293-6bq3e8g2gtubg22mnc499t1ioer4a1u1.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAD6HLsfE8Jo6YHY0FPboszh2RV9dFXpgc"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "424624984293-6bq3e8g2gtubg22mnc499t1ioer4a1u1.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
